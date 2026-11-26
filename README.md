@@ -2,7 +2,7 @@
 
 Make visual novel sprites without drawing. Mix hair, clothes and faces, recolour, then export every expression as PNGs that drop straight into Ren'Py.
 
-All in the browser, nothing to sign up for.
+All in the browser, nothing to sign up for. Share a character with a link; it travels in the URL, not through a server.
 
 ![Demo](docs/demo.gif)
 
@@ -46,3 +46,9 @@ src/ui/           everything you click
 New parts go in `src/parts/<slot>/`. Turn on the guide in the preview to line them up. More detail in `CLAUDE.md`.
 
 Hosted on Vercel; pushing to `main` deploys.
+
+## Analytics
+
+Visits are counted with [countmetrics](https://github.com/legendfinka/countmetrics), my own tracker. It sends the site key, page path and first referrer, never your character or share links. Its script sets no cookies and sends nothing if Do Not Track is on.
+
+Running your own copy? Swap or remove the tag at the bottom of `index.html`.
