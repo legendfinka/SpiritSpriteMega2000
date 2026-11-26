@@ -25,6 +25,12 @@ label start:
 
 The zip comes with a `README.txt` that has this filled in for your character.
 
+Export options for Ren'Py:
+
+- **Side images:** a head-and-shoulders crop next to the textbox, with the same expression.
+- **Layered:** parts plus a generated `layeredimage` script instead of one flat PNG per expression. Smaller, and expressions are attributes (`show mira happy`).
+- **Blink & talk** (layered only): eyes blink on their own, and the mouth moves while the character's line is on screen.
+
 ## How it works
 
 - **Every part is an SVG** on the same 800×1080 canvas, so layers just stack, no offsets.

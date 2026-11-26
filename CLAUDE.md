@@ -8,7 +8,7 @@ No backend; deploys as a static site.
 Users with no drawing skills can pick and recolour parts, preview all expressions
 (also on a background), export a `.zip`, and save/load the character as JSON.
 
-Not in v1: free-hand drawing, in-app AI, animation, accounts.
+Not in v1: free-hand drawing, in-app AI, animation (beyond Ren'Py blink & talk), accounts.
 
 ## 2. Stack
 Vite, React + TypeScript (strict), Zustand (one store, persisted to localStorage),
@@ -58,8 +58,16 @@ Vitest + React Testing Library, ESLint + Prettier.
 - Files: `"<name> <expression>.png"`, lowercase, in `<name>_sprites.zip`.
 - Zip also holds `character.json` and `README.txt` with a Ren'Py snippet
   (`define` + `show <name> neutral`).
-- Options: scale 0.5×/1×/2×, PNG/WebP, include JSON.
-- Export code is pure (Character + Expression[] → Blob) and testable.
+- Options: scale 0.5×/1×/2×, PNG/WebP, include JSON, side images, Sprites or Layered.
+- Side images: `"side <name> <expr>.png"` + plain `"side <name>.png"`, crop `SIDE_CROP`;
+  the define gets `image="<name>"`.
+- Layered (`export/layered.ts`): fixed slots merged where they touch (`<name>_base`,
+  `_hair`, `_marks`, `_accessory`), face parts as `images/<name>_<slot>_<part>.png`,
+  and `<name>_layered.rpy`. Expression ids are attributes, repeated across groups.
+  Blink & talk use ATL images plus `if_any`/`if_not ["talking"]` (not `when`, which
+  needs Ren'Py 8.4) and `config.speaking_attribute`. Side image = `LayeredImageProxy`.
+- Export code is pure (Character + Expression[] → Blob) and testable. `exportPlan`
+  is the single list of files; names shown in the dialog come from it.
 
 ## 7. UI layout
 - Top: name, undo/redo, reset, load/save JSON, Export
@@ -87,9 +95,13 @@ Vitest + React Testing Library, ESLint + Prettier.
   (`store/randomCharacter`), colour swatches (`canvas/palettes`), share link
   (`export/shareLink`, `#c=` hash, asks before replacing your character).
   Imported data is untrusted: `parseCharacter` checks expression ids and flattens names.
-- [ ] **M8 Ren'Py extras:** side images (`side <name> <expr>.png`, head crop via
-  `HEAD_VIEWBOX`), layeredimage export (one PNG per part + generated `layeredimage`
-  script), blink/talk frames + ATL snippet (lifts "no animation" from v1 scope).
+- [x] **M8 Ren'Py extras:** side images, layered export, blink & talk (lifts "no
+  animation" from v1 scope).
+  Also in M8:
+  - Phones: no SVG filter or blend mode (lag), readable text on yellow, day/night switch.
+  - Underwear on both base bodies (briefs + bandeau on female), coloured with the outfit.
+  - Random names (`store/randomNames.ts`) behind a name lock, locked by default.
+  - Base font 15px (all sizes are rem, nothing below 0.72rem); stronger alignment guide.
 - [ ] **M9 Bigger:** cast library (several characters, 2–3 together in scene view),
   custom part upload (SVG checked against the canvas and tokens), offline PWA,
   Ukrainian/Russian UI.
@@ -101,6 +113,9 @@ Vitest + React Testing Library, ESLint + Prettier.
 - Import part files only in `parts/registry.ts`.
 - UI style: rough, cozy 90s Soviet panel block. Panels use `composes: rough-slab from global`
   (fill via `--slab-bg`), colours from `index.css` variables.
+- Day/night: `html[data-theme]`, set before paint by the inline script in `index.html`,
+  toggled by `ui/theme.ts`. Text on yellow (`--mustard`, `--lit`) is always `--line`.
+- Phones: no SVG `filter` on panels or blend modes over the page; they make it lag.
 - Art style: 4–5 px `--outline` strokes on main shapes, flat fills, one shade,
   at most one highlight.
 - Commits: Conventional Commits (`feat:`, `fix(web):` …), short subject.
