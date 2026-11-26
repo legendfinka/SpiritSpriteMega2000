@@ -37,7 +37,7 @@ Vitest + React Testing Library, ESLint + Prettier.
 - **Tokens:** `--skin --skin-shade --hair --hair-shade --hair-hi --iris --outfit-main
   --outfit-shade --outfit-accent --pants --pants-shade --outline`. Shades/highlights
   derive from the base (HSL −15 % / +12 % lightness) unless overridden.
-- **Layer order (back → front):** body → outfit → hairBack → face → eyes → brows →
+- **Layer order (back → front):** hairBack → body → outfit → face → eyes → brows →
   hairFront → mouth → extras → accessory
 - **Expressions:** override only eyes, brows, mouth, extras. 5 fixed presets
   (neutral = the character's own face parts) plus `Character.customExpressions`.
@@ -71,9 +71,10 @@ Vitest + React Testing Library, ESLint + Prettier.
 - [x] **M3 Expressions:** preset strip, custom expressions
 - [x] **M4 Export:** export dialog, zip + README, single image, JSON save/load.
   Rasterising is injected (`Rasterize`) so `buildSpriteZip` is tested without canvas.
-- [ ] **M5 Polish:** done (needs passing test/lint/build): undo/redo, shortcuts, scene
-  preview with 3 backgrounds, glasses, GitHub Pages workflow.
-  Left: 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat), female body.
+- [ ] **M5 Polish** (written, needs passing test/lint/build and an eye on the art):
+  undo/redo, shortcuts, scene preview with 3 backgrounds, GitHub Pages workflow,
+  hairBack moved behind the body, female base + soft face, 6 front / 5 back hairstyles,
+  6 outfits, extra eyes/mouths/brows/extras, 4 accessories, starter characters.
 
 ## 9. Conventions
 - No `any` without a comment. One function component per file.

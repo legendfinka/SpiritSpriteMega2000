@@ -53,6 +53,16 @@ describe('shortcuts and history', () => {
     expect(character().parts.hairFront).toBeUndefined();
   });
 
+  it('loads a starter character, and undo brings the old one back', () => {
+    render(<App />);
+    fireEvent.change(screen.getByLabelText('Start from'), { target: { value: 'mira' } });
+    expect(character().parts.body).toBe('body/base-female');
+    expect(preview().querySelector('[data-part="outfit/dress"]')).not.toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    expect(character().parts.body).toBe('body/base-male');
+  });
+
   it('opens export with Ctrl+E and ignores other keys while it is open', () => {
     render(<App />);
     key('e', { ctrlKey: true });

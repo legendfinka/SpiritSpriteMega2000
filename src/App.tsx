@@ -16,6 +16,7 @@ import { ExpressionStrip } from './ui/ExpressionStrip';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
 import { Stage } from './ui/Stage';
+import { StarterPicker } from './ui/StarterPicker';
 import { MOD, useShortcuts } from './ui/useShortcuts';
 import { Wordmark } from './ui/Wordmark';
 
@@ -113,6 +114,7 @@ export function App() {
         >
           Reset
         </button>
+        <StarterPicker onPicked={() => setActiveId('neutral')} />
         <CharacterFileButtons onLoaded={() => setActiveId('neutral')} />
         <button
           type="button"
