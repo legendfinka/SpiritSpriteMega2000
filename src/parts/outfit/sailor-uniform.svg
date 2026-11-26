@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- knee socks -->
+<path d="M286 990 L289 1085 L394 1085 L396 990 Z M514 990 L511 1085 L406 1085 L404 990 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- pleated skirt -->
+<path d="M266 700 L534 700 L590 940 L210 940 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M312 700 L272 940 M356 700 L340 940 M400 700 L400 940 M444 700 L460 940 M488 700 L528 940" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5"/>
+<!-- blouse sleeves -->
+<path d="M258 418 C222 436 206 490 204 560 L196 832 L268 832 L274 600 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M542 418 C578 436 594 490 596 560 L604 832 L532 832 L526 600 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M199 796 L269 796 L268 832 L196 832 Z M601 796 L531 796 L532 832 L604 832 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M200 810 H268 M600 810 H532" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="3"/>
+<!-- blouse -->
+<path d="M368 384 C330 396 280 400 262 420 C250 436 248 470 252 520 L268 720 L532 720 L548 520 C552 470 550 436 538 420 C520 400 470 396 432 384 Q400 400 368 384 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- sailor collar with stripes -->
+<path d="M268 424 L400 600 L532 424 L448 386 L400 470 L352 386 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M292 432 L400 576 L508 432" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="5"/>
+<!-- neckerchief -->
+<path d="M400 590 L360 568 L364 618 Z M400 590 L440 568 L436 618 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M392 600 L378 676 L398 684 Z M408 600 L422 676 L402 684 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<rect x="388" y="580" width="24" height="22" rx="4" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+</svg>

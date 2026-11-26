@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- one braid swinging out to the left -->
+<g fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5">
+<ellipse cx="286" cy="300" rx="30" ry="34"/>
+<ellipse cx="264" cy="352" rx="28" ry="32"/>
+<ellipse cx="242" cy="404" rx="27" ry="31"/>
+<ellipse cx="222" cy="456" rx="26" ry="30"/>
+<ellipse cx="204" cy="506" rx="24" ry="28"/>
+</g>
+<path d="M264 336 Q276 352 266 368 M242 388 Q254 404 244 420 M222 440 Q234 456 224 472 M204 492 Q214 506 206 520" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-linecap="round"/>
+<path d="M196 532 L178 594 L206 584 L222 600 L214 536 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<rect x="190" y="524" width="32" height="14" rx="5" transform="rotate(-20 206 531)" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+<!-- head -->
+<path d="M282 225 C266 125 322 50 400 48 C478 50 534 125 518 225 C520 262 512 290 500 300 L300 300 C288 290 280 262 282 225 Z" fill="var(--hair-shade, #3a2516)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+</svg>

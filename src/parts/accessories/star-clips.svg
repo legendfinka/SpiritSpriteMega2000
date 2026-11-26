@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- two star hair clips by the left temple -->
+<g fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round">
+<path d="M316 136 L319.5 145.1 L329.3 145.7 L321.7 151.9 L324.2 161.3 L316 156 L307.8 161.3 L310.3 151.9 L302.7 145.7 L312.5 145.1 Z"/>
+<path d="M344 112 L347.5 121.1 L357.3 121.7 L349.7 127.9 L352.2 137.3 L344 132 L335.8 137.3 L338.3 127.9 L330.7 121.7 L340.5 121.1 Z"/>
+</g>
+</svg>

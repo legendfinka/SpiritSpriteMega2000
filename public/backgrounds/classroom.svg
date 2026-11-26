@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <pattern id="planks" width="240" height="40" patternUnits="userSpaceOnUse">
+      <rect width="240" height="40" fill="#a9774f"/>
+      <path d="M0 1 H240 M120 0 V40" stroke="#7a4b2e" stroke-width="4"/>
+    </pattern>
+  </defs>
+
+  <!-- painted walls: cream top, school green below -->
+  <rect width="1920" height="560" fill="#ece4d0"/>
+  <rect y="560" width="1920" height="320" fill="#5f8f6e"/>
+  <path d="M0 560 H1920" stroke="#2b1d18" stroke-width="6"/>
+  <rect y="880" width="1920" height="200" fill="url(#planks)"/>
+  <path d="M0 880 H1920" stroke="#2b1d18" stroke-width="6"/>
+
+  <!-- window with a tree outside -->
+  <rect x="90" y="140" width="360" height="440" fill="#f3ead6" stroke="#2b1d18" stroke-width="8"/>
+  <rect x="118" y="168" width="304" height="384" fill="#9fc6d9" stroke="#2b1d18" stroke-width="6"/>
+  <circle cx="230" cy="420" r="110" fill="#6f9b63" stroke="#2b1d18" stroke-width="6"/>
+  <path d="M230 470 V552" stroke="#7a4b2e" stroke-width="18"/>
+  <path d="M270 168 V552 M118 360 H422" stroke="#f3ead6" stroke-width="14"/>
+
+  <!-- blackboard -->
+  <rect x="580" y="150" width="820" height="380" fill="#8a5a32" stroke="#2b1d18" stroke-width="8"/>
+  <rect x="600" y="170" width="780" height="340" fill="#2f4a3e" stroke="#2b1d18" stroke-width="5"/>
+  <g fill="none" stroke="#f7f7f2" stroke-opacity="0.8" stroke-width="5" stroke-linecap="round">
+    <path d="M650 250 q30 -30 60 0 t60 0 t60 0"/>
+    <circle cx="1220" cy="300" r="60"/>
+    <path d="M1160 300 H1280 M1220 240 V360"/>
+    <path d="M660 420 H900 M660 460 H820"/>
+  </g>
+  <text x="660" y="350" font-family="Courier New, monospace" font-size="58" font-weight="bold" fill="#f7f7f2" fill-opacity="0.85">show mira happy</text>
+  <rect x="640" y="510" width="700" height="16" fill="#6b3f26" stroke="#2b1d18" stroke-width="4"/>
+  <rect x="700" y="500" width="40" height="12" fill="#f7f7f2"/>
+
+  <!-- clock and a portrait frame -->
+  <circle cx="1620" cy="230" r="70" fill="#f7eedb" stroke="#2b1d18" stroke-width="8"/>
+  <path d="M1620 230 V180 M1620 230 L1655 250" stroke="#2b1d18" stroke-width="7" stroke-linecap="round"/>
+  <rect x="1540" y="360" width="160" height="200" fill="#e3a92b" stroke="#2b1d18" stroke-width="8"/>
+  <rect x="1566" y="386" width="108" height="148" fill="#bcb6ab" stroke="#2b1d18" stroke-width="4"/>
+  <circle cx="1620" cy="440" r="28" fill="#8f897f"/>
+  <path d="M1576 534 Q1620 470 1664 534 Z" fill="#8f897f"/>
+
+  <!-- desks in front -->
+  <g stroke="#2b1d18" stroke-width="6">
+    <rect x="120" y="900" width="420" height="34" fill="#c99a6a"/>
+    <path d="M150 934 V1080 M510 934 V1080"/>
+    <rect x="1380" y="900" width="420" height="34" fill="#c99a6a"/>
+    <path d="M1410 934 V1080 M1770 934 V1080"/>
+  </g>
+</svg>

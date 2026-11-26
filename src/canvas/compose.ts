@@ -21,7 +21,8 @@ export function resolvePartIds(
     ids.eyes = [expression.eyes];
     ids.brows = [expression.brows];
     ids.mouth = [expression.mouth];
-    if (expression.extras) ids.extras = [...expression.extras];
+    // the character's own extras (freckles, plaster) stay; the expression's go on top
+    if (expression.extras) ids.extras = [...new Set([...(ids.extras ?? []), ...expression.extras])];
   }
   return ids;
 }

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- long hair with loose waves -->
+<path d="M266 230 C248 120 316 44 400 42 C484 44 552 120 534 230 Q560 300 540 360 Q566 430 548 500 Q578 570 560 640 Q590 700 572 760 L228 760 Q210 700 240 640 Q222 570 252 500 Q234 430 260 360 Q240 300 266 230 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M318 292 Q400 356 482 292 L490 758 L310 758 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M276 300 Q262 360 280 420 Q264 490 278 560 Q262 630 272 700 M524 300 Q538 360 520 420 Q536 490 522 560 Q538 630 528 700" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+</svg>

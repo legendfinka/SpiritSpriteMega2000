@@ -8,11 +8,16 @@ import { getPart, PARTS, partsForSlot, toFragment } from './registry';
 
 describe('library size', () => {
   it.each([
-    ['hairFront', 6],
-    ['hairBack', 5],
-    ['outfit', 6],
+    ['hairFront', 10],
+    ['hairBack', 9],
+    ['outfit', 12],
     ['body', 2],
-    ['accessory', 4],
+    ['face', 4],
+    ['eyes', 11],
+    ['mouth', 12],
+    ['brows', 8],
+    ['extras', 9],
+    ['accessory', 8],
   ] as const)('%s has at least %i parts', (slot, min) => {
     expect(partsForSlot(slot).length).toBeGreaterThanOrEqual(min);
   });

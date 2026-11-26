@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- toothy grin -->
+<path d="M368 288 Q400 300 432 288 Q428 316 400 318 Q372 316 368 288 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M372 300 Q400 308 428 300 M386 296 V312 M400 298 V316 M414 296 V312" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="2" stroke-linecap="round"/>
+</svg>

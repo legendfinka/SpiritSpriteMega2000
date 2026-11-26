@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- plaster on the cheek -->
+<g transform="rotate(-20 470 268)">
+<rect x="444" y="259" width="52" height="18" rx="7" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+<rect x="461" y="262" width="18" height="12" rx="2" fill="var(--skin-shade, #e9a677)"/>
+<path d="M450 266 h2 M450 271 h2 M488 266 h2 M488 271 h2" stroke="var(--outline, #2b1d18)" stroke-width="2" stroke-linecap="round"/>
+</g>
+</svg>

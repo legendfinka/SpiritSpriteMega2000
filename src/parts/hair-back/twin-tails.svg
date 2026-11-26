@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- tails flaring out past the arms -->
+<path d="M300 96 C220 90 170 170 176 280 C180 380 160 470 184 560 C214 500 234 420 236 330 C238 240 250 170 300 136 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M500 96 C580 90 630 170 624 280 C620 380 640 470 616 560 C586 500 566 420 564 330 C562 240 550 170 500 136 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M236 140 C204 200 204 300 204 380 C204 440 196 490 190 530 M564 140 C596 200 596 300 596 380 C596 440 604 490 610 530" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<!-- head -->
+<path d="M282 225 C266 125 322 50 400 48 C478 50 534 125 518 225 C520 262 512 290 500 300 L300 300 C288 290 280 262 282 225 Z" fill="var(--hair-shade, #3a2516)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- hair ties -->
+<ellipse cx="296" cy="112" rx="16" ry="22" transform="rotate(30 296 112)" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<ellipse cx="504" cy="112" rx="16" ry="22" transform="rotate(-30 504 112)" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+</svg>

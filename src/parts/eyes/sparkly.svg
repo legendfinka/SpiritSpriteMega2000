@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- big shiny eyes -->
+<path d="M320 222 Q350 198 380 216 Q380 250 350 252 Q320 250 320 222 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="350" cy="230" rx="17" ry="21" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="350" cy="232" rx="7" ry="10" fill="var(--outline, #2b1d18)"/>
+<circle cx="342" cy="220" r="6" fill="#ffffff"/>
+<circle cx="358" cy="241" r="3" fill="#ffffff"/>
+<circle cx="345" cy="244" r="2" fill="#ffffff"/>
+<path d="M314 220 Q350 192 386 214" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+<path d="M480 222 Q450 198 420 216 Q420 250 450 252 Q480 250 480 222 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="450" cy="230" rx="17" ry="21" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="450" cy="232" rx="7" ry="10" fill="var(--outline, #2b1d18)"/>
+<circle cx="442" cy="220" r="6" fill="#ffffff"/>
+<circle cx="458" cy="241" r="3" fill="#ffffff"/>
+<circle cx="445" cy="244" r="2" fill="#ffffff"/>
+<path d="M486 220 Q450 192 414 214" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+</svg>

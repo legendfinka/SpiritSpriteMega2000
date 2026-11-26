@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- jeans -->
+<path d="M280 780 L520 780 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<!-- sleeves -->
+<path d="M256 418 C216 436 198 490 196 560 L190 832 L272 832 L278 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M544 418 C584 436 602 490 604 560 L610 832 L528 832 L522 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M193 800 L271 800 L272 832 L190 832 Z M607 800 L529 800 L528 832 L610 832 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- body -->
+<path d="M366 380 C326 394 276 400 258 422 C244 440 244 474 248 524 L262 720 C264 770 262 810 266 850 L534 850 C538 810 536 770 538 720 L552 524 C556 474 556 440 542 422 C524 400 474 394 434 380 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M265 818 L535 818 L534 850 L266 850 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- kangaroo pocket -->
+<path d="M318 690 L482 690 L498 790 L302 790 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M318 690 L302 790 M482 690 L498 790" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="10"/>
+<!-- hood bunched behind the neck -->
+<path d="M334 398 C322 360 356 338 400 340 C444 338 478 360 466 398 Q400 422 334 398 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M360 392 Q400 406 440 392" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+<!-- drawstrings -->
+<path d="M386 402 L380 520 M414 402 L420 520" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="5" stroke-linecap="round"/>
+<path d="M376 518 L384 538 M416 518 L424 538" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+</svg>

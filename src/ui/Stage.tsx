@@ -9,6 +9,8 @@ const BACKGROUNDS = [
   { id: 'room', label: 'Room' },
   { id: 'kitchen', label: 'Kitchen' },
   { id: 'courtyard', label: 'Courtyard' },
+  { id: 'classroom', label: 'Classroom' },
+  { id: 'rooftop', label: 'Rooftop at night' },
 ] as const;
 
 type View = 'sprite' | 'scene';

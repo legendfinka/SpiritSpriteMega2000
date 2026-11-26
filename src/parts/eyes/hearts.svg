@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- heart eyes, tinted with the iris colour -->
+<path d="M350 248 C330 234 316 222 322 208 C328 196 344 198 350 210 C356 198 372 196 378 208 C384 222 370 234 350 248 Z" fill="var(--iris, #4f7fb8)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M450 248 C430 234 416 222 422 208 C428 196 444 198 450 210 C456 198 472 196 478 208 C484 222 470 234 450 248 Z" fill="var(--iris, #4f7fb8)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="333" cy="212" r="4" fill="#ffffff"/>
+<circle cx="433" cy="212" r="4" fill="#ffffff"/>
+</svg>

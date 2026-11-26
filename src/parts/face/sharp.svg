@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- ears -->
+<path d="M298 205 C270 195 262 222 270 245 C276 262 290 268 302 262 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M502 205 C530 195 538 222 530 245 C524 262 510 268 498 262 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M288 220 C280 228 282 242 292 248 M512 220 C520 228 518 242 508 248" fill="none" stroke="var(--skin-shade, #e9a677)" stroke-width="5" stroke-linecap="round"/>
+<!-- angular jaw, pointed chin -->
+<path d="M292 190 C292 110 340 75 400 75 C460 75 508 110 508 190 L504 252 L460 316 L400 346 L340 316 L296 252 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M312 266 L338 300 M488 266 L462 300" fill="none" stroke="var(--skin-shade, #e9a677)" stroke-width="4" stroke-linecap="round"/>
+<path d="M404 238 L392 268 L406 270" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

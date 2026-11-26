@@ -52,7 +52,7 @@ export interface Expression {
   eyes: string;
   brows: string;
   mouth: string;
-  /** replaces the default extras when set */
+  /** drawn on top of the character's own extras */
   extras?: string[];
 }
 

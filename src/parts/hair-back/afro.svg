@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- big round afro -->
+<circle cx="400" cy="178" r="172" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<circle cx="400" cy="178" r="140" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="6" stroke-dasharray="4 18" stroke-linecap="round"/>
+<path d="M260 120 q8 -10 16 0 M250 200 q8 -10 16 0 M534 200 q8 -10 16 0 M524 120 q8 -10 16 0 M300 50 q8 -10 16 0 M484 50 q8 -10 16 0" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-linecap="round"/>
+<path d="M300 40 Q360 12 420 14" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="10" stroke-linecap="round"/>
+</svg>

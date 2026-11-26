@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- quiff swept up and back -->
+<path d="M290 232 C278 160 298 104 338 72 C362 40 424 18 474 40 C514 58 522 100 502 122 C522 152 518 200 510 238 L498 192 C470 154 432 142 400 142 C360 142 322 160 304 198 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M330 140 Q380 98 476 100 M316 170 Q370 128 498 140" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M346 72 Q404 34 470 52" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="9" stroke-linecap="round"/>
+</svg>

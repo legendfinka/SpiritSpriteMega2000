@@ -42,13 +42,14 @@ export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
 export function getPresetExpression(id: PresetExpressionId, character: Character): Expression {
   const preset = PRESET_EXPRESSIONS[id];
   if (id !== 'neutral') return preset;
-  const { eyes, brows, mouth, extras } = character.parts;
+  const { eyes, brows, mouth } = character.parts;
   return {
     id,
     eyes: eyes ?? preset.eyes,
     brows: brows ?? preset.brows,
     mouth: mouth ?? preset.mouth,
-    extras: extras ? [extras] : [],
+    // the character's extras are always drawn, so neutral adds none
+    extras: [],
   };
 }
 

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- side part with long locks framing the face, goes well with long back hair -->
+<path d="M276 384 C254 150 310 60 400 56 C490 60 546 150 524 384 L506 384 C504 300 500 240 494 200 C470 150 420 128 360 130 L340 112 L334 140 C316 170 306 230 300 300 L294 384 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M290 220 L284 372 M510 220 L516 372 M344 116 Q420 120 488 186" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M300 110 Q330 84 372 78" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="8" stroke-linecap="round"/>
+</svg>

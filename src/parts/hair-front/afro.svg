@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- puffy hairline, pair with the afro back -->
+<path d="M286 222 C270 120 330 50 400 48 C470 50 530 120 514 222 Q510 182 486 170 Q470 140 440 146 Q420 124 400 132 Q380 124 360 146 Q330 140 314 170 Q290 182 286 222 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M320 120 q8 -10 16 0 M360 96 q8 -10 16 0 M424 96 q8 -10 16 0 M464 120 q8 -10 16 0 M392 70 q8 -10 16 0" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-linecap="round"/>
+</svg>

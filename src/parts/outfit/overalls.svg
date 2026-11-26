@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- t-shirt with short sleeves -->
+<path d="M258 418 C226 432 210 474 210 540 L264 552 L272 470 Z M542 418 C574 432 590 474 590 540 L536 552 L528 470 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M368 384 C330 395 280 400 262 420 C250 436 248 470 252 520 L270 700 L530 700 L548 520 C552 470 550 436 538 420 C520 400 470 395 432 384 Q400 420 368 384 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M256 470 H544 M254 500 H546" fill="none" stroke="var(--outfit-main, #2f6f6a)" stroke-width="10"/>
+<!-- denim dungarees -->
+<path d="M266 690 L534 690 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<path d="M328 520 L472 520 L478 700 L322 700 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M368 560 H432 V604 H368 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M300 740 Q330 760 352 730 M500 740 Q470 760 448 730" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+<path d="M334 532 H466" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="3" stroke-dasharray="6 5"/>
+<!-- straps and buttons -->
+<path d="M296 404 L318 400 L346 524 L326 526 Z M504 404 L482 400 L454 524 L474 526 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="338" cy="532" r="9" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+<circle cx="462" cy="532" r="9" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+</svg>

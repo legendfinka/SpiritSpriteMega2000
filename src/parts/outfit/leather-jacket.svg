@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- jeans -->
+<path d="M280 780 L520 780 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<!-- t-shirt peeking out -->
+<path d="M366 384 Q400 420 434 384 L444 450 L356 450 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- sleeves with cuff zips -->
+<path d="M258 418 C222 436 206 490 204 560 L196 832 L268 832 L274 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M542 418 C578 436 594 490 596 560 L604 832 L532 832 L526 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M214 784 L232 830 M586 784 L568 830" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="4" stroke-dasharray="3 4"/>
+<path d="M226 470 C216 560 212 680 210 760 M574 470 C584 560 588 680 590 760" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="6" stroke-linecap="round"/>
+<!-- body with a V opening -->
+<path d="M368 382 C330 394 282 400 262 420 C248 436 246 470 250 520 L264 700 C268 760 272 800 276 830 L524 830 C528 800 532 760 536 700 L550 520 C554 470 552 436 538 420 C518 400 470 394 432 382 L420 440 L380 440 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- offset zip -->
+<path d="M420 440 L470 600 L458 800" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<path d="M420 440 L470 600 L458 800" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="3" stroke-dasharray="2 4"/>
+<!-- wide lapels with snaps -->
+<path d="M368 382 L316 422 L350 524 L380 440 Z M432 382 L490 418 L466 478 L420 440 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="332" cy="436" r="5" fill="var(--outfit-accent, #ece4d0)"/>
+<circle cx="474" cy="432" r="5" fill="var(--outfit-accent, #ece4d0)"/>
+<!-- epaulettes -->
+<path d="M280 414 L326 400 L330 414 L284 428 Z M520 414 L474 400 L470 414 L516 428 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- zip pockets and belt -->
+<path d="M290 640 L340 620 M510 660 L480 700" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="4" stroke-dasharray="2 4"/>
+<path d="M276 800 L524 800 L524 830 L276 830 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<rect x="296" y="798" width="30" height="34" rx="3" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="5"/>
+</svg>

@@ -80,6 +80,20 @@ describe('composeLayers', () => {
     expect(bySlot('hairFront')).toEqual(['hair-front/messy-fringe']);
   });
 
+  it("keeps the character's own extras under every expression", () => {
+    const c = character({ face: 'face/oval', extras: 'extras/freckles' });
+    const extras = composeLayers(c, {
+      id: 'happy',
+      eyes: 'eyes/closed-happy',
+      brows: 'brows/happy',
+      mouth: 'mouth/smile',
+      extras: ['extras/blush', 'extras/freckles'],
+    })
+      .filter((l) => l.slot === 'extras')
+      .map((l) => l.part.id);
+    expect(extras).toEqual(['extras/freckles', 'extras/blush']);
+  });
+
   it('skips unknown part ids instead of throwing', () => {
     const c = character({ body: 'body/base-male', hairFront: 'hair-front/does-not-exist' });
     expect(composeLayers(c).map((l) => l.slot)).toEqual(['body']);
