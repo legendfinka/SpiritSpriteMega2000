@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- narrow 90s shades -->
+<path d="M318 216 L292 210 M482 216 L508 210" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linecap="round"/>
+<path d="M314 210 L388 214 L382 238 Q352 250 322 240 Z" fill="var(--outline, #2b1d18)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M486 210 L412 214 L418 238 Q448 250 478 240 Z" fill="var(--outline, #2b1d18)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M388 216 Q400 210 412 216" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linecap="round"/>
+<path d="M330 222 L346 222 M428 222 L444 222" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+</svg>

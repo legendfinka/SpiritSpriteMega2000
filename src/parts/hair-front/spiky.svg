@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- anime spikes -->
+<path d="M290 236 L270 150 L300 160 L294 96 L330 120 L338 52 L372 96 L400 26 L428 96 L462 52 L470 120 L506 96 L500 160 L530 150 L510 236 L496 182 L472 196 L454 160 L430 188 L400 150 L370 188 L346 160 L328 196 L304 182 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 150 L400 60 M346 160 L344 90 M454 160 L456 90 M304 182 L300 130 M496 182 L500 130" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M346 112 L372 104 M428 104 L454 112" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="7" stroke-linecap="round"/>
+</svg>

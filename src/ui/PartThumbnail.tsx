@@ -14,7 +14,10 @@ interface PartThumbnailProps {
 export function PartThumbnail({ part, colors }: PartThumbnailProps) {
   const character = useMemo<Character>(() => {
     const base = createDefaultCharacter();
-    return { ...base, parts: { ...base.parts, [part.slot]: part.id }, colors };
+    const parts = { ...base.parts, [part.slot]: part.id };
+    // bodies all look alike under a jacket
+    if (part.slot === 'body') delete parts.outfit;
+    return { ...base, parts, colors };
   }, [part, colors]);
 
   return (

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- jeans -->
+<path d="M280 780 L520 780 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<!-- baggy knit sleeves with rib cuffs -->
+<path d="M256 418 C216 436 198 490 196 560 L190 832 L272 832 L278 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M544 418 C584 436 602 490 604 560 L610 832 L528 832 L522 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M193 800 L271 800 L272 832 L190 832 Z M607 800 L529 800 L528 832 L610 832 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M198 816 H268 M532 816 H602" fill="none" stroke="var(--outfit-main, #2f6f6a)" stroke-width="28" stroke-dasharray="3 8"/>
+<!-- body -->
+<path d="M366 380 C326 394 276 400 258 422 C244 440 244 474 248 524 L262 720 C264 770 262 810 266 850 L534 850 C538 810 536 770 538 720 L552 524 C556 474 556 440 542 422 C524 400 474 394 434 380 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- folk pattern band: dots, zigzag, dots -->
+<path d="M250 466 L550 466 L551 534 L249 534 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+<path d="M256 512 L272 488 L288 512 L304 488 L320 512 L336 488 L352 512 L368 488 L384 512 L400 488 L416 512 L432 488 L448 512 L464 488 L480 512 L496 488 L512 512 L528 488 L544 512" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="6" stroke-linejoin="round"/>
+<path d="M262 476 H542 M262 524 H542" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="6" stroke-dasharray="1 15" stroke-linecap="round"/>
+<path d="M280 620 C290 680 290 740 288 800 M520 620 C510 680 510 740 512 800" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5" stroke-linecap="round"/>
+<!-- rib hem -->
+<path d="M265 816 L535 816 L534 850 L266 850 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M270 833 H530" fill="none" stroke="var(--outfit-main, #2f6f6a)" stroke-width="30" stroke-dasharray="3 9"/>
+<!-- turtleneck, tucked behind the chin -->
+<path d="M366 384 L362 334 Q400 346 438 334 L434 384 Q400 398 366 384 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M366 352 Q400 364 434 352 M367 368 Q400 380 433 368" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="3"/>
+</svg>

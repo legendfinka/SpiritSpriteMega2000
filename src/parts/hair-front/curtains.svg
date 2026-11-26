@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- 90s middle-part curtains -->
+<path d="M284 262 C268 150 312 62 400 56 C488 62 532 150 516 262 L506 238 C498 190 470 150 420 132 Q406 126 400 106 Q394 126 380 132 C330 150 302 190 294 238 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M398 110 C376 140 336 164 308 214 M402 110 C424 140 464 164 492 214" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M300 150 C320 110 350 90 380 84 M500 150 C480 110 450 90 420 84" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-linecap="round"/>
+<path d="M338 96 Q364 80 392 78 M408 78 Q436 80 462 96" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- trousers with creases -->
+<path d="M280 780 L520 780 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M338 880 L334 1080 M462 880 L466 1080" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="4" stroke-linecap="round"/>
+<!-- shirt under the blazer -->
+<path d="M368 384 C330 395 300 405 290 425 L300 700 L298 840 L502 840 L500 700 L510 425 C500 405 470 395 432 384 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- tie -->
+<path d="M388 392 L412 392 L408 412 L392 412 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M392 412 L408 412 L416 560 L400 586 L384 560 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- shirt collar points -->
+<path d="M368 384 L382 416 L398 394 Z M432 384 L418 416 L402 394 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- sleeves -->
+<path d="M258 418 C222 436 206 490 204 560 L196 832 L268 832 L274 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M542 418 C578 436 594 490 596 560 L604 832 L532 832 L526 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M200 806 L268 806 M600 806 L532 806" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5"/>
+<circle cx="250" cy="820" r="5" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="2"/>
+<circle cx="550" cy="820" r="5" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="2"/>
+<!-- blazer, left panel buttons over the right -->
+<path d="M432 382 C470 395 520 400 538 420 C552 436 554 470 550 520 L534 700 C530 760 526 800 522 846 L396 846 L396 600 L448 440 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M368 382 C330 395 280 400 262 420 C248 436 246 470 250 520 L266 700 C270 760 274 800 278 846 L404 846 L404 600 L352 440 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- lapels -->
+<path d="M368 382 L332 410 L352 440 Z M432 382 L468 410 L448 440 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- crest, pockets, buttons -->
+<path d="M308 488 H340 V510 Q340 526 324 532 Q308 526 308 510 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M316 500 H332 M324 494 V522" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="3"/>
+<path d="M286 760 L346 756 M514 760 L454 756" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+<circle cx="392" cy="650" r="7" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="3"/>
+<circle cx="392" cy="730" r="7" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="3"/>
+</svg>

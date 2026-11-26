@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- arms (behind torso), slimmer but inside the same sleeves as the male base -->
+<path d="M272 430 C244 444 228 494 226 560 L220 845 L264 845 L272 600 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M528 430 C556 444 572 494 574 560 L580 845 L536 845 L528 600 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- hands -->
+<path d="M220 838 C214 866 218 898 240 905 C262 909 270 886 264 838 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M580 838 C586 866 582 898 560 905 C538 909 530 886 536 838 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M246 868 C249 882 250 893 247 902" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
+<path d="M554 868 C551 882 550 893 553 902" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
+<!-- torso + legs: narrower shoulders and waist, fuller hips -->
+<path d="M376 386 C344 398 300 404 280 424 C268 438 266 470 270 516 C276 580 296 640 300 700 C303 750 284 800 282 850 L288 1085 L394 1085 L400 890 L406 1085 L512 1085 L518 850 C516 800 497 750 500 700 C504 640 524 580 530 516 C534 470 532 438 520 424 C500 404 456 398 424 386 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M318 522 Q345 550 372 532 M482 522 Q455 550 428 532" fill="none" stroke="var(--skin-shade, #e9a677)" stroke-width="4" stroke-linecap="round"/>
+<!-- neck -->
+<path d="M378 280 L376 394 Q400 408 424 394 L422 280 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M378 312 Q400 350 422 312 L422 338 Q400 368 378 338 Z" fill="var(--skin-shade, #e9a677)"/>
+</svg>

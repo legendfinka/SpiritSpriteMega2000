@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- high ponytail swinging out to the right -->
+<path d="M468 92 C560 66 606 140 594 232 C586 300 562 360 576 436 C536 404 524 332 530 270 C536 204 520 152 468 132 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M520 120 C560 150 566 230 552 300 C546 340 548 380 560 412" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M500 104 C548 100 576 140 578 190" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="7" stroke-linecap="round"/>
+<!-- head -->
+<path d="M282 225 C266 125 322 50 400 48 C478 50 534 125 518 225 C520 262 512 290 500 300 L300 300 C288 290 280 262 282 225 Z" fill="var(--hair-shade, #3a2516)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- scrunchie -->
+<ellipse cx="482" cy="110" rx="20" ry="26" transform="rotate(-25 482 110)" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<path d="M472 96 Q480 110 474 124 M490 94 Q496 108 492 124" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
+</svg>

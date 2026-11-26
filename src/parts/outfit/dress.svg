@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- knee socks over the body's legs -->
+<path d="M286 990 L289 1085 L394 1085 L396 990 Z M514 990 L511 1085 L406 1085 L404 990 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M290 1008 H394 M510 1008 H406" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="7"/>
+<!-- A-line dress with a scoop neck -->
+<path d="M368 384 C330 396 280 400 262 420 C250 436 248 470 252 520 L268 690 L220 942 Q400 974 580 942 L532 690 L548 520 C552 470 550 436 538 420 C520 400 470 396 432 384 Q400 424 368 384 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M330 712 L298 950 M400 712 L400 958 M470 712 L502 950" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5" stroke-linecap="round"/>
+<path d="M226 920 Q400 950 574 920" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="8"/>
+<!-- waist sash and bow -->
+<path d="M266 676 L534 676 L536 712 L264 712 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M400 694 L364 672 L366 718 Z M400 694 L436 672 L434 718 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="400" cy="694" r="8" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="3"/>
+<!-- round collar -->
+<path d="M370 386 Q352 424 396 412 L400 398 Z M430 386 Q448 424 404 412 L400 398 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- puff sleeves -->
+<path d="M268 418 C232 424 212 462 218 512 Q248 528 280 512 L284 450 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M532 418 C568 424 588 462 582 512 Q552 528 520 512 L516 450 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M222 498 Q250 510 278 498 M578 498 Q550 510 522 498" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="4" stroke-linecap="round"/>
+</svg>

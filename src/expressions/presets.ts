@@ -20,14 +20,14 @@ export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
     eyes: 'eyes/sad',
     brows: 'brows/sad',
     mouth: 'mouth/frown',
-    extras: [],
+    extras: ['extras/tears'],
   },
   angry: {
     id: 'angry',
     eyes: 'eyes/narrow',
     brows: 'brows/angry',
     mouth: 'mouth/grit',
-    extras: [],
+    extras: ['extras/anger-mark'],
   },
   surprised: {
     id: 'surprised',

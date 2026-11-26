@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- big open laugh -->
+<path d="M364 282 Q400 292 436 282 Q432 330 400 333 Q368 330 364 282 Z" fill="var(--outline, #2b1d18)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M372 288 Q400 296 428 288 L426 296 Q400 302 374 296 Z" fill="#ffffff"/>
+<path d="M380 322 Q400 306 420 322 Q410 330 400 330 Q390 330 380 322 Z" fill="var(--skin-shade, #e9a677)"/>
+</svg>

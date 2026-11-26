@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- walkman headphones -->
+<path d="M272 226 C264 92 328 36 400 34 C472 36 536 92 528 226" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="14" stroke-linecap="round"/>
+<path d="M272 226 C264 92 328 36 400 34 C472 36 536 92 528 226" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="6" stroke-linecap="round"/>
+<!-- cord to a player in the pocket -->
+<path d="M268 268 C246 330 300 380 330 440" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
+<!-- foam ear cups -->
+<ellipse cx="274" cy="236" rx="22" ry="34" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<ellipse cx="526" cy="236" rx="22" ry="34" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<path d="M266 212 V260 M282 212 V260 M518 212 V260 M534 212 V260" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="3" stroke-dasharray="3 5"/>
+</svg>

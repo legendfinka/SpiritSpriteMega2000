@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- long fringe swept from a left part over the right brow -->
+<path d="M284 252 C268 150 312 62 400 56 C488 62 532 150 518 272 L500 216 Q470 208 446 188 Q410 160 362 150 L344 120 L330 152 Q310 182 296 240 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M350 118 Q420 136 484 204 M380 100 Q450 120 506 190" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M330 100 Q378 78 430 88" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="8" stroke-linecap="round"/>
+</svg>

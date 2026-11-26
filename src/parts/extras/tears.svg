@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- streams down both cheeks -->
+<path d="M332 248 Q326 282 332 304 Q338 316 345 304 Q350 282 344 248 Z" fill="#ffffff" fill-opacity="0.85" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M468 248 Q474 282 468 304 Q462 316 455 304 Q450 282 456 248 Z" fill="#ffffff" fill-opacity="0.85" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M330 326 Q324 338 330 344 Q338 348 340 338 Q338 330 330 326 Z M470 326 Q476 338 470 344 Q462 348 460 338 Q462 330 470 326 Z" fill="#ffffff" fill-opacity="0.85" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
+</svg>

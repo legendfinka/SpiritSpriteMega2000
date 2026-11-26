@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- close buzz cut, pair it with no back hair -->
+<path d="M292 200 C290 120 336 70 400 68 C464 70 510 120 508 200 L500 186 C490 150 450 126 400 124 C350 126 310 150 300 186 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M312 166 C322 120 360 96 400 94 C440 96 478 120 488 166" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+<path d="M330 112 C350 128 370 136 400 138" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+</svg>

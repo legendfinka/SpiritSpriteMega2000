@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- ears -->
+<path d="M300 208 C274 198 266 224 273 246 C279 262 292 267 303 261 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M500 208 C526 198 534 224 527 246 C521 262 508 267 497 261 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M290 222 C283 230 285 242 294 247 M510 222 C517 230 515 242 506 247" fill="none" stroke="var(--skin-shade, #e9a677)" stroke-width="5" stroke-linecap="round"/>
+<!-- rounder head, small chin -->
+<path d="M296 190 C296 112 342 78 400 78 C458 78 504 112 504 190 C504 246 490 284 456 310 C434 328 416 334 400 334 C384 334 366 328 344 310 C310 284 296 246 296 190 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- button nose -->
+<path d="M401 254 L396 265 L404 266" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

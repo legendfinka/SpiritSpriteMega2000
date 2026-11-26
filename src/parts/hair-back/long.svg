@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- long straight hair falling behind the back to the waist -->
+<path d="M266 230 C248 120 316 44 400 42 C484 44 552 120 534 230 C546 380 560 540 584 720 L560 708 L542 742 L520 716 L500 750 L300 750 L280 716 L258 742 L240 708 L216 720 C240 540 254 380 266 230 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M318 292 Q400 356 482 292 L490 748 L310 748 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M278 320 C272 450 262 580 246 700 M522 320 C528 450 538 580 554 700" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+</svg>

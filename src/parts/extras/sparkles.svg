@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- excited sparkles around the head -->
+<path d="M548 110 Q552 132 574 136 Q552 140 548 162 Q544 140 522 136 Q544 132 548 110 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M252 150 Q255 165 270 168 Q255 171 252 186 Q249 171 234 168 Q249 165 252 150 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M572 196 Q574 205 583 207 Q574 209 572 218 Q570 209 561 207 Q570 205 572 196 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
+</svg>

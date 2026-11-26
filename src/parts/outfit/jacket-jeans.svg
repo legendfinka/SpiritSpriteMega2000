@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
 <!-- jeans -->
-<path d="M280 760 L520 760 L526 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
-<path d="M400 880 L424 1085 L376 1085 Z" fill="var(--pants-shade, #283e5d)"/>
-<path d="M400 862 L400 1085" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+<path d="M280 760 L520 760 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<path d="M400 830 L400 880" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
 <path d="M300 828 Q336 838 350 812" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
 <path d="M500 828 Q464 838 450 812" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
 <!-- t-shirt -->

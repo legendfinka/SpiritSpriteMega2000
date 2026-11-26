@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- bushy, slightly flat -->
+<path d="M314 186 Q344 160 384 168 L382 186 Q346 180 320 198 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M486 186 Q456 160 416 168 L418 186 Q454 180 480 198 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+</svg>

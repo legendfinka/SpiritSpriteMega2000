@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- chin-length bob -->
+<path d="M268 230 C250 120 316 46 400 44 C484 46 550 120 532 230 C540 300 532 350 514 374 Q478 388 456 368 L344 368 Q322 388 286 374 C268 350 260 300 268 230 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- darker underside behind the neck -->
+<path d="M318 290 Q400 344 482 290 L486 366 L314 366 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M282 300 Q290 340 300 366 M518 300 Q510 340 500 366" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+</svg>

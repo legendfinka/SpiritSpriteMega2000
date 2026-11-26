@@ -1,8 +1,35 @@
 import { describe, expect, it } from 'vitest';
 import { PRESET_EXPRESSIONS } from '../expressions/presets';
 import { createDefaultCharacter } from '../store/defaultCharacter';
+import { parseCharacter } from '../store/parseCharacter';
+import { STARTERS } from '../store/starters';
 import { COLOR_TOKENS } from '../types';
-import { getPart, PARTS, toFragment } from './registry';
+import { getPart, PARTS, partsForSlot, toFragment } from './registry';
+
+describe('library size', () => {
+  it.each([
+    ['hairFront', 6],
+    ['hairBack', 5],
+    ['outfit', 6],
+    ['body', 2],
+    ['accessory', 4],
+  ] as const)('%s has at least %i parts', (slot, min) => {
+    expect(partsForSlot(slot).length).toBeGreaterThanOrEqual(min);
+  });
+});
+
+describe.each(STARTERS.map((s) => [s.label, s] as const))('starter %s', (_label, starter) => {
+  it('uses existing parts in the right slots', () => {
+    for (const [slot, id] of Object.entries(starter.create().parts)) {
+      expect(getPart(id)?.slot, id).toBe(slot);
+    }
+  });
+
+  it('is a valid character', () => {
+    const character = starter.create();
+    expect(parseCharacter(JSON.parse(JSON.stringify(character)))).toEqual(character);
+  });
+});
 
 const KNOWN_TOKENS: readonly string[] = COLOR_TOKENS;
 const ALLOWED_HEX = ['#fff', '#ffffff', '#000', '#000000'];

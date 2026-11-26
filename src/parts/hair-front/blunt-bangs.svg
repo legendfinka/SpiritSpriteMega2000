@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- straight bangs with side locks over the ears -->
+<path d="M262 312 C250 150 306 58 400 54 C494 58 550 150 538 312 L504 312 L498 200 L494 170 L470 177 L448 168 L424 177 L400 168 L376 177 L352 168 L330 177 L306 170 L302 200 L296 312 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M352 168 L360 110 M400 168 L400 100 M448 168 L440 110 M282 230 L286 300 M518 230 L514 300" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="4" stroke-linecap="round"/>
+<path d="M330 96 Q400 68 470 96" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="10" stroke-linecap="round"/>
+</svg>

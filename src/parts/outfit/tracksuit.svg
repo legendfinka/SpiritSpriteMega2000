@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- bottoms with a side stripe -->
+<path d="M280 780 L520 780 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M283 850 L278 1085 M517 850 L522 1085" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="10"/>
+<path d="M400 892 L394 1080 L376 1080 L392 900 Z M400 892 L406 1080 L424 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<!-- sleeves with a piping stripe and ribbed cuffs -->
+<path d="M258 418 C222 436 206 490 204 560 L196 832 L268 832 L274 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M542 418 C578 436 594 490 596 560 L604 832 L532 832 L526 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M234 438 C216 494 210 600 206 798 M566 438 C584 494 590 600 594 798" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="9"/>
+<path d="M199 800 L269 800 L268 832 L196 832 Z M601 800 L531 800 L532 832 L604 832 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M204 816 H264 M536 816 H596" fill="none" stroke="var(--outfit-main, #2f6f6a)" stroke-width="28" stroke-dasharray="3 8"/>
+<!-- zip-up top -->
+<path d="M368 380 C330 394 282 400 262 420 C248 436 246 470 250 520 L264 700 C268 760 272 800 276 846 L524 846 C528 800 532 760 536 700 L550 520 C554 470 552 436 538 420 C518 400 470 394 432 380 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- colour-block chevron across the chest -->
+<path d="M252 466 L400 556 L548 466 L550 520 L400 612 L250 520 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M262 640 C268 700 272 760 276 812 M538 640 C532 700 528 760 524 812" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="8" stroke-linecap="round"/>
+<!-- waistband -->
+<path d="M276 816 L524 816 L524 846 L276 846 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- zip and stand collar -->
+<path d="M400 386 L400 816" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4"/>
+<path d="M366 382 L362 350 Q400 364 438 350 L434 382 Q400 394 366 382 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<rect x="393" y="400" width="14" height="24" rx="3" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="3"/>
+</svg>

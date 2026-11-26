@@ -7,8 +7,8 @@
 <path d="M594 838 C600 870 596 905 570 912 C544 916 534 890 538 838 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
 <path d="M240 870 C244 885 246 896 242 906" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
 <path d="M560 870 C556 885 554 896 558 906" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
-<!-- torso + legs -->
-<path d="M368 380 C330 395 280 400 262 420 C250 435 248 470 252 520 L270 700 C275 760 280 800 285 830 L290 1085 L510 1085 L515 830 C520 800 525 760 530 700 L548 520 C552 470 550 435 538 420 C520 400 470 395 432 380 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- torso + legs, notched so skirts and shorts show two legs -->
+<path d="M368 380 C330 395 280 400 262 420 C250 435 248 470 252 520 L270 700 C275 760 280 800 285 830 L290 1085 L394 1085 L400 885 L406 1085 L510 1085 L515 830 C520 800 525 760 530 700 L548 520 C552 470 550 435 538 420 C520 400 470 395 432 380 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
 <!-- neck -->
 <path d="M370 280 L368 392 Q400 408 432 392 L430 280 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
 <path d="M370 312 Q400 352 430 312 L430 340 Q400 372 370 340 Z" fill="var(--skin-shade, #e9a677)"/>

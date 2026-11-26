@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- buns -->
+<circle cx="306" cy="82" r="46" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<circle cx="494" cy="82" r="46" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<path d="M282 80 Q290 54 316 58 Q336 66 328 88 Q318 104 300 96 M518 80 Q510 54 484 58 Q464 66 472 88 Q482 104 500 96" fill="none" stroke="var(--hair-shade, #3a2516)" stroke-width="5" stroke-linecap="round"/>
+<path d="M276 66 Q284 46 304 42 M524 66 Q516 46 496 42" fill="none" stroke="var(--hair-hi, #9b653b)" stroke-width="6" stroke-linecap="round"/>
+<!-- head -->
+<path d="M282 225 C266 125 322 50 400 48 C478 50 534 125 518 225 C520 262 512 290 500 300 L300 300 C288 290 280 262 282 225 Z" fill="var(--hair-shade, #3a2516)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+</svg>

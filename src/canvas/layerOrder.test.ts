@@ -36,6 +36,10 @@ describe('LAYER_ORDER', () => {
   it('draws brows under the front hair', () => {
     expect(layerIndex('brows')).toBeLessThan(layerIndex('hairFront'));
   });
+
+  it('draws back hair behind the body', () => {
+    expect(layerIndex('hairBack')).toBe(0);
+  });
 });
 
 describe('composeLayers', () => {
