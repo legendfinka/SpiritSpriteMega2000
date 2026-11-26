@@ -11,6 +11,7 @@ import { useCharacterStore } from './store/useCharacterStore';
 import type { ExpressionId, Slot } from './types';
 import { CharacterFileButtons } from './ui/CharacterFileButtons';
 import { ColorPanel } from './ui/ColorPanel';
+import { ConfirmDialog } from './ui/ConfirmDialog';
 import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
@@ -30,6 +31,7 @@ export function App() {
   const [activeId, setActiveId] = useState<ExpressionId>('neutral');
   const [slot, setSlot] = useState<Slot>('hairFront');
   const [exporting, setExporting] = useState(false);
+  const [resetting, setResetting] = useState(false);
 
   // deleted or reset? fall back to neutral
   const active =
@@ -48,24 +50,21 @@ export function App() {
     if (FACE_SLOTS.includes(next) && faceTarget.kind === 'preset') setActiveId('neutral');
   };
 
-  useShortcuts(
-    {
-      undo,
-      redo,
-      save: () => downloadCharacterJson(useCharacterStore.getState().character),
-      openExport: () => setExporting(true),
-      stepExpression: (delta) => {
-        const ids = listExpressions(character).map((e) => e.id);
-        const i = ids.indexOf(active.id);
-        setActiveId(ids[(i + delta + ids.length) % ids.length] ?? 'neutral');
-      },
-      pickExpression: (index) => {
-        const id = listExpressions(character)[index]?.id;
-        if (id) setActiveId(id);
-      },
+  useShortcuts({
+    undo,
+    redo,
+    save: () => downloadCharacterJson(useCharacterStore.getState().character),
+    openExport: () => setExporting(true),
+    stepExpression: (delta) => {
+      const ids = listExpressions(character).map((e) => e.id);
+      const i = ids.indexOf(active.id);
+      setActiveId(ids[(i + delta + ids.length) % ids.length] ?? 'neutral');
     },
-    !exporting,
-  );
+    pickExpression: (index) => {
+      const id = listExpressions(character)[index]?.id;
+      if (id) setActiveId(id);
+    },
+  });
 
   return (
     <div className={styles.app}>
@@ -106,11 +105,7 @@ export function App() {
         </div>
         <button
           type="button"
-          onClick={() => {
-            if (window.confirm('Reset the character to the default? (You can undo this.)')) {
-              resetCharacter();
-            }
-          }}
+          onClick={() => setResetting(true)}
         >
           Reset
         </button>
@@ -126,6 +121,22 @@ export function App() {
         </button>
       </header>
       {exporting && <ExportDialog active={active} onClose={() => setExporting(false)} />}
+      {resetting && (
+        <ConfirmDialog
+          title="Start over?"
+          confirmLabel="Reset"
+          cancelLabel="Keep"
+          onCancel={() => setResetting(false)}
+          onConfirm={() => {
+            resetCharacter();
+            setActiveId('neutral');
+            setResetting(false);
+          }}
+        >
+          <p>{character.name || 'This character'} goes back to the default.</p>
+          <small>Changed your mind later? Undo brings it back.</small>
+        </ConfirmDialog>
+      )}
 
       <main className={styles.main}>
         <PartPicker slot={slot} onSlotChange={changeSlot} faceTarget={faceTarget} />

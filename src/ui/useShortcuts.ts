@@ -22,16 +22,16 @@ function isEditing(target: EventTarget | null): boolean {
   return ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
 }
 
-/** global shortcuts; pass enabled=false while a dialog is open */
-export function useShortcuts(handlers: ShortcutHandlers, enabled = true): void {
+/** global shortcuts; quiet while any modal dialog is open */
+export function useShortcuts(handlers: ShortcutHandlers): void {
   const ref = useRef(handlers);
   useEffect(() => {
     ref.current = handlers;
   });
 
   useEffect(() => {
-    if (!enabled) return;
     const onKey = (e: KeyboardEvent) => {
+      if (document.querySelector('[aria-modal="true"]')) return;
       const h = ref.current;
       const key = e.key.toLowerCase();
       const mod = e.metaKey || e.ctrlKey;
@@ -62,5 +62,5 @@ export function useShortcuts(handlers: ShortcutHandlers, enabled = true): void {
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [enabled]);
+  }, []);
 }

@@ -70,6 +70,24 @@ describe('shortcuts and history', () => {
     key('3');
     expect(preview().querySelector('[data-part="eyes/normal"]')).not.toBeNull();
   });
+
+  it('asks before resetting, Keep and Escape leave the character alone', () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: 'None' }));
+    const reset = () => fireEvent.click(screen.getByRole('button', { name: 'Reset' }));
+
+    reset();
+    fireEvent.click(screen.getByRole('button', { name: 'Keep' }));
+    reset();
+    key('Escape');
+    expect(screen.queryByRole('alertdialog')).toBeNull();
+    expect(character().parts.hairFront).toBeUndefined();
+
+    reset();
+    const dialog = within(screen.getByRole('alertdialog', { name: 'Start over?' }));
+    fireEvent.click(dialog.getByRole('button', { name: 'Reset' }));
+    expect(character().parts.hairFront).toBe('hair-front/messy-fringe');
+  });
 });
 
 afterEach(() => {
@@ -137,7 +155,6 @@ describe('expressions', () => {
   });
 
   it('renames, rejects a taken name, and deletes', () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(true);
     render(<App />);
     fireEvent.click(strip().getByRole('button', { name: 'New expression' }));
 
@@ -152,6 +169,14 @@ describe('expressions', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('Name already used');
 
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    const dialog = within(screen.getByRole('alertdialog', { name: 'Delete expression?' }));
+    fireEvent.click(dialog.getByRole('button', { name: 'Keep' }));
+    expect(character().customExpressions).toHaveLength(1);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    fireEvent.click(
+      within(screen.getByRole('alertdialog')).getByRole('button', { name: 'Delete' }),
+    );
     expect(character().customExpressions).toEqual([]);
     expect(strip().getByText('preset')).toBeInTheDocument();
   });

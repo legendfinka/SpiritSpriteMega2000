@@ -39,11 +39,14 @@ describe('CharacterFileButtons', () => {
   });
 
   it('refuses a file that is not a character', async () => {
-    const alert = vi.spyOn(window, 'alert').mockImplementation(() => {});
     render(<CharacterFileButtons />);
     pickFile('{"nope": true}', 'other.json');
 
-    await waitFor(() => expect(alert).toHaveBeenCalledWith(expect.stringContaining('other.json')));
+    const notice = await screen.findByRole('alertdialog', { name: "Can't load that" });
+    expect(notice).toHaveTextContent('other.json');
     expect(useCharacterStore.getState().character.name).toBe('guy');
+
+    fireEvent.click(screen.getByRole('button', { name: 'OK' }));
+    expect(screen.queryByRole('alertdialog')).toBeNull();
   });
 });

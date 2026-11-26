@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 import { MAX_NAME_LENGTH } from '../expressions/names';
 import { useCharacterStore } from '../store/useCharacterStore';
 import type { Expression, ExpressionId } from '../types';
+import { ConfirmDialog } from './ConfirmDialog';
 import styles from './ExpressionStrip.module.css';
 
 interface ExpressionPlateProps {
@@ -30,9 +31,11 @@ export function ExpressionPlate({ expression, custom, onActiveChange }: Expressi
     if (result.id !== expression.id) onActiveChange(result.id);
   };
 
+  const [deleting, setDeleting] = useState(false);
+
   const remove = () => {
-    if (!window.confirm(`Delete the “${expression.id}” expression?`)) return;
     removeExpression(expression.id);
+    setDeleting(false);
     onActiveChange('neutral');
   };
 
@@ -75,11 +78,23 @@ export function ExpressionPlate({ expression, custom, onActiveChange }: Expressi
           Duplicate
         </button>
         {custom && (
-          <button type="button" onClick={remove}>
+          <button type="button" onClick={() => setDeleting(true)}>
             Delete
           </button>
         )}
       </div>
+      {deleting && (
+        <ConfirmDialog
+          title="Delete expression?"
+          confirmLabel="Delete"
+          cancelLabel="Keep"
+          onConfirm={remove}
+          onCancel={() => setDeleting(false)}
+        >
+          <p>“{expression.id}” will be gone.</p>
+          <small>Undo brings it back.</small>
+        </ConfirmDialog>
+      )}
     </div>
   );
 }
