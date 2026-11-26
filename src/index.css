@@ -1,25 +1,53 @@
 :root {
   color-scheme: light dark;
-  --bg: #f6f4f1;
-  --fg: #1e1b18;
-  --border: #d9d4cc;
-  --accent: #d94f70;
-  --checker-a: #ffffff;
-  --checker-b: #e9e6e1;
-  --checker: repeating-conic-gradient(var(--checker-a) 0 25%, var(--checker-b) 0 50%);
 
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* palette: panel block, brick, mustard, kitchen tiles, lit windows */
+  --concrete: #bcb6ab;
+  --seam: rgb(60 50 40 / 0.2);
+  --slab: #f3ead6;
+  --slab-2: #e6d9bd;
+  --line: #2b1d18;
+  --fg: #2b1d18;
+  --muted: #6f6458;
+  --brick: #b8432b;
+  --mustard: #e3a92b;
+  --teal: #2f7d77;
+  --window: #2c3e57;
+  --lit: #ffd36b;
+  --tile-a: #f7f1e3;
+  --tile-b: #d5e5dc;
+  --stain: rgb(70 58 45 / 0.18);
+  --rust: rgb(150 80 40 / 0.22);
+  --tape: rgb(238 222 178 / 0.82);
+
+  /* wide, blocky poster type to match the stencil wordmark */
+  --font-display: 'Arial Black', 'Arial Bold', Gadget, Impact, sans-serif;
+  --font-body: Verdana, Tahoma, 'Trebuchet MS', sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --shadow: 4px 4px 0 var(--line);
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  font-family: var(--font-body);
+  font-size: 13px;
   color: var(--fg);
-  background: var(--bg);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1b1a1d;
-    --fg: #ece9e4;
-    --border: #36343a;
-    --checker-a: #2a282d;
-    --checker-b: #232126;
+    --concrete: #3b3834;
+    --seam: rgb(0 0 0 / 0.4);
+    --slab: #2c2723;
+    --slab-2: #3a332c;
+    --line: #0e0a08;
+    --fg: #f1e6cf;
+    --muted: #b2a58f;
+    --brick: #c2533a;
+    --window: #1b2738;
+    --tile-a: #3a342d;
+    --tile-b: #2f3b36;
+    --stain: rgb(0 0 0 / 0.3);
+    --rust: rgb(120 60 30 / 0.3);
+    --tape: rgb(200 185 150 / 0.7);
   }
 }
 
@@ -31,4 +59,111 @@
 
 body {
   margin: 0;
+  /* prefab panels: grain, water stains, rust streaks, seams every 240 x 160 */
+  background:
+    var(--noise),
+    radial-gradient(ellipse 340px 200px at 12% 88%, var(--stain), transparent 70%),
+    radial-gradient(ellipse 220px 420px at 90% 18%, var(--stain), transparent 70%),
+    radial-gradient(ellipse 160px 120px at 55% 4%, var(--stain), transparent 70%),
+    linear-gradient(to bottom, var(--rust), transparent) 237px 162px / 7px 120px no-repeat,
+    linear-gradient(to bottom, var(--rust), transparent) 717px 2px / 6px 90px no-repeat,
+    linear-gradient(to bottom, var(--rust), transparent) 1197px 322px / 8px 140px no-repeat,
+    linear-gradient(to right, var(--seam) 3px, transparent 3px) 0 0 / 240px 100%,
+    linear-gradient(to bottom, var(--seam) 3px, transparent 3px) 0 0 / 100% 160px,
+    var(--concrete);
+  scrollbar-color: var(--brick) var(--slab-2);
+}
+
+/* film grain over everything, like a cheap 90s print */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: var(--noise);
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+::selection {
+  color: var(--line);
+  background: var(--mustard);
+}
+
+/*
+ * Hand-cut slab: background and border sit on ::before with a displacement
+ * filter, so edges wobble while the content stays sharp.
+ * Set --slab-bg to change the fill. Don't put overflow on the slab itself.
+ */
+.rough-slab {
+  position: relative;
+  isolation: isolate;
+  border: 3px solid transparent;
+}
+
+.rough-slab::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--slab-bg, var(--slab));
+  border: 3px solid var(--line);
+  box-shadow: var(--shadow);
+  filter: url(#rough);
+}
+
+/* shared 90s chunky control look */
+button,
+input:not([type='checkbox'], [type='color']) {
+  font: inherit;
+  color: var(--fg);
+  background: var(--slab);
+  border: 2px solid var(--line);
+  border-radius: 3px;
+}
+
+button {
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--line);
+  transition:
+    transform 60ms,
+    box-shadow 60ms;
+}
+
+button:hover {
+  background: var(--slab-2);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+input:not([type='checkbox'], [type='color']) {
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--mustard);
+}
+
+:focus-visible {
+  outline: 3px dashed var(--teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- simplified logo for 16-32 px -->
+  <defs>
+    <clipPath id="badge"><rect x="2" y="2" width="60" height="60" rx="12"/></clipPath>
+  </defs>
+  <g clip-path="url(#badge)">
+    <rect width="64" height="64" fill="#e3a92b"/>
+    <path d="M14 44 L14 26 C14 14 22 7 32 7 C42 7 50 14 50 26 L50 44 Z" fill="#ffffff" stroke="#2b1d18" stroke-width="4" stroke-linejoin="round"/>
+    <ellipse cx="26" cy="25" rx="3.5" ry="5" fill="#2b1d18"/>
+    <ellipse cx="38" cy="25" rx="3.5" ry="5" fill="#2b1d18"/>
+    <rect x="4" y="40" width="56" height="30" fill="#bcb6ab" stroke="#2b1d18" stroke-width="4"/>
+    <rect x="11" y="48" width="11" height="9" fill="#ffd36b" stroke="#2b1d18" stroke-width="3"/>
+    <rect x="27" y="48" width="11" height="9" fill="#2c3e57" stroke="#2b1d18" stroke-width="3"/>
+    <rect x="43" y="48" width="11" height="9" fill="#ffd36b" stroke="#2b1d18" stroke-width="3"/>
+  </g>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#2b1d18" stroke-width="4"/>
+</svg>

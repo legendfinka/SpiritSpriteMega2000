@@ -56,7 +56,8 @@ Vitest + React Testing Library, ESLint + Prettier.
 ## 8. Milestones
 - [ ] **M1 Skeleton** (written, needs passing test/lint/build): setup, layered
   rendering, base parts (drawn from scratch; `gen_guy.py` was unavailable)
-- [ ] **M2 Editing:** store, part picker, colour panel
+- [ ] **M2 Editing** (written, needs passing test/lint/build): store, part picker,
+  colour panel. "neutral" renders the character's own face slots.
 - [ ] **M3 Expressions:** preset strip, custom editor
 - [ ] **M4 Export:** single PNG, zip + JSON + README, JSON import
 - [ ] **M5 Polish:** 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat),
@@ -67,6 +68,8 @@ Vitest + React Testing Library, ESLint + Prettier.
 - Part files: kebab-case, tokenised colours only (hex only as fallback or pure
   black/white), aligned to the guide.
 - Import part files only in `parts/registry.ts`.
+- UI style: rough, cozy 90s Soviet panel block. Panels use `composes: rough-slab from global`
+  (fill via `--slab-bg`), colours from `index.css` variables.
 - Art style: 4–5 px `--outline` strokes on main shapes, flat fills, one shade,
   at most one highlight.
 - Commits: Conventional Commits (`feat:`, `fix(web):` …), short subject.
