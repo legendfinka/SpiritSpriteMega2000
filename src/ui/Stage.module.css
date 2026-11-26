@@ -149,3 +149,12 @@
   height: 100%;
   transition: left 200ms ease;
 }
+
+/* on phones the preview goes first and gets a fixed height */
+@media (width < 900px) {
+  .stage {
+    order: -1;
+    height: min(72svh, 680px);
+    padding: 0.6rem 0.6rem 0.8rem;
+  }
+}

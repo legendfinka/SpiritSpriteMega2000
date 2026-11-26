@@ -26,6 +26,15 @@
   overflow-y: auto;
 }
 
+/* two columns of swatches when stacked */
+@media (width < 900px) {
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 0 1rem;
+  }
+}
+
 .row,
 .derivedRow {
   display: flex;

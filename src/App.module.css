@@ -134,6 +134,50 @@
   min-height: 0;
 }
 
+/* phones and narrow tablets: stack everything and let the page scroll */
+@media (width < 900px) {
+  .app {
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    height: auto;
+    min-height: 100dvh;
+    padding: 10px;
+  }
+
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    gap: 10px;
+  }
+
+  .header {
+    gap: 0.5rem;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .wordmark {
+    height: 30px;
+  }
+
+  .logo {
+    width: 44px;
+    height: 44px;
+    margin: -6px 0;
+  }
+
+  .control input:not([type='checkbox']) {
+    width: 7rem;
+  }
+
+  .header .exportButton {
+    margin-left: auto;
+  }
+}
+
 /* undo/redo pair */
 .history {
   display: flex;
