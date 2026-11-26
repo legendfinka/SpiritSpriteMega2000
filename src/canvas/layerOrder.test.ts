@@ -81,8 +81,8 @@ describe('composeLayers', () => {
     expect(composeLayers(c).map((l) => l.slot)).toEqual(['body']);
   });
 
-  it('has real art for every slot except accessory (M5)', () => {
-    for (const slot of LAYER_ORDER.filter((s) => s !== 'accessory')) {
+  it('has real art for every slot', () => {
+    for (const slot of LAYER_ORDER) {
       expect(partsForSlot(slot).length, slot).toBeGreaterThan(0);
     }
   });

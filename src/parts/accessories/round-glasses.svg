@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- temples back to the ears -->
+<path d="M320 222 L292 214 M480 222 L508 214" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linecap="round"/>
+<!-- lenses -->
+<circle cx="350" cy="228" r="32" fill="#ffffff" fill-opacity="0.18" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<circle cx="450" cy="228" r="32" fill="#ffffff" fill-opacity="0.18" stroke="var(--outline, #2b1d18)" stroke-width="5"/>
+<path d="M382 226 Q400 214 418 226" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linecap="round"/>
+<!-- glare -->
+<path d="M332 214 Q338 206 348 204 M432 214 Q438 206 448 204" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+</svg>
