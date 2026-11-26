@@ -162,6 +162,28 @@ input[type='checkbox'] {
   outline-offset: 2px;
 }
 
+/* no double-tap zoom on controls */
+button,
+input,
+select,
+label {
+  touch-action: manipulation;
+}
+
+@media (width < 900px) {
+  /* nothing should push the page sideways */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  /* iOS zooms into inputs under 16px */
+  input:not([type='checkbox'], [type='color']),
+  select {
+    font-size: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -134,23 +134,25 @@
   min-height: 0;
 }
 
-/* phones and narrow tablets: stack everything and let the page scroll */
+/* phones and narrow tablets: one column, page scrolls under a sticky preview */
 @media (width < 900px) {
   .app {
-    grid-template-rows: auto auto auto;
+    /* minmax(0, …) stops swipe rows (tabs, windows) from widening the page */
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
     gap: 10px;
     height: auto;
     min-height: 100dvh;
     padding: 10px;
   }
 
+  /* panels join .app's grid so the preview can stick for the whole page */
   .main {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
-    gap: 10px;
+    display: contents;
   }
 
   .header {
+    order: -2;
     gap: 0.5rem;
     padding: 0.5rem 0.7rem;
   }

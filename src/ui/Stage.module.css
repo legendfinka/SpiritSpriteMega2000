@@ -150,11 +150,26 @@
   transition: left 200ms ease;
 }
 
-/* on phones the preview goes first and gets a fixed height */
+/* on phones the preview sticks to the top while you scroll the parts */
 @media (width < 900px) {
   .stage {
+    position: sticky;
+    top: 0;
+    z-index: 5;
     order: -1;
-    height: min(72svh, 680px);
-    padding: 0.6rem 0.6rem 0.8rem;
+    gap: 0.4rem;
+    height: 44svh;
+    padding: 0.4rem 0.5rem 0.6rem;
+  }
+
+  .toolbar {
+    gap: 0.4rem 0.6rem;
+  }
+
+  .preview::before,
+  .preview::after,
+  .scene::before,
+  .scene::after {
+    display: none;
   }
 }
