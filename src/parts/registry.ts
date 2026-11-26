@@ -1,6 +1,6 @@
 import type { Part, Slot } from '../types';
 
-/** Folder name under src/parts/ -> slot. */
+/** folder -> slot */
 export const FOLDER_SLOTS: Record<string, Slot> = {
   body: 'body',
   outfit: 'outfit',
@@ -14,7 +14,7 @@ export const FOLDER_SLOTS: Record<string, Slot> = {
   accessories: 'accessory',
 };
 
-// The only place part files are imported (see CLAUDE.md §9).
+// the only place part files get imported
 const files = import.meta.glob<string>('./*/*.svg', {
   query: '?raw',
   import: 'default',
@@ -26,10 +26,7 @@ function toLabel(fileName: string): string {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-/**
- * Part files are standalone SVGs with fallback colours so editors can preview them.
- * The app needs only the inner fragment with bare var(--token) references.
- */
+/** drops the <svg> wrapper and colour fallbacks, they're only for editor previews */
 export function toFragment(file: string): string {
   const inner = /<svg\b[^>]*>([\s\S]*)<\/svg>/.exec(file)?.[1];
   if (inner === undefined) throw new Error('Part file has no <svg> wrapper');

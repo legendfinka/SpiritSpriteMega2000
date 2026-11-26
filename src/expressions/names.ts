@@ -1,11 +1,8 @@
-/**
- * Expression ids become Ren'Py image attributes and file names
- * ("<name> <expression>.png"), so they must be one lowercase word.
- */
+// ids end up in Ren'Py and file names, so: one lowercase word
 const NAME_RE = /^[a-z][a-z0-9_]*$/;
 export const MAX_NAME_LENGTH = 32;
 
-/** Turn user input into a candidate id: "Very Happy!" -> "very_happy". */
+/** "Very Happy!" -> "very_happy" */
 export function toExpressionName(raw: string): string {
   return raw
     .trim()
@@ -15,7 +12,7 @@ export function toExpressionName(raw: string): string {
     .slice(0, MAX_NAME_LENGTH);
 }
 
-/** Error message for a candidate id, or null if it can be used. */
+/** error message, or null if it's fine */
 export function expressionNameError(name: string, taken: readonly string[]): string | null {
   if (name === '') return 'Enter a name';
   if (!NAME_RE.test(name)) return 'Must start with a letter';

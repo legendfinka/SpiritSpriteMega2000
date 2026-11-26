@@ -1,14 +1,14 @@
 import type { ColorToken, Hex } from '../types';
 import { COLOR_TOKENS } from '../types';
 
-/** HSL lightness shift (absolute, 0..1) for derived tokens. */
+// lightness shift for shades and highlights
 const SHADE_AMOUNT = -0.15;
 const HIGHLIGHT_AMOUNT = 0.12;
 
 export type DerivedToken = 'skin-shade' | 'hair-shade' | 'hair-hi' | 'outfit-shade' | 'pants-shade';
 export type BaseToken = Exclude<ColorToken, DerivedToken>;
 
-/** Derived token -> [base token, lightness delta]. */
+/** derived token -> [base, lightness shift] */
 export const DERIVED_TOKENS: Record<DerivedToken, readonly [BaseToken, number]> = {
   'skin-shade': ['skin', SHADE_AMOUNT],
   'hair-shade': ['hair', SHADE_AMOUNT],
@@ -72,16 +72,13 @@ export function hslToHex(h: number, s: number, l: number): Hex {
   return `#${toByte(f(0))}${toByte(f(8))}${toByte(f(4))}`;
 }
 
-/** Shift HSL lightness by `delta` (absolute, -1..1), clamped. Deterministic. */
+/** shift HSL lightness, clamped */
 export function shiftLightness(hex: Hex, delta: number): Hex {
   const [h, s, l] = hexToHsl(hex);
   return hslToHex(h, s, Math.min(1, Math.max(0, l + delta)));
 }
 
-/**
- * Fill in every token: base colours fall back to defaults, derived tokens are
- * computed from their base unless the user explicitly overrode them.
- */
+/** every token filled: bases default, shades derived unless overridden */
 export function resolveColors(colors: Partial<Record<ColorToken, Hex>>): Record<ColorToken, Hex> {
   const out = {} as Record<ColorToken, Hex>;
   for (const token of COLOR_TOKENS) {
@@ -100,7 +97,7 @@ export function resolveColors(colors: Partial<Record<ColorToken, Hex>>): Record<
 
 const VAR_RE = /var\(\s*--([a-z0-9-]+)\s*\)/gi;
 
-/** Replace every var(--token) with its hex value. Throws on unknown tokens. */
+/** var(--token) -> hex, throws on unknown tokens */
 export function inlineTokens(svg: string, colors: Record<ColorToken, Hex>): string {
   return svg.replace(VAR_RE, (_match, name: string) => {
     const value = (colors as Record<string, Hex | undefined>)[name];
@@ -109,7 +106,7 @@ export function inlineTokens(svg: string, colors: Record<ColorToken, Hex>): stri
   });
 }
 
-/** Resolved colours as CSS custom properties, for the live preview. */
+/** as CSS vars, for the live preview */
 export function toCssVars(colors: Record<ColorToken, Hex>): Record<`--${string}`, string> {
   const vars: Record<`--${string}`, string> = {};
   for (const token of COLOR_TOKENS) vars[`--${token}`] = colors[token];

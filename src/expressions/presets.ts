@@ -38,7 +38,7 @@ export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
   },
 };
 
-/** "neutral" shows the face chosen on the character; other presets override it. */
+/** neutral uses the character's own face, other presets are fixed */
 export function getPresetExpression(id: PresetExpressionId, character: Character): Expression {
   const preset = PRESET_EXPRESSIONS[id];
   if (id !== 'neutral') return preset;
@@ -64,7 +64,7 @@ export function isPresetId(id: ExpressionId): id is PresetExpressionId {
   return (PRESET_IDS as readonly string[]).includes(id);
 }
 
-/** Presets first, then the character's custom expressions. */
+/** presets, then custom ones */
 export function listExpressions(character: Character): Expression[] {
   return [...PRESET_IDS.map((id) => getPresetExpression(id, character)), ...character.customExpressions];
 }
@@ -74,7 +74,7 @@ export function getExpression(id: ExpressionId, character: Character): Expressio
   return character.customExpressions.find((e) => e.id === id);
 }
 
-/** Every id in use, for name checks. */
+/** all ids in use */
 export function takenExpressionIds(character: Character): string[] {
   return [...PRESET_IDS, ...character.customExpressions.map((e) => e.id)];
 }

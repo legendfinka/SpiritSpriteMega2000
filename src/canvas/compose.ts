@@ -7,7 +7,7 @@ export interface Layer {
   part: Part;
 }
 
-/** Part ids per slot after applying the expression's face overrides. */
+/** part ids per slot, with the expression's face swapped in */
 export function resolvePartIds(
   character: Character,
   expression?: Expression,
@@ -26,10 +26,7 @@ export function resolvePartIds(
   return ids;
 }
 
-/**
- * Ordered layers (back -> front) for a character showing an expression.
- * Unknown part ids are skipped so that old saves with removed parts still load.
- */
+/** layers back to front; unknown ids are skipped so old saves still load */
 export function composeLayers(
   character: Character,
   expression?: Expression,

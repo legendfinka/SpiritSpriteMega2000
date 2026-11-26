@@ -5,7 +5,6 @@
   min-height: 0;
 }
 
-/* stencil plate */
 .heading {
   margin: 0;
   padding: 0.45rem 0.75rem 0.35rem;
@@ -49,7 +48,7 @@
   gap: 0.5rem;
 }
 
-/* chunky paint-chip swatches */
+/* paint-chip swatches */
 .label input[type='color'] {
   width: 2rem;
   height: 1.6rem;
@@ -64,7 +63,7 @@
   padding: 0;
 }
 
-/* separate rules: one unknown pseudo-element would drop the whole selector list */
+/* kept apart: one unknown pseudo-element kills the whole rule */
 .label input[type='color']::-webkit-color-swatch {
   border: none;
 }

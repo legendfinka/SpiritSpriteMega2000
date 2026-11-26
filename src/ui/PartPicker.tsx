@@ -8,7 +8,7 @@ import { FACE_SLOTS, OPTIONAL_SLOTS, SLOT_LABELS } from './slots';
 
 const TABS = LAYER_ORDER.filter((slot) => partsForSlot(slot).length > 0);
 
-/** What the face tabs (eyes, brows, mouth, extras) edit. */
+/** what the face tabs are editing */
 export type FaceTarget =
   | { kind: 'character' }
   | { kind: 'custom'; expression: Expression }
@@ -29,7 +29,7 @@ export function PartPicker({ slot, onSlotChange, faceTarget }: PartPickerProps) 
   const target = FACE_SLOTS.includes(slot) ? faceTarget : ({ kind: 'character' } as const);
   const locked = target.kind === 'preset';
 
-  // Selection and edits go to the character, or to the expression being edited.
+  // edits go to the character or to the selected expression
   let isSelected: (partId: string | undefined) => boolean;
   let pick: (partId: string | undefined) => void;
   if (target.kind === 'character') {
@@ -40,7 +40,7 @@ export function PartPicker({ slot, onSlotChange, faceTarget }: PartPickerProps) 
     if (slot === 'extras') {
       const extras = expression.extras ?? [];
       isSelected = (id) => (id === undefined ? extras.length === 0 : extras.includes(id));
-      // Extras on an expression can be combined, so each one toggles.
+      // extras stack, so each click toggles
       pick = (id) =>
         updateExpression(expression.id, {
           extras:

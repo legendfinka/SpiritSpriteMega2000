@@ -13,7 +13,7 @@ export const SLOT_LABELS: Record<Slot, string> = {
   accessory: 'Accessory',
 };
 
-/** Slots that may be left empty. */
+/** can be left empty */
 export const OPTIONAL_SLOTS: readonly Slot[] = [
   'outfit',
   'hairBack',
@@ -22,8 +22,8 @@ export const OPTIONAL_SLOTS: readonly Slot[] = [
   'accessory',
 ];
 
-/** Slots whose preview is only visible on the neutral expression. */
+/** slots that expressions override */
 export const FACE_SLOTS: readonly Slot[] = ['eyes', 'brows', 'mouth', 'extras'];
 
-/** Slots best previewed on the whole sprite rather than a head crop. */
+/** thumbnails show the full body, not a head crop */
 export const FULL_BODY_SLOTS: readonly Slot[] = ['body', 'outfit'];

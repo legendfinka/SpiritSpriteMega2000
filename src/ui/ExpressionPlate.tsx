@@ -6,12 +6,11 @@ import styles from './ExpressionStrip.module.css';
 
 interface ExpressionPlateProps {
   expression: Expression;
-  /** Presets can only be duplicated; custom ones can be renamed and deleted. */
+  /** presets can only be duplicated */
   custom: boolean;
   onActiveChange: (id: ExpressionId) => void;
 }
 
-/** Enamel name plate for the selected expression. */
 export function ExpressionPlate({ expression, custom, onActiveChange }: ExpressionPlateProps) {
   const addExpression = useCharacterStore((s) => s.addExpression);
   const renameExpression = useCharacterStore((s) => s.renameExpression);

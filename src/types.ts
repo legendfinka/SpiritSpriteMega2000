@@ -10,7 +10,7 @@ export type Slot =
   | 'extras'
   | 'accessory';
 
-/** Slots an expression is allowed to override. */
+/** slots an expression can override */
 export type FaceSlot = 'eyes' | 'brows' | 'mouth' | 'extras';
 
 export const COLOR_TOKENS = [
@@ -30,22 +30,21 @@ export const COLOR_TOKENS = [
 
 export type ColorToken = (typeof COLOR_TOKENS)[number];
 
-/** Hex colour string, e.g. "#a1b2c3". */
 export type Hex = string;
 
 export interface Part {
-  /** "<folder>/<file-name>", e.g. "hair-front/messy-fringe". */
+  /** e.g. "hair-front/messy-fringe" */
   id: string;
   slot: Slot;
   label: string;
-  /** Raw SVG fragment (no outer <svg>), colours as var(--token). */
+  /** inner SVG, colours as var(--token) */
   svg: string;
   tags?: string[];
   offset?: { x: number; y: number };
 }
 
 export type PresetExpressionId = 'neutral' | 'happy' | 'sad' | 'angry' | 'surprised';
-// `string & {}` keeps editor autocomplete for the presets while allowing custom ids.
+// `string & {}` keeps autocomplete for presets but allows custom ids
 export type ExpressionId = PresetExpressionId | (string & {});
 
 export interface Expression {
@@ -53,20 +52,19 @@ export interface Expression {
   eyes: string;
   brows: string;
   mouth: string;
-  /** When set, replaces the character's default extras. */
+  /** replaces the default extras when set */
   extras?: string[];
 }
 
 export interface Character {
-  /** Used in export file names. */
+  /** used in file names */
   name: string;
-  /** slot -> part id. Face slots hold the defaults an expression overrides. */
+  /** slot -> part id; face slots are the neutral defaults */
   parts: Partial<Record<Slot, string>>;
-  /** Base colours plus any explicit shade/highlight overrides. */
+  /** base colours + any shade overrides */
   colors: Partial<Record<ColorToken, Hex>>;
-  /** Which expressions to export. */
+  /** which ones get exported */
   expressions: ExpressionId[];
-  /** User-made expressions, shown after the presets. */
   customExpressions: Expression[];
   version: 1;
 }

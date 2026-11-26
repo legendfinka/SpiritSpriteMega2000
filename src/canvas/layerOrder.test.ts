@@ -4,7 +4,7 @@ import type { Character, Part, Slot } from '../types';
 import { composeLayers } from './compose';
 import { LAYER_ORDER, layerIndex } from './layerOrder';
 
-// Compile-time exhaustiveness: adding a Slot without listing it here fails tsc.
+// tsc fails here if a new Slot isn't listed
 const ALL_SLOTS: Record<Slot, true> = {
   body: true,
   outfit: true,
@@ -18,7 +18,7 @@ const ALL_SLOTS: Record<Slot, true> = {
   accessory: true,
 };
 
-/** Stub lookup: every "stub/<slot>" id resolves, so slots without art yet are covered too. */
+// any "stub/<slot>" resolves, even slots with no art yet
 function stubPart(id: string): Part | undefined {
   const slot = id.replace(/^stub\//, '');
   return slot in ALL_SLOTS ? { id, slot: slot as Slot, label: slot, svg: '' } : undefined;
@@ -43,7 +43,7 @@ describe('composeLayers', () => {
     const n = LAYER_ORDER.length;
     for (let mask = 1; mask < 1 << n; mask++) {
       const slots = LAYER_ORDER.filter((_, i) => mask & (1 << i));
-      // Insert in reverse so object key order can't accidentally produce the right answer.
+      // reversed so key order can't fake a pass
       const parts: Character['parts'] = {};
       for (const slot of [...slots].reverse()) parts[slot] = `stub/${slot}`;
       const drawn = composeLayers(character(parts), undefined, stubPart).map((l) => l.slot);

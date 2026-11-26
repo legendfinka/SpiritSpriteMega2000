@@ -1,18 +1,13 @@
 import type { Slot } from '../types';
 
-/**
- * Draw order, back -> front. The single source of truth: never hard-code
- * slot order anywhere else. Changing it breaks every existing part, so ask first.
- *
- * Brows sit under hairFront so the fringe can cover them.
- */
+/** back to front; the only place this lives, ask before changing it */
 export const LAYER_ORDER: readonly Slot[] = [
   'body',
   'outfit',
   'hairBack',
   'face',
   'eyes',
-  'brows',
+  'brows', // under hairFront so the fringe can cover them
   'hairFront',
   'mouth',
   'extras',

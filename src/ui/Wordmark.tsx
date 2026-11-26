@@ -1,9 +1,6 @@
 import { useId } from 'react';
 
-/**
- * Hand-drawn stencil glyphs, stroked at 11 px on a 52 px cap height.
- * Gaps in the paths and the mask band give the stencil bridges.
- */
+// hand-drawn stencil letters: 11px strokes, 52px tall
 const GLYPHS: Record<string, { width: number; d: string }> = {
   S: { width: 36, d: 'M36 5.5 H12 L5.5 12 V20 L11.5 26 H24.5 L30.5 32 V40 L24 46.5 H0' },
   P: { width: 36, d: 'M5.5 52 V5.5 H24 L30.5 12 V22 L24 28.5 H13' },
@@ -35,9 +32,9 @@ interface WordmarkProps {
   className?: string;
 }
 
-/** Decorative faux-Cyrillic stencil title. Hidden from screen readers. */
+/** faux-Cyrillic title, hidden from screen readers */
 export function Wordmark({ text = 'SPIЯIT SPЯITE', className }: WordmarkProps) {
-  // useId output contains characters that are awkward inside url(#…).
+  // useId chars break url(#…)
   const id = `wm${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   const { glyphs, width } = layout(text);
   const letters = `${id}-letters`;
@@ -69,7 +66,7 @@ export function Wordmark({ text = 'SPIЯIT SPЯITE', className }: WordmarkProps)
           ))}
         </g>
       </defs>
-      {/* misregistered print: black shadow, teal offset, cream ink */}
+      {/* black shadow, teal misprint, cream ink */}
       <use href={`#${letters}`} x={3} y={3} style={{ color: 'var(--line)' }} />
       <use href={`#${letters}`} x={-2} y={-1} style={{ color: 'var(--teal)' }} />
       <use href={`#${letters}`} style={{ color: '#f7eedb' }} />

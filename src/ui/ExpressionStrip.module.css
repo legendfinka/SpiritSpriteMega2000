@@ -1,4 +1,4 @@
-/* expression strip: building facade, the selected window is lit */
+/* building facade */
 .strip {
   composes: rough-slab from global;
   --slab-bg:
@@ -67,7 +67,7 @@
   background: color-mix(in srgb, var(--window), var(--lit) 30%);
 }
 
-/* lit window with tied-back curtains */
+/* lit window with curtains */
 .window[aria-pressed='true'] .windowSvg {
   background:
     linear-gradient(100deg, var(--brick) 0 11%, transparent 11.5%),
@@ -78,7 +78,7 @@
     0 0 26px 6px rgb(255 211 107 / 0.65);
 }
 
-/* empty flat: boarded-up window with a chalk plus */
+/* boarded-up window for "new" */
 .addPane {
   display: grid;
   place-items: center;
@@ -91,7 +91,7 @@
   border-style: dashed;
 }
 
-/* window sill doubles as the label */
+/* sill = label */
 .sill {
   width: calc(100% + 16px);
   max-width: 112px;
@@ -110,7 +110,7 @@
   background: var(--noise), var(--mustard);
 }
 
-/* enamel name plate for the selected expression */
+/* name plate */
 .plate {
   display: flex;
   flex-direction: column;

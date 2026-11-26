@@ -19,7 +19,7 @@ const TOKEN_LABELS: Record<ColorToken, string> = {
   outline: 'Outline',
 };
 
-// Object key order above is the display order.
+// shown in the order above
 const TOKENS = Object.keys(TOKEN_LABELS) as ColorToken[];
 
 export function ColorPanel() {

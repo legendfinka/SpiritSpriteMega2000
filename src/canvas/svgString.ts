@@ -5,11 +5,7 @@ import { composeLayers, offsetTransform } from './compose';
 export const CANVAS_WIDTH = 800;
 export const CANVAS_HEIGHT = 1080;
 
-/**
- * Standalone SVG document for one expression, with every colour token
- * inlined as hex. Canvas rasterisation ignores CSS variables, so export must
- * use this rather than the live preview's DOM.
- */
+/** standalone SVG with hex colours baked in, since canvas ignores CSS vars */
 export function renderSvgString(character: Character, expression: Expression, scale = 1): string {
   const colors = resolveColors(character.colors);
   const body = composeLayers(character, expression)

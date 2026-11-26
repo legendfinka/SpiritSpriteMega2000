@@ -10,7 +10,7 @@ interface PartThumbnailProps {
   colors: Character['colors'];
 }
 
-/** The part shown on the default character, in the user's colours. */
+/** part on the default guy, in the user's colours */
 export function PartThumbnail({ part, colors }: PartThumbnailProps) {
   const character = useMemo<Character>(() => {
     const base = createDefaultCharacter();

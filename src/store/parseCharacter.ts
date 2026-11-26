@@ -21,10 +21,7 @@ function isExpression(value: unknown): value is Expression {
   );
 }
 
-/**
- * Validate untrusted data (localStorage, JSON import) and fill fields added
- * after a save was made. Returns null if it isn't a character.
- */
+/** checks saved/imported data and fills newer fields; null if it's junk */
 export function parseCharacter(value: unknown): Character | null {
   if (!isRecord(value)) return null;
   const { name, parts, colors, expressions, customExpressions = [], version } = value;

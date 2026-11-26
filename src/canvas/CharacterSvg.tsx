@@ -9,17 +9,14 @@ interface CharacterSvgProps {
   expression?: Expression;
   className?: string;
   title?: string;
-  /** Crop, in template coordinates. Defaults to the full 800x1080 canvas. */
+  /** crop in template coords, full canvas by default */
   viewBox?: string;
 }
 
-/** Head-and-shoulders crop, handy for thumbnails. */
+/** head crop for thumbnails */
 export const HEAD_VIEWBOX = '200 40 400 400';
 
-/**
- * Live preview of a character. Colours are applied as CSS custom properties so
- * recolouring doesn't re-parse parts. Export uses renderSvgString instead.
- */
+/** live preview; colours are CSS vars so recolouring is cheap (export uses renderSvgString) */
 export function CharacterSvg({
   character,
   expression,
@@ -48,7 +45,7 @@ export function CharacterSvg({
           data-slot={slot}
           data-part={part.id}
           transform={offsetTransform(part)}
-          // Part SVGs are bundled, trusted assets from src/parts/.
+          // our own bundled SVGs, safe to inject
           dangerouslySetInnerHTML={{ __html: part.svg }}
         />
       ))}

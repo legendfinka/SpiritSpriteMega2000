@@ -10,7 +10,7 @@ interface ExpressionStripProps {
   onSelect: (id: ExpressionId) => void;
 }
 
-/** Building facade: one window per expression, the selected one is lit. */
+/** a window per expression, the selected one is lit */
 export function ExpressionStrip({ active, onSelect }: ExpressionStripProps) {
   const character = useCharacterStore((s) => s.character);
   const addExpression = useCharacterStore((s) => s.addExpression);
