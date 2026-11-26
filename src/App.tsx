@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import styles from './App.module.css';
-import { CharacterSvg } from './canvas/CharacterSvg';
-import { getExpression, getPresetExpression, isPresetId } from './expressions/presets';
+import { downloadCharacterJson } from './export/characterJson';
+import {
+  getExpression,
+  getPresetExpression,
+  isPresetId,
+  listExpressions,
+} from './expressions/presets';
 import { useCharacterStore } from './store/useCharacterStore';
 import type { ExpressionId, Slot } from './types';
 import { CharacterFileButtons } from './ui/CharacterFileButtons';
@@ -10,18 +15,19 @@ import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
+import { Stage } from './ui/Stage';
+import { MOD, useShortcuts } from './ui/useShortcuts';
 import { Wordmark } from './ui/Wordmark';
 
-const guideUrl = `${import.meta.env.BASE_URL}templates/alignment-guide.svg`;
 const logoUrl = `${import.meta.env.BASE_URL}logo.svg`;
 
 export function App() {
   const character = useCharacterStore((s) => s.character);
-  const setName = useCharacterStore((s) => s.setName);
-  const resetCharacter = useCharacterStore((s) => s.resetCharacter);
+  const canUndo = useCharacterStore((s) => s.past.length > 0);
+  const canRedo = useCharacterStore((s) => s.future.length > 0);
+  const { setName, resetCharacter, undo, redo } = useCharacterStore.getState();
   const [activeId, setActiveId] = useState<ExpressionId>('neutral');
   const [slot, setSlot] = useState<Slot>('hairFront');
-  const [showGuide, setShowGuide] = useState(false);
   const [exporting, setExporting] = useState(false);
 
   // deleted or reset? fall back to neutral
@@ -41,6 +47,25 @@ export function App() {
     if (FACE_SLOTS.includes(next) && faceTarget.kind === 'preset') setActiveId('neutral');
   };
 
+  useShortcuts(
+    {
+      undo,
+      redo,
+      save: () => downloadCharacterJson(useCharacterStore.getState().character),
+      openExport: () => setExporting(true),
+      stepExpression: (delta) => {
+        const ids = listExpressions(character).map((e) => e.id);
+        const i = ids.indexOf(active.id);
+        setActiveId(ids[(i + delta + ids.length) % ids.length] ?? 'neutral');
+      },
+      pickExpression: (index) => {
+        const id = listExpressions(character)[index]?.id;
+        if (id) setActiveId(id);
+      },
+    },
+    !exporting,
+  );
+
   return (
     <div className={styles.app}>
       <header className={styles.header}>
@@ -58,24 +83,43 @@ export function App() {
           Name
           <input value={character.name} onChange={(e) => setName(e.target.value)} />
         </label>
-        <label className={styles.control}>
-          <input
-            type="checkbox"
-            checked={showGuide}
-            onChange={(e) => setShowGuide(e.target.checked)}
-          />
-          Alignment guide
-        </label>
+        <div className={styles.history}>
+          <button
+            type="button"
+            aria-label="Undo"
+            title={`Undo (${MOD}+Z)`}
+            disabled={!canUndo}
+            onClick={undo}
+          >
+            ↶
+          </button>
+          <button
+            type="button"
+            aria-label="Redo"
+            title={`Redo (${MOD}+Shift+Z)`}
+            disabled={!canRedo}
+            onClick={redo}
+          >
+            ↷
+          </button>
+        </div>
         <button
           type="button"
           onClick={() => {
-            if (window.confirm('Reset the character to the default?')) resetCharacter();
+            if (window.confirm('Reset the character to the default? (You can undo this.)')) {
+              resetCharacter();
+            }
           }}
         >
           Reset
         </button>
         <CharacterFileButtons onLoaded={() => setActiveId('neutral')} />
-        <button type="button" className={styles.exportButton} onClick={() => setExporting(true)}>
+        <button
+          type="button"
+          className={styles.exportButton}
+          title={`Export (${MOD}+E)`}
+          onClick={() => setExporting(true)}
+        >
           Export ▸
         </button>
       </header>
@@ -83,17 +127,7 @@ export function App() {
 
       <main className={styles.main}>
         <PartPicker slot={slot} onSlotChange={changeSlot} faceTarget={faceTarget} />
-        <div className={styles.stage}>
-          <div className={styles.preview}>
-            <CharacterSvg
-              character={character}
-              expression={active}
-              className={styles.sprite}
-              title="Preview"
-            />
-            {showGuide && <img src={guideUrl} alt="" className={styles.guide} />}
-          </div>
-        </div>
+        <Stage character={character} expression={active} />
         <ColorPanel />
       </main>
 

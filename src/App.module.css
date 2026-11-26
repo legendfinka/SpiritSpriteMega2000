@@ -123,66 +123,13 @@
   min-height: 0;
 }
 
-/* striped wallpaper under a warm lamp */
-.stage {
-  composes: rough-slab from global;
-  --slab-bg:
-    radial-gradient(circle at 50% 35%, rgb(255 211 107 / 0.3), transparent 60%),
-    repeating-linear-gradient(90deg, transparent 0 22px, rgb(184 67 43 / 0.08) 22px 26px),
-    var(--slab);
+/* undo/redo pair */
+.history {
   display: flex;
-  justify-content: center;
-  min-height: 0;
-  padding: 1.25rem 1rem 1rem;
+  gap: 0.3rem;
 }
 
-/* tiles show transparency */
-.preview {
-  position: relative;
-  height: 100%;
-  aspect-ratio: 800 / 1080;
-  background: repeating-conic-gradient(var(--tile-a) 0 25%, var(--tile-b) 0 50%) 0 0 / 32px 32px;
-  border: 3px solid var(--line);
-  box-shadow:
-    inset 0 0 0 4px var(--slab),
-    var(--shadow);
-  rotate: -0.4deg;
-}
-
-.preview::before,
-.preview::after {
-  content: '';
-  position: absolute;
-  top: -12px;
-  z-index: 2;
-  width: 74px;
-  height: 24px;
-  background: var(--noise), var(--tape);
-  clip-path: polygon(
-    0 12%, 5% 0, 30% 8%, 60% 0, 95% 6%, 100% 0, 97% 50%, 100% 100%, 70% 92%, 40% 100%, 4% 94%,
-    0 100%, 3% 50%
-  );
-  pointer-events: none;
-}
-
-.preview::before {
-  left: -22px;
-  rotate: -32deg;
-}
-
-.preview::after {
-  right: -22px;
-  rotate: 28deg;
-}
-
-.sprite,
-.guide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.guide {
-  pointer-events: none;
+.history button {
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
 }

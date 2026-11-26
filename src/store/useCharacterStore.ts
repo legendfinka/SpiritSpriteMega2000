@@ -8,11 +8,18 @@ import { createDefaultCharacter } from './defaultCharacter';
 import { parseCharacter } from './parseCharacter';
 
 export const STORAGE_KEY = 'spirit-sprite-character';
+const HISTORY_LIMIT = 100;
+// edits with the same key this close together become one undo step (colour drags, typing)
+const MERGE_MS = 1000;
 
 export type ExpressionPatch = Partial<Pick<Expression, 'eyes' | 'brows' | 'mouth' | 'extras'>>;
 
 interface CharacterState {
   character: Character;
+  past: Character[];
+  future: Character[];
+  undo: () => void;
+  redo: () => void;
   setName: (name: string) => void;
   /** undefined empties the slot */
   setPart: (slot: Slot, partId: string | undefined) => void;
@@ -34,12 +41,53 @@ interface CharacterState {
 export const useCharacterStore = create<CharacterState>()(
   persist(
     (set, get) => {
-      const update = (change: (c: Character) => Partial<Character>) =>
-        set((state) => ({ character: { ...state.character, ...change(state.character) } }));
+      let lastKey: string | undefined;
+      let lastTime = 0;
+
+      // every edit goes through here so it lands in the undo history
+      const commit = (next: (c: Character) => Character, mergeKey?: string) =>
+        set((state) => {
+          const character = next(state.character);
+          if (character === state.character) return state;
+          const now = Date.now();
+          const merge = mergeKey !== undefined && mergeKey === lastKey && now - lastTime < MERGE_MS;
+          lastKey = mergeKey;
+          lastTime = now;
+          return {
+            character,
+            past: merge ? state.past : [...state.past, state.character].slice(-HISTORY_LIMIT),
+            future: [],
+          };
+        });
+
+      const update = (change: (c: Character) => Partial<Character>, mergeKey?: string) =>
+        commit((c) => {
+          const patch = change(c);
+          const same = Object.entries(patch).every(([k, v]) => c[k as keyof Character] === v);
+          return same ? c : { ...c, ...patch };
+        }, mergeKey);
 
       return {
         character: createDefaultCharacter(),
-        setName: (name) => update(() => ({ name })),
+        past: [],
+        future: [],
+        undo: () => {
+          lastKey = undefined;
+          set((s) => {
+            const prev = s.past.at(-1);
+            if (!prev) return s;
+            return { character: prev, past: s.past.slice(0, -1), future: [s.character, ...s.future] };
+          });
+        },
+        redo: () => {
+          lastKey = undefined;
+          set((s) => {
+            const [next, ...rest] = s.future;
+            if (!next) return s;
+            return { character: next, past: [...s.past, s.character], future: rest };
+          });
+        },
+        setName: (name) => update(() => ({ name }), 'name'),
         setPart: (slot, partId) =>
           update((c) => {
             const parts = { ...c.parts };
@@ -47,7 +95,8 @@ export const useCharacterStore = create<CharacterState>()(
             else parts[slot] = partId;
             return { parts };
           }),
-        setColor: (token, hex) => update((c) => ({ colors: { ...c.colors, [token]: hex } })),
+        setColor: (token, hex) =>
+          update((c) => ({ colors: { ...c.colors, [token]: hex } }), `color:${token}`),
         resetColor: (token) =>
           update((c) => {
             const colors = { ...c.colors };
@@ -55,8 +104,8 @@ export const useCharacterStore = create<CharacterState>()(
             else colors[token] = DEFAULT_BASE_COLORS[token];
             return { colors };
           }),
-        resetCharacter: () => set({ character: createDefaultCharacter() }),
-        loadCharacter: (character) => set({ character }),
+        resetCharacter: () => commit(() => createDefaultCharacter()),
+        loadCharacter: (character) => commit(() => character),
         setExpressionExported: (id, exported) =>
           update((c) => ({
             expressions: exported

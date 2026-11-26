@@ -6,6 +6,59 @@ const state = () => useCharacterStore.getState();
 
 beforeEach(() => {
   state().resetCharacter();
+  useCharacterStore.setState({ past: [], future: [] });
+});
+
+describe('undo / redo', () => {
+  it('steps back and forward through edits', () => {
+    state().setPart('hairFront', undefined);
+    state().setName('mira');
+    state().undo();
+    expect(state().character.name).toBe('guy');
+    state().undo();
+    expect(state().character.parts.hairFront).toBe('hair-front/messy-fringe');
+    state().redo();
+    expect(state().character.parts.hairFront).toBeUndefined();
+    expect(state().future).toHaveLength(1);
+  });
+
+  it('merges a quick run of colour changes into one step', () => {
+    state().setColor('hair', '#111111');
+    state().setColor('hair', '#222222');
+    state().setColor('hair', '#333333');
+    expect(state().past).toHaveLength(1);
+    state().undo();
+    expect(state().character.colors.hair).toBe(createDefaultCharacter().colors.hair);
+  });
+
+  it('keeps different edits as separate steps', () => {
+    state().setColor('hair', '#111111');
+    state().setColor('skin', '#222222');
+    expect(state().past).toHaveLength(2);
+  });
+
+  it('clears redo after a new edit', () => {
+    state().setName('a');
+    state().undo();
+    state().setName('b');
+    expect(state().future).toEqual([]);
+  });
+
+  it('ignores edits that change nothing', () => {
+    state().setExpressionExported('neutral', true);
+    state().undo();
+    expect(state().past).toEqual([]);
+  });
+
+  it('can undo a reset and a load', () => {
+    state().setName('mira');
+    state().resetCharacter();
+    state().undo();
+    expect(state().character.name).toBe('mira');
+    state().loadCharacter({ ...createDefaultCharacter(), name: 'loaded' });
+    state().undo();
+    expect(state().character.name).toBe('mira');
+  });
 });
 
 describe('useCharacterStore', () => {

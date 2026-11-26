@@ -9,6 +9,57 @@ const preview = () => screen.getByRole('img', { name: 'Preview' });
 
 beforeEach(() => {
   useCharacterStore.getState().resetCharacter();
+  useCharacterStore.setState({ past: [], future: [] });
+});
+
+describe('shortcuts and history', () => {
+  const key = (k: string, extra: KeyboardEventInit = {}) =>
+    fireEvent.keyDown(document, { key: k, ...extra });
+
+  it('picks expressions with number and arrow keys', () => {
+    render(<App />);
+    key('3');
+    expect(preview().querySelector('[data-part="eyes/sad"]')).not.toBeNull();
+    key('ArrowRight');
+    expect(preview().querySelector('[data-part="eyes/narrow"]')).not.toBeNull();
+    key('ArrowLeft');
+    key('ArrowLeft');
+    key('ArrowLeft');
+    // wraps from neutral back to the last one
+    key('ArrowLeft');
+    expect(preview().querySelector('[data-part="eyes/wide"]')).not.toBeNull();
+  });
+
+  it('undoes with the button and Ctrl+Z, redoes with Ctrl+Shift+Z', () => {
+    render(<App />);
+    const undoButton = screen.getByRole('button', { name: 'Undo' });
+    expect(undoButton).toBeDisabled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'None' }));
+    expect(character().parts.hairFront).toBeUndefined();
+    key('z', { ctrlKey: true });
+    expect(character().parts.hairFront).toBe('hair-front/messy-fringe');
+    key('z', { ctrlKey: true, shiftKey: true });
+    expect(character().parts.hairFront).toBeUndefined();
+
+    fireEvent.click(undoButton);
+    expect(character().parts.hairFront).toBe('hair-front/messy-fringe');
+  });
+
+  it('leaves Ctrl+Z to text fields while typing', () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: 'None' }));
+    fireEvent.keyDown(screen.getByLabelText('Name'), { key: 'z', ctrlKey: true });
+    expect(character().parts.hairFront).toBeUndefined();
+  });
+
+  it('opens export with Ctrl+E and ignores other keys while it is open', () => {
+    render(<App />);
+    key('e', { ctrlKey: true });
+    expect(screen.getByRole('dialog', { name: 'Export' })).toBeInTheDocument();
+    key('3');
+    expect(preview().querySelector('[data-part="eyes/normal"]')).not.toBeNull();
+  });
 });
 
 afterEach(() => {

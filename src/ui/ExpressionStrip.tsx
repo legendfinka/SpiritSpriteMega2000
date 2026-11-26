@@ -23,11 +23,12 @@ export function ExpressionStrip({ active, onSelect }: ExpressionStripProps) {
   return (
     <footer className={styles.strip}>
       <div className={styles.windows}>
-        {listExpressions(character).map((expr) => (
+        {listExpressions(character).map((expr, i) => (
           <button
             key={expr.id}
             type="button"
             className={styles.window}
+            title={i < 9 ? `${expr.id} (${i + 1}, or ←/→)` : expr.id}
             aria-pressed={expr.id === active.id}
             onClick={() => onSelect(expr.id)}
           >
