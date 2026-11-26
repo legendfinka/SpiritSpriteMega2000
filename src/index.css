@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
 
-  /* palette: panel block, brick, mustard, kitchen tiles, lit windows */
+  /* panel block palette */
   --concrete: #bcb6ab;
   --seam: rgb(60 50 40 / 0.2);
   --slab: #f3ead6;
@@ -20,7 +20,7 @@
   --rust: rgb(150 80 40 / 0.22);
   --tape: rgb(238 222 178 / 0.82);
 
-  /* wide, blocky poster type to match the stencil wordmark */
+  /* blocky poster font */
   --font-display: 'Arial Black', 'Arial Bold', Gadget, Impact, sans-serif;
   --font-body: Verdana, Tahoma, 'Trebuchet MS', sans-serif;
   --font-mono: 'Courier New', Courier, monospace;
@@ -59,7 +59,7 @@
 
 body {
   margin: 0;
-  /* prefab panels: grain, water stains, rust streaks, seams every 240 x 160 */
+  /* concrete: grain, stains, rust, panel seams */
   background:
     var(--noise),
     radial-gradient(ellipse 340px 200px at 12% 88%, var(--stain), transparent 70%),
@@ -74,7 +74,7 @@ body {
   scrollbar-color: var(--brick) var(--slab-2);
 }
 
-/* film grain over everything, like a cheap 90s print */
+/* grain over everything */
 body::after {
   content: '';
   position: fixed;
@@ -91,11 +91,7 @@ body::after {
   background: var(--mustard);
 }
 
-/*
- * Hand-cut slab: background and border sit on ::before with a displacement
- * filter, so edges wobble while the content stays sharp.
- * Set --slab-bg to change the fill. Don't put overflow on the slab itself.
- */
+/* wobbly panel: edges live on ::before so text stays sharp; no overflow on the panel itself */
 .rough-slab {
   position: relative;
   isolation: isolate;
@@ -114,7 +110,7 @@ body::after {
   filter: url(#rough);
 }
 
-/* shared 90s chunky control look */
+/* chunky 90s controls */
 button,
 input:not([type='checkbox'], [type='color']) {
   font: inherit;
@@ -140,6 +136,13 @@ button:hover {
 button:active {
   transform: translate(2px, 2px);
   box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+  transform: none;
 }
 
 input:not([type='checkbox'], [type='color']) {

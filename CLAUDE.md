@@ -64,7 +64,9 @@ Vitest + React Testing Library, ESLint + Prettier.
   colour panel. "neutral" renders the character's own face slots.
 - [ ] **M3 Expressions** (written, needs passing test/lint/build): preset strip,
   custom expressions (add, duplicate, rename, delete, edit face parts)
-- [ ] **M4 Export:** single PNG, zip + JSON + README, JSON import
+- [ ] **M4 Export** (written, needs passing test/lint/build): export dialog (expressions,
+  scale, PNG/WebP, JSON), zip + README, single image, JSON save/load.
+  Rasterising is injected (`Rasterize`) so `buildSpriteZip` is tested without canvas.
 - [ ] **M5 Polish:** 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat),
   glasses, female body, backgrounds, shortcuts, undo/redo, GitHub Pages
 

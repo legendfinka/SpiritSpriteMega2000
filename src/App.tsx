@@ -4,7 +4,9 @@ import { CharacterSvg } from './canvas/CharacterSvg';
 import { getExpression, getPresetExpression, isPresetId } from './expressions/presets';
 import { useCharacterStore } from './store/useCharacterStore';
 import type { ExpressionId, Slot } from './types';
+import { CharacterFileButtons } from './ui/CharacterFileButtons';
 import { ColorPanel } from './ui/ColorPanel';
+import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
@@ -20,8 +22,9 @@ export function App() {
   const [activeId, setActiveId] = useState<ExpressionId>('neutral');
   const [slot, setSlot] = useState<Slot>('hairFront');
   const [showGuide, setShowGuide] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
-  // Falls back to neutral if the selected expression was deleted or reset away.
+  // deleted or reset? fall back to neutral
   const active =
     getExpression(activeId, character) ?? getPresetExpression('neutral', character);
 
@@ -34,7 +37,7 @@ export function App() {
 
   const changeSlot = (next: Slot) => {
     setSlot(next);
-    // Presets can't be edited, so face tabs jump to neutral (the default face).
+    // presets are read-only, so face tabs jump to neutral
     if (FACE_SLOTS.includes(next) && faceTarget.kind === 'preset') setActiveId('neutral');
   };
 
@@ -43,7 +46,7 @@ export function App() {
       <header className={styles.header}>
         <div className={styles.brand}>
           <img src={logoUrl} alt="" className={styles.logo} />
-          {/* Faux-Cyrillic is decoration; screen readers get the real name. */}
+          {/* faux-Cyrillic is just for looks, screen readers get the real name */}
           <h1 className={styles.title} aria-label="SpiritSprite Mega 2000">
             <Wordmark className={styles.wordmark} />
             <span aria-hidden="true" className={styles.badge}>
@@ -71,7 +74,12 @@ export function App() {
         >
           Reset
         </button>
+        <CharacterFileButtons onLoaded={() => setActiveId('neutral')} />
+        <button type="button" className={styles.exportButton} onClick={() => setExporting(true)}>
+          Export ▸
+        </button>
       </header>
+      {exporting && <ExportDialog active={active} onClose={() => setExporting(false)} />}
 
       <main className={styles.main}>
         <PartPicker slot={slot} onSlotChange={changeSlot} faceTarget={faceTarget} />
