@@ -39,7 +39,8 @@ Vitest + React Testing Library, ESLint + Prettier.
   derive from the base (HSL −15 % / +12 % lightness) unless overridden.
 - **Layer order (back → front):** hairBack → body → outfit → face → eyes → brows →
   hairFront → mouth → extras → accessory
-- **Expressions:** override only eyes, brows, mouth, extras. 5 fixed presets
+- **Expressions:** override eyes, brows, mouth; their extras are drawn on top of the
+  character's own extras (freckles stay on every expression). 5 fixed presets
   (neutral = the character's own face parts) plus `Character.customExpressions`.
   Ids are Ren'Py attributes: `[a-z][a-z0-9_]*`. Face tabs edit the selected custom
   expression (extras combine) or, on neutral, the character.
@@ -75,6 +76,10 @@ Vitest + React Testing Library, ESLint + Prettier.
   undo/redo, shortcuts, scene preview with 3 backgrounds, CI workflow + Vercel hosting,
   hairBack moved behind the body, female base + soft face, 6 front / 5 back hairstyles,
   6 outfits, extra eyes/mouths/brows/extras, 4 accessories, starter characters.
+- [ ] **M6 Content & mobile:** stacked layout under 900px with a sticky preview,
+  own popups (`ui/ConfirmDialog`) instead of `confirm`/`alert`, 4 faces, 10/9 hairstyles,
+  12 outfits, 11 eyes, 12 mouths, 8 brows, 9 extras, 8 accessories, 5 backgrounds,
+  8 starters. Demo GIF goes in `docs/demo.gif`.
 
 ## 9. Conventions
 - No `any` without a comment. One function component per file.

@@ -4,6 +4,8 @@ Make visual novel sprites without drawing. Mix hair, clothes and faces, recolour
 
 All in the browser, nothing to sign up for.
 
+![Demo](docs/demo.gif)
+
 ```bash
 npm install
 npm run dev
