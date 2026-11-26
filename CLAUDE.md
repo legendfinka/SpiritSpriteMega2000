@@ -22,9 +22,11 @@ Vitest + React Testing Library, ESLint + Prettier.
 - `canvas/`: rendering, colours; `layerOrder.ts` is the only definition of draw order
 - `parts/`: `registry.ts` + folders `body outfit hair-back face hair-front eyes brows mouth extras accessories`
 - `expressions/presets.ts`, `store/`, `types.ts` (source of truth for data types)
-- `ui/`: PartPicker, ColorPanel, ExpressionStrip, PreviewOnBackground, ExportDialog
-- `export/`: svgToPng, exportZip, renpySnippet
-- Outside `src/`: `public/backgrounds/` (1920×1080), `public/templates/alignment-guide.svg`
+- `ui/`: PartPicker, ColorPanel, Stage (sprite/scene preview), ExpressionStrip,
+  ExportDialog, `useShortcuts`
+- `export/`: svgToPng, exportZip, renpySnippet, characterJson
+- Outside `src/`: `public/backgrounds/*.svg` (1920×1080), `public/templates/alignment-guide.svg`,
+  `.github/workflows/deploy.yml` (GitHub Pages; Vite `base: './'`)
 
 ## 5. Core concepts
 - **Canvas:** all parts share an 800×1080 viewBox, head centre ≈ (400, 200).
@@ -43,6 +45,8 @@ Vitest + React Testing Library, ESLint + Prettier.
   expression (extras combine) or, on neutral, the character.
 - **Saved data:** always load through `store/parseCharacter.ts`, which fills fields
   added later. Keep new `Character` fields backward compatible.
+- **History:** every character edit goes through the store's `commit`, so it can be
+  undone. Quick repeats with the same merge key (colour drags, typing) are one step.
 
 ## 6. Export
 - One standalone SVG per expression with hex colours inlined (no CSS variables).
@@ -53,22 +57,23 @@ Vitest + React Testing Library, ESLint + Prettier.
 - Export code is pure (Character + Expression[] → Blob) and testable.
 
 ## 7. UI layout
-- Top: name, load/save JSON, Export
-- Middle: part picker (tab per slot, thumbnails) | large preview | colour pickers
-- Bottom: expression strip with "+", then background preview (left/center/right)
+- Top: name, undo/redo, reset, load/save JSON, Export
+- Middle: part picker (tab per slot, thumbnails) | stage (sprite or scene on a
+  background, left/center/right) | colour pickers
+- Bottom: expression strip (windows + "new") and the selected expression's name plate
+- Keys: `Mod+Z` / `Mod+Shift+Z` / `Mod+Y`, `Mod+S` save JSON, `Mod+E` export,
+  `1`–`9` and `←`/`→` pick expressions (ignored while typing or in a dialog)
 
 ## 8. Milestones
-- [ ] **M1 Skeleton** (written, needs passing test/lint/build): setup, layered
-  rendering, base parts (drawn from scratch; `gen_guy.py` was unavailable)
-- [ ] **M2 Editing** (written, needs passing test/lint/build): store, part picker,
-  colour panel. "neutral" renders the character's own face slots.
-- [ ] **M3 Expressions** (written, needs passing test/lint/build): preset strip,
-  custom expressions (add, duplicate, rename, delete, edit face parts)
-- [ ] **M4 Export** (written, needs passing test/lint/build): export dialog (expressions,
-  scale, PNG/WebP, JSON), zip + README, single image, JSON save/load.
+- [x] **M1 Skeleton:** setup, layered rendering, base parts (drawn from scratch;
+  `gen_guy.py` was unavailable)
+- [x] **M2 Editing:** store, part picker, colour panel
+- [x] **M3 Expressions:** preset strip, custom expressions
+- [x] **M4 Export:** export dialog, zip + README, single image, JSON save/load.
   Rasterising is injected (`Rasterize`) so `buildSpriteZip` is tested without canvas.
-- [ ] **M5 Polish:** 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat),
-  glasses, female body, backgrounds, shortcuts, undo/redo, GitHub Pages
+- [ ] **M5 Polish:** done (needs passing test/lint/build): undo/redo, shortcuts, scene
+  preview with 3 backgrounds, glasses, GitHub Pages workflow.
+  Left: 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat), female body.
 
 ## 9. Conventions
 - No `any` without a comment. One function component per file.
