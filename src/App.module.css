@@ -1,44 +1,156 @@
 .app {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 14px;
   height: 100vh;
+  padding: 14px;
 }
 
+/* header: brick street-sign plate with halftone print */
 .header {
+  composes: rough-slab from global;
+  --slab-bg:
+    radial-gradient(rgb(0 0 0 / 0.14) 1.3px, transparent 1.7px) 0 0 / 7px 7px, var(--brick);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.5rem 1rem;
+  color: #f7eedb;
+}
+
+.brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid var(--border);
+  gap: 0.75rem;
+  margin: 0 auto 0 0;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  margin: -16px 0 -12px;
+  rotate: -6deg;
+  filter: drop-shadow(3px 3px 0 var(--line));
+}
+
+.logo:hover {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+  25% {
+    rotate: 6deg;
+    translate: 0 -4px;
+  }
+  60% {
+    rotate: -12deg;
+  }
 }
 
 .title {
+  display: flex;
+  align-items: center;
   margin: 0;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
-.toggle {
+.wordmark {
+  display: block;
+  height: 40px;
+  filter: url(#rough-sm);
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.2rem 0.45rem 0.1rem;
+  font-size: 0.85rem;
+  color: var(--line);
+  text-shadow: none;
+  background: var(--mustard);
+  border: 2px solid var(--line);
+  box-shadow: 2px 2px 0 var(--line);
+  rotate: -5deg;
+  filter: url(#rough-sm);
+}
+
+.control {
   display: flex;
   gap: 0.4rem;
   align-items: center;
-  font-size: 0.9rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.control input:not([type='checkbox']) {
+  width: 10rem;
 }
 
 .main {
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) minmax(0, 1fr) minmax(190px, 250px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+}
+
+/* stage: cozy striped wallpaper under a warm lamp */
+.stage {
+  composes: rough-slab from global;
+  --slab-bg:
+    radial-gradient(circle at 50% 35%, rgb(255 211 107 / 0.3), transparent 60%),
+    repeating-linear-gradient(90deg, transparent 0 22px, rgb(184 67 43 / 0.08) 22px 26px),
+    var(--slab);
   display: flex;
   justify-content: center;
   min-height: 0;
-  padding: 1rem;
+  padding: 1.25rem 1rem 1rem;
 }
 
+/* bathroom-tile checker shows transparency; taped to the wall */
 .preview {
   position: relative;
   height: 100%;
   aspect-ratio: 800 / 1080;
-  background: var(--checker);
-  background-size: 24px 24px;
-  border-radius: 8px;
+  background: repeating-conic-gradient(var(--tile-a) 0 25%, var(--tile-b) 0 50%) 0 0 / 32px 32px;
+  border: 3px solid var(--line);
+  box-shadow:
+    inset 0 0 0 4px var(--slab),
+    var(--shadow);
+  rotate: -0.4deg;
+}
+
+.preview::before,
+.preview::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  z-index: 2;
+  width: 74px;
+  height: 24px;
+  background: var(--noise), var(--tape);
+  clip-path: polygon(
+    0 12%, 5% 0, 30% 8%, 60% 0, 95% 6%, 100% 0, 97% 50%, 100% 100%, 70% 92%, 40% 100%, 4% 94%,
+    0 100%, 3% 50%
+  );
+  pointer-events: none;
+}
+
+.preview::before {
+  left: -22px;
+  rotate: -32deg;
+}
+
+.preview::after {
+  right: -22px;
+  rotate: 28deg;
 }
 
 .sprite,
@@ -53,12 +165,19 @@
   pointer-events: none;
 }
 
+/* expression strip: building facade, the selected window is lit */
 .strip {
+  composes: rough-slab from global;
+  --slab-bg:
+    var(--noise), linear-gradient(to right, var(--seam) 3px, transparent 3px) 0 0 / 120px 100%,
+    var(--concrete);
+}
+
+.windows {
   display: flex;
-  gap: 0.75rem;
+  gap: 1.25rem;
   justify-content: center;
-  padding: 0.75rem;
-  border-top: 1px solid var(--border);
+  padding: 0.9rem 0.75rem 0.75rem;
   overflow-x: auto;
 }
 
@@ -66,25 +185,68 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  font: inherit;
-  font-size: 0.8rem;
-  color: inherit;
+  gap: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   background: none;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  cursor: pointer;
+  border: none;
+  box-shadow: none;
 }
 
-.thumb[aria-pressed='true'] {
-  border-color: var(--accent);
+.thumb:hover {
+  background: none;
+}
+
+.thumb:nth-child(odd) {
+  rotate: -0.8deg;
+}
+
+.thumb:nth-child(even) {
+  rotate: 0.6deg;
 }
 
 .thumbSvg {
+  display: block;
   width: 96px;
   height: 96px;
-  background: var(--checker);
-  background-size: 12px 12px;
-  border-radius: 6px;
+  background: var(--window);
+  border: 5px solid #f7eedb;
+  outline: 3px solid var(--line);
+  box-shadow: inset 0 0 0 2px var(--line);
+  transition:
+    background 150ms,
+    box-shadow 150ms;
+}
+
+.thumb:hover .thumbSvg {
+  background: color-mix(in srgb, var(--window), var(--lit) 30%);
+}
+
+/* lit window with tied-back curtains */
+.thumb[aria-pressed='true'] .thumbSvg {
+  background:
+    linear-gradient(100deg, var(--brick) 0 11%, transparent 11.5%),
+    linear-gradient(-100deg, var(--brick) 0 11%, transparent 11.5%),
+    radial-gradient(circle at 50% 30%, #fff3c4, var(--lit) 70%);
+  box-shadow:
+    inset 0 0 0 2px var(--line),
+    0 0 26px 6px rgb(255 211 107 / 0.65);
+}
+
+/* window sill doubles as the label */
+.thumb span {
+  width: calc(100% + 16px);
+  margin-top: 3px;
+  padding: 0.1rem 0.35rem 0;
+  color: var(--line);
+  background: var(--noise), #d8d1c4;
+  border: 2px solid var(--line);
+  box-shadow: 2px 2px 0 var(--line);
+}
+
+.thumb[aria-pressed='true'] span {
+  background: var(--noise), var(--mustard);
 }

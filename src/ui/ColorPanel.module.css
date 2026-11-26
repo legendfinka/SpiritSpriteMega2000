@@ -1,0 +1,88 @@
+.panel {
+  composes: rough-slab from global;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* stencil plate */
+.heading {
+  margin: 0;
+  padding: 0.45rem 0.75rem 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f7eedb;
+  text-shadow: 2px 2px 0 var(--line);
+  background:
+    radial-gradient(rgb(0 0 0 / 0.14) 1.3px, transparent 1.7px) 0 0 / 7px 7px,
+    var(--teal);
+  border-bottom: 3px dashed var(--line);
+}
+
+.list {
+  padding: 0.75rem;
+  overflow-y: auto;
+}
+
+.row,
+.derivedRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.derivedRow {
+  padding-left: 1.1rem;
+  font-size: 0.85em;
+  border-left: 3px dotted var(--muted);
+  margin-left: 0.6rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* chunky paint-chip swatches */
+.label input[type='color'] {
+  width: 2rem;
+  height: 1.6rem;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 2px solid var(--line);
+  box-shadow: 2px 2px 0 var(--line);
+}
+
+.label input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+/* separate rules: one unknown pseudo-element would drop the whole selector list */
+.label input[type='color']::-webkit-color-swatch {
+  border: none;
+}
+
+.label input[type='color']::-moz-color-swatch {
+  border: none;
+}
+
+.auto {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.reset {
+  padding: 0.05rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: bold;
+  box-shadow: 1px 1px 0 var(--line);
+}
