@@ -14,16 +14,19 @@ export type ExpressionPatch = Partial<Pick<Expression, 'eyes' | 'brows' | 'mouth
 interface CharacterState {
   character: Character;
   setName: (name: string) => void;
-  /** Pass undefined to empty the slot. */
+  /** undefined empties the slot */
   setPart: (slot: Slot, partId: string | undefined) => void;
   setColor: (token: ColorToken, hex: Hex) => void;
-  /** Derived tokens go back to automatic, base tokens to their default. */
+  /** shades back to auto, bases back to default */
   resetColor: (token: ColorToken) => void;
   resetCharacter: () => void;
-  /** Add a custom expression copied from `from`. Returns the new id. */
+  /** e.g. after loading a JSON file */
+  loadCharacter: (character: Character) => void;
+  setExpressionExported: (id: ExpressionId, exported: boolean) => void;
+  /** copies `from`, returns the new id */
   addExpression: (from: Expression) => ExpressionId;
   updateExpression: (id: ExpressionId, patch: ExpressionPatch) => void;
-  /** Returns an error message, or the new id on success. */
+  /** new id, or an error message */
   renameExpression: (id: ExpressionId, rawName: string) => { id: string } | { error: string };
   removeExpression: (id: ExpressionId) => void;
 }
@@ -53,6 +56,15 @@ export const useCharacterStore = create<CharacterState>()(
             return { colors };
           }),
         resetCharacter: () => set({ character: createDefaultCharacter() }),
+        loadCharacter: (character) => set({ character }),
+        setExpressionExported: (id, exported) =>
+          update((c) => ({
+            expressions: exported
+              ? c.expressions.includes(id)
+                ? c.expressions
+                : [...c.expressions, id]
+              : c.expressions.filter((e) => e !== id),
+          })),
 
         addExpression: (from) => {
           const id = uniqueExpressionName(from.id, takenExpressionIds(get().character));
@@ -97,7 +109,7 @@ export const useCharacterStore = create<CharacterState>()(
       version: 1,
       storage: createJSONStorage(() => localStorage),
       partialize: ({ character }) => ({ character }),
-      // Ignore saved data that doesn't look like a character.
+      // skip saved data that isn't a character
       merge: (persisted, current) => {
         const saved = parseCharacter((persisted as { character?: unknown } | undefined)?.character);
         return saved ? { ...current, character: saved } : current;
