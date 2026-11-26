@@ -32,7 +32,9 @@
   rotate: 1deg;
 }
 
+/* yellow stays yellow at night, so the text has to stay dark */
 .tab[aria-selected='true'] {
+  color: var(--line);
   background: var(--mustard);
   rotate: 0deg;
   translate: 0 -2px;
@@ -99,6 +101,7 @@
 
 .item[aria-pressed='true'],
 .item[aria-pressed='true']:disabled:hover {
+  color: var(--line);
   background: var(--lit);
   box-shadow: 3px 3px 0 var(--teal);
 }

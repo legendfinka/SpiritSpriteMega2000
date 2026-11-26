@@ -1,25 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 800 1080" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 800 1080" font-family="sans-serif" font-size="16" font-weight="bold">
+  <!--
+    Readable on light and dark tiles: strong colours, each line drawn over a wider
+    white one, and text with a white outline (paint-order puts it behind the fill).
+  -->
+  <defs>
+    <style>
+      .halo { stroke: #fff; stroke-opacity: 0.85; fill: none; }
+      text { paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; stroke-dasharray: none; }
+    </style>
+  </defs>
+
   <!-- 100px grid -->
-  <g stroke="#00a0ff" stroke-opacity="0.25" stroke-width="1">
+  <g stroke="#0069b4" stroke-opacity="0.45" stroke-width="1.5">
     <path d="M100 0V1080M200 0V1080M300 0V1080M500 0V1080M600 0V1080M700 0V1080"/>
     <path d="M0 100H800M0 200H800M0 300H800M0 400H800M0 500H800M0 600H800M0 700H800M0 800H800M0 900H800M0 1000H800"/>
   </g>
+
   <!-- centre line -->
-  <path d="M400 0V1080" stroke="#ff3070" stroke-opacity="0.6" stroke-width="2" stroke-dasharray="8 6"/>
+  <path class="halo" d="M400 0V1080" stroke-width="6"/>
+  <path d="M400 0V1080" stroke="#d1004a" stroke-width="3" stroke-dasharray="10 6"/>
+
   <!-- head: centre (400,200), outline 292..508 x 75..340 -->
-  <ellipse cx="400" cy="207" rx="108" ry="133" fill="none" stroke="#ff3070" stroke-opacity="0.6" stroke-width="2"/>
-  <path d="M385 200H415M400 185V215" stroke="#ff3070" stroke-width="2"/>
+  <ellipse class="halo" cx="400" cy="207" rx="108" ry="133" stroke-width="7"/>
+  <ellipse cx="400" cy="207" rx="108" ry="133" fill="none" stroke="#d1004a" stroke-width="3"/>
+  <path class="halo" d="M383 200H417M400 183V217" stroke-width="7"/>
+  <path d="M383 200H417M400 183V217" stroke="#d1004a" stroke-width="3"/>
+
   <!-- landmark lines -->
-  <g stroke="#20c070" stroke-opacity="0.8" stroke-width="2" stroke-dasharray="4 4" fill="#20c070">
-    <path d="M280 180H520"/><text x="526" y="184" stroke="none">brows 180</text>
-    <path d="M280 225H520"/><text x="526" y="229" stroke="none">eyes 225</text>
-    <circle cx="350" cy="225" r="4" stroke="none"/><circle cx="450" cy="225" r="4" stroke="none"/>
-    <path d="M340 295H460"/><text x="526" y="299" stroke="none">mouth 295</text>
-    <path d="M340 340H460"/><text x="526" y="344" stroke="none">chin 340</text>
-    <path d="M200 420H600"/><text x="606" y="424" stroke="none">shoulders 420</text>
-    <path d="M240 780H560"/><text x="566" y="784" stroke="none">waist 780</text>
-    <path d="M180 845H620"/><text x="626" y="849" stroke="none">wrists 845</text>
+  <g class="halo" stroke-width="7">
+    <path d="M280 180H520M280 225H520M340 295H460M340 340H460M200 420H600M240 780H560M180 845H620"/>
   </g>
+  <g stroke="#00804a" stroke-width="3" stroke-dasharray="6 4" fill="#00804a">
+    <path d="M280 180H520"/><text x="526" y="185">brows 180</text>
+    <path d="M280 225H520"/><text x="526" y="230">eyes 225</text>
+    <circle cx="350" cy="225" r="5" stroke="#fff" stroke-width="2" stroke-dasharray="none"/>
+    <circle cx="450" cy="225" r="5" stroke="#fff" stroke-width="2" stroke-dasharray="none"/>
+    <path d="M340 295H460"/><text x="526" y="300">mouth 295</text>
+    <path d="M340 340H460"/><text x="526" y="345">chin 340</text>
+    <path d="M200 420H600"/><text x="606" y="425">shoulders 420</text>
+    <path d="M240 780H560"/><text x="566" y="785">waist 780</text>
+    <path d="M180 845H620"/><text x="626" y="850">wrists 845</text>
+  </g>
+
   <!-- canvas border -->
-  <rect x="1" y="1" width="798" height="1078" fill="none" stroke="#00a0ff" stroke-opacity="0.6" stroke-width="2"/>
+  <rect x="1.5" y="1.5" width="797" height="1077" fill="none" stroke="#0069b4" stroke-width="3"/>
 </svg>

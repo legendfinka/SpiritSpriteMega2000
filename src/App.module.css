@@ -180,6 +180,38 @@
   }
 }
 
+/* name input + its lock */
+.nameField {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.nameField button {
+  display: inline-grid;
+  place-items: center;
+  padding: 0.25rem 0.4rem;
+}
+
+/* open lock stands out, so you notice Random will rename */
+.nameField button[aria-pressed='false'] {
+  color: var(--line);
+  background: var(--mustard);
+}
+
+/* sun / moon switch */
+/* fixed box: ☀ and ☾ are different widths */
+.header .themeButton {
+  display: inline-grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2rem;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
 /* undo/redo pair */
 .history {
   display: flex;

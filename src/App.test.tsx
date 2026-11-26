@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
 import { shareHash } from './export/shareLink';
+import { THEME_KEY } from './ui/theme';
 import { useCharacterStore } from './store/useCharacterStore';
 
 const character = () => useCharacterStore.getState().character;
@@ -124,6 +125,17 @@ describe('quick wins', () => {
     expect(screen.queryByRole('alertdialog')).toBeNull();
   });
 
+  it('switches day and night and remembers the choice', () => {
+    render(<App />);
+    expect(document.documentElement.dataset.theme).toBe('day');
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to night' }));
+    expect(document.documentElement.dataset.theme).toBe('night');
+    expect(localStorage.getItem(THEME_KEY)).toBe('night');
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to day' }));
+    expect(document.documentElement.dataset.theme).toBe('day');
+    localStorage.removeItem(THEME_KEY);
+  });
+
   it('randomises in one undoable step', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.999);
     render(<App />);
@@ -132,6 +144,21 @@ describe('quick wins', () => {
     expect(character().parts).not.toEqual(before.parts);
     fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
     expect(character()).toEqual(before);
+  });
+
+  it('keeps the name on Random until the lock is opened', () => {
+    render(<App />);
+    const random = screen.getByRole('button', { name: 'Random' });
+    const lock = screen.getByRole('button', { name: 'Keep name on Random' });
+    expect(lock).toHaveAttribute('aria-pressed', 'true');
+
+    fireEvent.click(random);
+    expect(character().name).toBe('guy');
+
+    fireEvent.click(lock);
+    expect(lock).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(random);
+    expect(character().name).not.toBe('guy');
   });
 
   it('applies a swatch and puts the shade back to auto', () => {

@@ -127,7 +127,7 @@
 
 .plateLabel {
   font-family: var(--font-display);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -141,7 +141,7 @@
 .plateName small {
   margin-left: 0.3rem;
   padding: 0 0.3rem;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--line);
   background: var(--mustard);
   border: 1px solid var(--line);
@@ -172,7 +172,7 @@
   flex: 1;
   padding: 0.2rem 0.4rem;
   font-family: var(--font-display);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -203,7 +203,7 @@
 
   .sill {
     max-width: 88px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 
   .plate {

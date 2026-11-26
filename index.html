@@ -6,6 +6,18 @@
     <meta name="theme-color" content="#b8432b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>SpiritSpriteMega2000</title>
+    <script>
+      // pick day or night before the first paint, so the page doesn't flash
+      try {
+        var saved = localStorage.getItem('spirit-sprite-theme');
+        var night = saved
+          ? saved === 'night'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = night ? 'night' : 'day';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'day';
+      }
+    </script>
   </head>
   <body>
     <!-- wobble filters for the CSS -->

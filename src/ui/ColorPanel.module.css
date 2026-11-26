@@ -122,7 +122,7 @@
 .reset {
   padding: 0.05rem 0.4rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: bold;
   box-shadow: 1px 1px 0 var(--line);
 }

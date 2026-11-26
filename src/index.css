@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* panel block palette */
   --concrete: #bcb6ab;
@@ -28,27 +28,28 @@
   --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   font-family: var(--font-body);
-  font-size: 13px;
+  /* everything else is in rem, so this scales the whole app */
+  font-size: 15px;
   color: var(--fg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --concrete: #3b3834;
-    --seam: rgb(0 0 0 / 0.4);
-    --slab: #2c2723;
-    --slab-2: #3a332c;
-    --line: #0e0a08;
-    --fg: #f1e6cf;
-    --muted: #b2a58f;
-    --brick: #c2533a;
-    --window: #1b2738;
-    --tile-a: #3a342d;
-    --tile-b: #2f3b36;
-    --stain: rgb(0 0 0 / 0.3);
-    --rust: rgb(120 60 30 / 0.3);
-    --tape: rgb(200 185 150 / 0.7);
-  }
+/* night: set by the inline script in index.html (system setting or saved choice) */
+:root[data-theme='night'] {
+  color-scheme: dark;
+  --concrete: #3b3834;
+  --seam: rgb(0 0 0 / 0.4);
+  --slab: #2c2723;
+  --slab-2: #3a332c;
+  --line: #0e0a08;
+  --fg: #f1e6cf;
+  --muted: #b2a58f;
+  --brick: #c2533a;
+  --window: #1b2738;
+  --tile-a: #3a342d;
+  --tile-b: #2f3b36;
+  --stain: rgb(0 0 0 / 0.3);
+  --rust: rgb(120 60 30 / 0.3);
+  --tape: rgb(200 185 150 / 0.7);
 }
 
 *,
@@ -168,6 +169,23 @@ input,
 select,
 label {
   touch-action: manipulation;
+}
+
+/*
+ * phones: the wobble filter redraws on every change inside a panel, and the grain
+ * blends the whole screen on every scroll frame. Both are slow there, so swap in
+ * cheap stand-ins: uneven corners and plain see-through grain.
+ */
+@media (pointer: coarse), (width < 900px) {
+  .rough-slab::before {
+    filter: none;
+    border-radius: 3px 7px 4px 8px / 6px 3px 8px 4px;
+  }
+
+  body::after {
+    mix-blend-mode: normal;
+    opacity: 0.12;
+  }
 }
 
 @media (width < 900px) {

@@ -15,12 +15,14 @@ import { ColorPanel } from './ui/ColorPanel';
 import { ConfirmDialog } from './ui/ConfirmDialog';
 import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
+import { LockButton } from './ui/LockButton';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
 import { ShareButton } from './ui/ShareButton';
 import { SharedLinkPrompt } from './ui/SharedLinkPrompt';
 import { Stage } from './ui/Stage';
 import { StarterPicker } from './ui/StarterPicker';
+import { useTheme } from './ui/theme';
 import { MOD, useShortcuts } from './ui/useShortcuts';
 import { Wordmark } from './ui/Wordmark';
 
@@ -35,6 +37,9 @@ export function App() {
   const [slot, setSlot] = useState<Slot>('hairFront');
   const [exporting, setExporting] = useState(false);
   const [resetting, setResetting] = useState(false);
+  const [theme, toggleTheme] = useTheme();
+  // locked by default: Random keeps the name you typed
+  const [nameLocked, setNameLocked] = useState(true);
 
   // deleted or reset? fall back to neutral
   const active =
@@ -82,10 +87,23 @@ export function App() {
             </span>
           </h1>
         </div>
-        <label className={styles.control}>
-          Name
-          <input value={character.name} onChange={(e) => setName(e.target.value)} />
-        </label>
+        <button
+          type="button"
+          className={styles.themeButton}
+          aria-label={theme === 'night' ? 'Switch to day' : 'Switch to night'}
+          title={theme === 'night' ? 'Day mode' : 'Night mode'}
+          onClick={toggleTheme}
+        >
+          {/* ︎: draw as text, not a colour emoji */}
+          {theme === 'night' ? '☀︎' : '☾︎'}
+        </button>
+        <div className={styles.nameField}>
+          <label className={styles.control}>
+            Name
+            <input value={character.name} onChange={(e) => setName(e.target.value)} />
+          </label>
+          <LockButton locked={nameLocked} onToggle={() => setNameLocked(!nameLocked)} />
+        </div>
         <div className={styles.history}>
           <button
             type="button"
@@ -110,7 +128,8 @@ export function App() {
           type="button"
           title="Random look and colours"
           onClick={() => {
-            loadCharacter(randomCharacter(useCharacterStore.getState().character));
+            const current = useCharacterStore.getState().character;
+            loadCharacter(randomCharacter(current, Math.random, { name: !nameLocked }));
             setActiveId('neutral');
           }}
         >

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { CharacterSvg, HEAD_VIEWBOX } from '../canvas/CharacterSvg';
 import { createDefaultCharacter } from '../store/defaultCharacter';
 import type { Character, Part } from '../types';
@@ -10,8 +10,8 @@ interface PartThumbnailProps {
   colors: Character['colors'];
 }
 
-/** part on the default guy, in the user's colours */
-export function PartThumbnail({ part, colors }: PartThumbnailProps) {
+/** part on the default guy, in the user's colours; only redraws when those change */
+export const PartThumbnail = memo(function PartThumbnail({ part, colors }: PartThumbnailProps) {
   const character = useMemo<Character>(() => {
     const base = createDefaultCharacter();
     const parts = { ...base.parts, [part.slot]: part.id };
@@ -29,4 +29,4 @@ export function PartThumbnail({ part, colors }: PartThumbnailProps) {
       />
     </span>
   );
-}
+});

@@ -7,6 +7,7 @@ import {
 } from '../canvas/palettes';
 import { partsForSlot } from '../parts/registry';
 import type { Character, Slot } from '../types';
+import { randomName } from './randomNames';
 
 // the neutral face stays calm: no hearts or dizzy eyes by default
 const CALM_FACE = {
@@ -17,8 +18,17 @@ const CALM_FACE = {
 // only marks that make sense on every expression
 const LASTING_EXTRAS = ['extras/freckles', 'extras/bandage'];
 
-/** new look and colours; name and expressions stay. `random` returns 0..1 */
-export function randomCharacter(base: Character, random: () => number = Math.random): Character {
+interface RandomOptions {
+  /** also pick a new name (when the name lock is open) */
+  name?: boolean;
+}
+
+/** new look and colours; expressions stay, the name too unless asked. `random` returns 0..1 */
+export function randomCharacter(
+  base: Character,
+  random: () => number = Math.random,
+  { name = false }: RandomOptions = {},
+): Character {
   const pick = <T>(list: readonly T[]): T => list[Math.floor(random() * list.length)] as T;
   const part = (slot: Slot) => pick(partsForSlot(slot)).id;
 
@@ -37,6 +47,7 @@ export function randomCharacter(base: Character, random: () => number = Math.ran
 
   return {
     ...base,
+    name: name ? randomName(parts.body, base.name, random) : base.name,
     parts,
     // fresh object, so old shade overrides don't clash with the new bases
     colors: {

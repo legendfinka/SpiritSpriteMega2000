@@ -10,6 +10,11 @@
 <!-- torso + legs: narrower shoulders and waist, fuller hips -->
 <path d="M376 386 C344 398 300 404 280 424 C268 438 266 470 270 516 C276 580 296 640 300 700 C303 750 284 800 282 850 L288 1085 L394 1085 L400 890 L406 1085 L512 1085 L518 850 C516 800 497 750 500 700 C504 640 524 580 530 516 C534 470 532 438 520 424 C500 404 456 398 424 386 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
 <path d="M318 522 Q345 550 372 532 M482 522 Q455 550 428 532" fill="none" stroke="var(--skin-shade, #e9a677)" stroke-width="4" stroke-linecap="round"/>
+<!-- bandeau top and briefs, so "no outfit" isn't bare; hidden under every outfit -->
+<path d="M270 468 Q400 452 530 468 L527 550 Q400 566 273 550 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M276 470 Q400 456 524 470" fill="none" stroke="var(--outfit-main, #2f6f6a)" stroke-width="6" stroke-linecap="round"/>
+<path d="M297 760 L503 760 L517 875 Q470 888 410 908 L400 912 L390 908 Q330 888 283 875 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M298 762 L502 762 L504 780 L296 780 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linejoin="round"/>
 <!-- neck -->
 <path d="M378 280 L376 394 Q400 408 424 394 L422 280 Z" fill="var(--skin, #f4cfae)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
 <path d="M378 312 Q400 350 422 312 L422 338 Q400 368 378 338 Z" fill="var(--skin-shade, #e9a677)"/>
