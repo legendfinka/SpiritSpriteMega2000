@@ -18,6 +18,15 @@ export function spriteFileName(name: string, expression: ExpressionId, format: I
   return `${toImageTag(name)} ${expression}.${format}`;
 }
 
+/** e.g. "side oleh happy.png"; no expression = the fallback "side oleh.png" */
+export function sideFileName(
+  name: string,
+  expression: ExpressionId | undefined,
+  format: ImageFormat,
+): string {
+  return `side ${toImageTag(name)}${expression ? ` ${expression}` : ''}.${format}`;
+}
+
 export function zipFileName(name: string): string {
   return `${toImageTag(name)}_sprites.zip`;
 }

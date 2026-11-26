@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { PRESET_EXPRESSIONS } from '../expressions/presets';
 import { createDefaultCharacter } from '../store/defaultCharacter';
-import { renderSvgString } from './svgString';
+import { renderPartsSvgString, renderSideSvgString, renderSvgString } from './svgString';
 
 describe('renderSvgString', () => {
   const character = createDefaultCharacter();
@@ -24,6 +24,19 @@ describe('renderSvgString', () => {
       PRESET_EXPRESSIONS.neutral,
     );
     expect(svg).toContain('#ff00ff');
+  });
+
+  it('crops side images to head and shoulders', () => {
+    expect(renderSideSvgString(character, PRESET_EXPRESSIONS.happy, 2)).toContain(
+      'width="600" height="600" viewBox="160 0 480 480"',
+    );
+  });
+
+  it('draws only the requested parts, in the given order, skipping unknown ones', () => {
+    const svg = renderPartsSvgString(character, ['eyes/wide', 'nope/missing', 'body/base-male']);
+    const parts = [...svg.matchAll(/data-part="([^"]+)"/g)].map((m) => m[1]);
+    expect(parts).toEqual(['eyes/wide', 'body/base-male']);
+    expect(svg).not.toContain('var(');
   });
 
   it('parses as SVG', () => {

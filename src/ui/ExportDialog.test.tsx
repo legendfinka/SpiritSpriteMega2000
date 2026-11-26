@@ -60,6 +60,35 @@ describe('ExportDialog', () => {
     expect(useCharacterStore.getState().character.expressions).not.toContain('sad');
   });
 
+  it('switches to a layered export with blink & talk', () => {
+    renderDialog();
+    const blink = screen.getByLabelText(/Blink & talk/);
+    expect(blink).toBeDisabled();
+
+    fireEvent.click(screen.getByLabelText(/^Layered/));
+    expect(blink).toBeEnabled();
+    expect(blink).toBeChecked();
+    expect(fileList()).toContain('guy_layered.rpy');
+    expect(fileList()).toContain('images/guy_base.png');
+    expect(fileList()).not.toContain('guy happy.png');
+  });
+
+  it('explains instead of crashing when a name clashes with layered keywords', () => {
+    useCharacterStore.setState((s) => ({
+      character: {
+        ...s.character,
+        customExpressions: [
+          { id: 'default', eyes: 'eyes/normal', brows: 'brows/neutral', mouth: 'mouth/neutral' },
+        ],
+        expressions: [...s.character.expressions, 'default'],
+      },
+    }));
+    renderDialog();
+    fireEvent.click(screen.getByLabelText(/^Layered/));
+    expect(screen.getByRole('alert')).toHaveTextContent('Rename the “default” expression');
+    expect(screen.getByRole('button', { name: 'Download zip' })).toBeDisabled();
+  });
+
   it('downloads the zip', async () => {
     renderDialog();
     fireEvent.click(screen.getByRole('button', { name: 'Download zip' }));

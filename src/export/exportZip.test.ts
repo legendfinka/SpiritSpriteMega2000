@@ -10,7 +10,14 @@ const fakeRasterize: Rasterize = async (svg) => new TextEncoder().encode(svg);
 
 const character = { ...createDefaultCharacter(), name: 'Oleh' };
 const expressions = [PRESET_EXPRESSIONS.neutral, PRESET_EXPRESSIONS.happy];
-const options: ExportOptions = { scale: 1, format: 'png', includeJson: true };
+const options: ExportOptions = {
+  scale: 1,
+  format: 'png',
+  includeJson: true,
+  mode: 'sprites',
+  sideImages: false,
+  blinkTalk: true,
+};
 
 async function unzip(bytes: Uint8Array) {
   const zip = await JSZip.loadAsync(bytes);
@@ -57,6 +64,41 @@ describe('buildSpriteZip', () => {
     const readme = await zip.file('README.txt')!.async('string');
     expect(readme).toContain('show oleh neutral');
     expect(readme).toContain('show oleh happy');
+  });
+
+  it('adds side images, plus a plain one for when the sprite is off screen', async () => {
+    const sides = { ...options, sideImages: true, includeJson: false };
+    const { zip, names } = await unzip(
+      await buildSpriteZip(character, expressions, sides, fakeRasterize),
+    );
+    expect(names).toEqual([
+      'README.txt',
+      'oleh happy.png',
+      'oleh neutral.png',
+      'side oleh happy.png',
+      'side oleh neutral.png',
+      'side oleh.png',
+    ]);
+    const svg = await zip.file('side oleh happy.png')!.async('string');
+    expect(svg).toContain('width="300" height="300" viewBox="160 0 480 480"');
+    expect(await zip.file('README.txt')!.async('string')).toContain(
+      'define oleh = Character("Oleh", image="oleh")',
+    );
+  });
+
+  it('builds a layered export: parts in images/ and the .rpy script', async () => {
+    const layered = { ...options, mode: 'layered' as const, includeJson: false };
+    const { zip, names } = await unzip(
+      await buildSpriteZip(character, expressions, layered, fakeRasterize),
+    );
+    expect(names).toContain('oleh_layered.rpy');
+    expect(names).toContain('images/oleh_base.png');
+    expect(names).toContain('images/oleh_eyes_closed_happy.png');
+    expect(names).not.toContain('oleh happy.png');
+    for (const name of names.filter((n) => n.endsWith('.png'))) {
+      expect(await zip.file(name)!.async('string'), name).not.toContain('var(');
+    }
+    expect(await zip.file('README.txt')!.async('string')).toContain('show oleh happy');
   });
 
   it('reports progress', async () => {

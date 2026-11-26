@@ -13,6 +13,12 @@ describe('renpySnippet', () => {
     expect(snippet).toMatch(/\n {4}return$/);
   });
 
+  it('links the image tag when asked, for side images and talking', () => {
+    expect(renpySnippet(named('Oleh'), ['neutral'], true)).toContain(
+      'define oleh = Character("Oleh", image="oleh")',
+    );
+  });
+
   it('avoids variable names Ren\'Py reserves', () => {
     expect(renpyVariable('Show')).toBe('show_char');
     expect(renpyVariable('Mira')).toBe('mira');

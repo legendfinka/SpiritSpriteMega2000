@@ -36,6 +36,9 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
     scale: 1,
     format: 'png',
     includeJson: true,
+    mode: 'sprites',
+    sideImages: false,
+    blinkTalk: true,
   });
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const dialog = useRef<HTMLDivElement>(null);
@@ -45,6 +48,17 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
   const selected = all.filter((e) => character.expressions.includes(e.id));
   const busy = status.kind === 'busy';
   const singleName = spriteFileName(character.name, active.id, options.format);
+  const layered = options.mode === 'layered';
+
+  // a layered export can refuse some expression names; say why instead of crashing
+  let fileNames: string[] = [];
+  let planError: string | null = null;
+  try {
+    fileNames = exportFileNames(character, selected, options);
+  } catch (err) {
+    planError = err instanceof Error ? err.message : String(err);
+  }
+  const errorMessage = planError ?? (status.kind === 'error' ? status.message : null);
 
   // latest onClose, without re-running the focus effect
   const closeRef = useRef(onClose);
@@ -67,7 +81,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
   }, []);
 
   const run = async (task: () => Promise<string>) => {
-    setStatus({ kind: 'busy', done: 0, total: selected.length });
+    setStatus({ kind: 'busy', done: 0, total: 0 });
     try {
       setStatus({ kind: 'done', message: await task() });
     } catch (err) {
@@ -167,12 +181,51 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                 Include character.json
               </label>
             </fieldset>
+
+            <fieldset className={styles.group}>
+              <legend>Ren&rsquo;Py</legend>
+              <label className={styles.check}>
+                <input
+                  type="radio"
+                  name="mode"
+                  checked={!layered}
+                  onChange={() => setOptions({ ...options, mode: 'sprites' })}
+                />
+                Sprites <small>one PNG per expression</small>
+              </label>
+              <label className={styles.check}>
+                <input
+                  type="radio"
+                  name="mode"
+                  checked={layered}
+                  onChange={() => setOptions({ ...options, mode: 'layered' })}
+                />
+                Layered <small>parts + layeredimage</small>
+              </label>
+              <label className={styles.check}>
+                <input
+                  type="checkbox"
+                  checked={options.sideImages}
+                  onChange={(e) => setOptions({ ...options, sideImages: e.target.checked })}
+                />
+                Side images
+              </label>
+              <label className={styles.check}>
+                <input
+                  type="checkbox"
+                  checked={layered && options.blinkTalk}
+                  disabled={!layered}
+                  onChange={(e) => setOptions({ ...options, blinkTalk: e.target.checked })}
+                />
+                Blink &amp; talk {!layered && <small>layered only</small>}
+              </label>
+            </fieldset>
           </div>
 
           <fieldset className={styles.group}>
             <legend>{zipFileName(character.name)}</legend>
             <ul className={styles.files} aria-label="Files in the zip">
-              {exportFileNames(character, selected, options).map((name) => (
+              {fileNames.map((name) => (
                 <li key={name}>{name}</li>
               ))}
             </ul>
@@ -180,12 +233,13 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
         </div>
 
         <p className={styles.status} role="status">
-          {status.kind === 'busy' && `Exporting… ${status.done}/${status.total}`}
+          {status.kind === 'busy' &&
+            `Exporting…${status.total > 0 ? ` ${status.done}/${status.total}` : ''}`}
           {status.kind === 'done' && status.message}
         </p>
-        {status.kind === 'error' && (
+        {errorMessage && (
           <p className={styles.error} role="alert">
-            {status.message}
+            {errorMessage}
           </p>
         )}
 
@@ -200,7 +254,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
             type="button"
             className={styles.primary}
             onClick={exportZip}
-            disabled={busy || selected.length === 0}
+            disabled={busy || selected.length === 0 || planError !== null}
           >
             Download zip
           </button>
