@@ -43,4 +43,4 @@ src/ui/           everything you click
 
 New parts go in `src/parts/<slot>/`. Turn on the guide in the preview to line them up. More detail in `CLAUDE.md`.
 
-Pushing to `main` deploys to GitHub Pages.
+Hosted on Vercel; pushing to `main` deploys.

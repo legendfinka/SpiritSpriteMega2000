@@ -26,7 +26,7 @@ Vitest + React Testing Library, ESLint + Prettier.
   ExportDialog, `useShortcuts`
 - `export/`: svgToPng, exportZip, renpySnippet, characterJson
 - Outside `src/`: `public/backgrounds/*.svg` (1920×1080), `public/templates/alignment-guide.svg`,
-  `.github/workflows/deploy.yml` (GitHub Pages; Vite `base: './'`)
+  `.github/workflows/ci.yml` (lint, test, build). Hosted on Vercel; Vite `base: './'`
 
 ## 5. Core concepts
 - **Canvas:** all parts share an 800×1080 viewBox, head centre ≈ (400, 200).
@@ -72,7 +72,7 @@ Vitest + React Testing Library, ESLint + Prettier.
 - [x] **M4 Export:** export dialog, zip + README, single image, JSON save/load.
   Rasterising is injected (`Rasterize`) so `buildSpriteZip` is tested without canvas.
 - [ ] **M5 Polish** (written, needs passing test/lint/build and an eye on the art):
-  undo/redo, shortcuts, scene preview with 3 backgrounds, GitHub Pages workflow,
+  undo/redo, shortcuts, scene preview with 3 backgrounds, CI workflow + Vercel hosting,
   hairBack moved behind the body, female base + soft face, 6 front / 5 back hairstyles,
   6 outfits, extra eyes/mouths/brows/extras, 4 accessories, starter characters.
 
