@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<path d="M284 250 C268 150 312 62 400 56 C488 62 532 150 516 250 L500 170 L486 200 L476 145 L452 168 L440 132 L418 172 L402 128 L382 166 L362 134 L348 170 L324 145 L314 200 L300 170 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- shade strands -->
+<path d="M402 128 L410 96 L418 172 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M362 134 L370 104 L382 166 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M440 132 L446 104 L452 168 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M324 145 L328 116 L348 170 Z" fill="var(--hair-shade, #3a2516)"/>
+<path d="M476 145 L482 120 L486 200 Z" fill="var(--hair-shade, #3a2516)"/>
+<!-- highlight -->
+<path d="M332 100 Q400 70 468 100 Q400 86 332 112 Z" fill="var(--hair-hi, #9b653b)"/>
+</svg>

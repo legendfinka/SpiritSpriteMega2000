@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<path d="M318 168 Q348 140 380 154 L378 166 Q348 154 322 178 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M482 168 Q452 140 420 154 L422 166 Q452 154 478 178 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+</svg>

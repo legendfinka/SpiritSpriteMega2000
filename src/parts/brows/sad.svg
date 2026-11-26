@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- inner ends lifted -->
+<path d="M318 190 Q350 182 378 162 L380 174 Q352 192 322 200 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M482 190 Q450 182 422 162 L420 174 Q448 192 478 200 Z" fill="var(--hair, #6b4428)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+</svg>

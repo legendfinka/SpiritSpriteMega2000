@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<path d="M374 300 Q400 284 426 300 L424 308 Q400 300 376 308 Z" fill="var(--outline, #2b1d18)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M382 299 Q400 290 418 299 L418 302 Q400 295 382 302 Z" fill="#ffffff"/>
+</svg>

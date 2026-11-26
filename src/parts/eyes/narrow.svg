@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- left: lid slants down toward the nose -->
+<path d="M322 220 L378 232 Q376 246 350 248 Q324 246 322 220 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="354" cy="238" rx="12" ry="10" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="354" cy="239" rx="5" ry="6" fill="var(--outline, #2b1d18)"/>
+<circle cx="349" cy="235" r="3" fill="#ffffff"/>
+<path d="M316 216 L384 232" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+<!-- right -->
+<path d="M478 220 L422 232 Q424 246 450 248 Q476 246 478 220 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="446" cy="238" rx="12" ry="10" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="446" cy="239" rx="5" ry="6" fill="var(--outline, #2b1d18)"/>
+<circle cx="441" cy="235" r="3" fill="#ffffff"/>
+<path d="M484 216 L416 232" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+</svg>

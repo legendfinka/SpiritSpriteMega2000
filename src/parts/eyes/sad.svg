@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- left: outer corner droops -->
+<path d="M322 232 Q344 212 378 220 Q376 246 350 248 Q326 248 322 232 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="352" cy="235" rx="13" ry="13" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="352" cy="237" rx="5" ry="7" fill="var(--outline, #2b1d18)"/>
+<circle cx="347" cy="231" r="3" fill="#ffffff"/>
+<path d="M316 236 Q342 208 384 218" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+<!-- right -->
+<path d="M478 232 Q456 212 422 220 Q424 246 450 248 Q474 248 478 232 Z" fill="#ffffff" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="448" cy="235" rx="13" ry="13" fill="var(--iris, #4f7fb8)"/>
+<ellipse cx="448" cy="237" rx="5" ry="7" fill="var(--outline, #2b1d18)"/>
+<circle cx="443" cy="231" r="3" fill="#ffffff"/>
+<path d="M484 236 Q458 208 416 218" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="7" stroke-linecap="round"/>
+</svg>
