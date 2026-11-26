@@ -1,22 +1,63 @@
 import { LAYER_ORDER } from '../canvas/layerOrder';
 import { partsForSlot } from '../parts/registry';
 import { useCharacterStore } from '../store/useCharacterStore';
-import type { Slot } from '../types';
+import type { Expression, Slot } from '../types';
 import styles from './PartPicker.module.css';
 import { PartThumbnail } from './PartThumbnail';
-import { OPTIONAL_SLOTS, SLOT_LABELS } from './slots';
+import { FACE_SLOTS, OPTIONAL_SLOTS, SLOT_LABELS } from './slots';
 
 const TABS = LAYER_ORDER.filter((slot) => partsForSlot(slot).length > 0);
+
+/** What the face tabs (eyes, brows, mouth, extras) edit. */
+export type FaceTarget =
+  | { kind: 'character' }
+  | { kind: 'custom'; expression: Expression }
+  | { kind: 'preset'; expression: Expression };
 
 interface PartPickerProps {
   slot: Slot;
   onSlotChange: (slot: Slot) => void;
+  faceTarget: FaceTarget;
 }
 
-export function PartPicker({ slot, onSlotChange }: PartPickerProps) {
-  const selected = useCharacterStore((s) => s.character.parts[slot]);
+export function PartPicker({ slot, onSlotChange, faceTarget }: PartPickerProps) {
+  const characterPart = useCharacterStore((s) => s.character.parts[slot]);
   const colors = useCharacterStore((s) => s.character.colors);
   const setPart = useCharacterStore((s) => s.setPart);
+  const updateExpression = useCharacterStore((s) => s.updateExpression);
+
+  const target = FACE_SLOTS.includes(slot) ? faceTarget : ({ kind: 'character' } as const);
+  const locked = target.kind === 'preset';
+
+  // Selection and edits go to the character, or to the expression being edited.
+  let isSelected: (partId: string | undefined) => boolean;
+  let pick: (partId: string | undefined) => void;
+  if (target.kind === 'character') {
+    isSelected = (id) => characterPart === id;
+    pick = (id) => setPart(slot, id);
+  } else {
+    const { expression } = target;
+    if (slot === 'extras') {
+      const extras = expression.extras ?? [];
+      isSelected = (id) => (id === undefined ? extras.length === 0 : extras.includes(id));
+      // Extras on an expression can be combined, so each one toggles.
+      pick = (id) =>
+        updateExpression(expression.id, {
+          extras:
+            id === undefined
+              ? []
+              : extras.includes(id)
+                ? extras.filter((e) => e !== id)
+                : [...extras, id],
+        });
+    } else {
+      const faceSlot = slot as 'eyes' | 'brows' | 'mouth';
+      isSelected = (id) => expression[faceSlot] === id;
+      pick = (id) => {
+        if (id) updateExpression(expression.id, { [faceSlot]: id });
+      };
+    }
+  }
 
   return (
     <section className={styles.picker} aria-label="Parts">
@@ -35,13 +76,24 @@ export function PartPicker({ slot, onSlotChange }: PartPickerProps) {
         ))}
       </div>
 
+      {FACE_SLOTS.includes(slot) && (
+        <p className={locked ? styles.noteLocked : styles.note}>
+          {target.kind === 'character' && 'Editing the default face (neutral)'}
+          {target.kind === 'custom' && <>Editing “{target.expression.id}”</>}
+          {target.kind === 'preset' && (
+            <>“{target.expression.id}” is a preset. Duplicate it below to make your own.</>
+          )}
+        </p>
+      )}
+
       <div className={styles.grid} role="tabpanel" aria-label={SLOT_LABELS[slot]}>
         {OPTIONAL_SLOTS.includes(slot) && (
           <button
             type="button"
             className={styles.item}
-            aria-pressed={selected === undefined}
-            onClick={() => setPart(slot, undefined)}
+            aria-pressed={isSelected(undefined)}
+            disabled={locked}
+            onClick={() => pick(undefined)}
           >
             None
           </button>
@@ -52,8 +104,9 @@ export function PartPicker({ slot, onSlotChange }: PartPickerProps) {
             type="button"
             className={styles.item}
             aria-label={part.label}
-            aria-pressed={selected === part.id}
-            onClick={() => setPart(slot, part.id)}
+            aria-pressed={isSelected(part.id)}
+            disabled={locked}
+            onClick={() => pick(part.id)}
           >
             <PartThumbnail part={part} colors={colors} />
             <span>{part.label}</span>

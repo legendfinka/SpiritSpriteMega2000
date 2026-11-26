@@ -38,6 +38,34 @@
   translate: 0 -2px;
 }
 
+/* little paper label pinned under the tabs */
+.note,
+.noteLocked {
+  margin: 0.6rem 0.7rem 0;
+  padding: 0.3rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: bold;
+  background: var(--noise), var(--tile-a);
+  border: 2px dashed var(--line);
+  rotate: -0.5deg;
+}
+
+.noteLocked {
+  background: var(--noise), var(--mustard);
+  color: var(--line);
+}
+
+.item:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.item:disabled:hover {
+  background: var(--slab);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -69,7 +97,8 @@
   rotate: 0.5deg;
 }
 
-.item[aria-pressed='true'] {
+.item[aria-pressed='true'],
+.item[aria-pressed='true']:disabled:hover {
   background: var(--lit);
   box-shadow: 3px 3px 0 var(--teal);
 }

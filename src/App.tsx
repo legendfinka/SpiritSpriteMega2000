@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import styles from './App.module.css';
-import { CharacterSvg, HEAD_VIEWBOX } from './canvas/CharacterSvg';
-import { getPresetExpression, PRESET_IDS } from './expressions/presets';
+import { CharacterSvg } from './canvas/CharacterSvg';
+import { getExpression, getPresetExpression, isPresetId } from './expressions/presets';
 import { useCharacterStore } from './store/useCharacterStore';
-import type { PresetExpressionId, Slot } from './types';
+import type { ExpressionId, Slot } from './types';
 import { ColorPanel } from './ui/ColorPanel';
-import { PartPicker } from './ui/PartPicker';
+import { ExpressionStrip } from './ui/ExpressionStrip';
+import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
 import { Wordmark } from './ui/Wordmark';
 
@@ -16,14 +17,25 @@ export function App() {
   const character = useCharacterStore((s) => s.character);
   const setName = useCharacterStore((s) => s.setName);
   const resetCharacter = useCharacterStore((s) => s.resetCharacter);
-  const [active, setActive] = useState<PresetExpressionId>('neutral');
+  const [activeId, setActiveId] = useState<ExpressionId>('neutral');
   const [slot, setSlot] = useState<Slot>('hairFront');
   const [showGuide, setShowGuide] = useState(false);
 
+  // Falls back to neutral if the selected expression was deleted or reset away.
+  const active =
+    getExpression(activeId, character) ?? getPresetExpression('neutral', character);
+
+  const faceTarget: FaceTarget =
+    active.id === 'neutral'
+      ? { kind: 'character' }
+      : isPresetId(active.id)
+        ? { kind: 'preset', expression: active }
+        : { kind: 'custom', expression: active };
+
   const changeSlot = (next: Slot) => {
     setSlot(next);
-    // Face choices only show on neutral, so jump there to make them visible.
-    if (FACE_SLOTS.includes(next)) setActive('neutral');
+    // Presets can't be edited, so face tabs jump to neutral (the default face).
+    if (FACE_SLOTS.includes(next) && faceTarget.kind === 'preset') setActiveId('neutral');
   };
 
   return (
@@ -62,12 +74,12 @@ export function App() {
       </header>
 
       <main className={styles.main}>
-        <PartPicker slot={slot} onSlotChange={changeSlot} />
+        <PartPicker slot={slot} onSlotChange={changeSlot} faceTarget={faceTarget} />
         <div className={styles.stage}>
           <div className={styles.preview}>
             <CharacterSvg
               character={character}
-              expression={getPresetExpression(active, character)}
+              expression={active}
               className={styles.sprite}
               title="Preview"
             />
@@ -77,27 +89,7 @@ export function App() {
         <ColorPanel />
       </main>
 
-      <footer className={styles.strip}>
-        <div className={styles.windows}>
-          {PRESET_IDS.map((id) => (
-            <button
-              key={id}
-              type="button"
-              className={styles.thumb}
-              aria-pressed={id === active}
-              onClick={() => setActive(id)}
-            >
-              <CharacterSvg
-                character={character}
-                expression={getPresetExpression(id, character)}
-                viewBox={HEAD_VIEWBOX}
-                className={styles.thumbSvg}
-              />
-              <span>{id}</span>
-            </button>
-          ))}
-        </div>
-      </footer>
+      <ExpressionStrip active={active} onSelect={setActiveId} />
     </div>
   );
 }

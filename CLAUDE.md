@@ -37,8 +37,12 @@ Vitest + React Testing Library, ESLint + Prettier.
   derive from the base (HSL −15 % / +12 % lightness) unless overridden.
 - **Layer order (back → front):** body → outfit → hairBack → face → eyes → brows →
   hairFront → mouth → extras → accessory
-- **Expressions:** override only eyes, brows, mouth, extras. 5 presets
-  (neutral, happy, sad, angry, surprised) plus user-made ones.
+- **Expressions:** override only eyes, brows, mouth, extras. 5 fixed presets
+  (neutral = the character's own face parts) plus `Character.customExpressions`.
+  Ids are Ren'Py attributes: `[a-z][a-z0-9_]*`. Face tabs edit the selected custom
+  expression (extras combine) or, on neutral, the character.
+- **Saved data:** always load through `store/parseCharacter.ts`, which fills fields
+  added later. Keep new `Character` fields backward compatible.
 
 ## 6. Export
 - One standalone SVG per expression with hex colours inlined (no CSS variables).
@@ -58,7 +62,8 @@ Vitest + React Testing Library, ESLint + Prettier.
   rendering, base parts (drawn from scratch; `gen_guy.py` was unavailable)
 - [ ] **M2 Editing** (written, needs passing test/lint/build): store, part picker,
   colour panel. "neutral" renders the character's own face slots.
-- [ ] **M3 Expressions:** preset strip, custom editor
+- [ ] **M3 Expressions** (written, needs passing test/lint/build): preset strip,
+  custom expressions (add, duplicate, rename, delete, edit face parts)
 - [ ] **M4 Export:** single PNG, zip + JSON + README, JSON import
 - [ ] **M5 Polish:** 3+ hairstyles, 2+ outfits (90s tracksuit, school uniform, coat),
   glasses, female body, backgrounds, shortcuts, undo/redo, GitHub Pages
