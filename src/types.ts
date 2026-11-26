@@ -66,5 +66,7 @@ export interface Character {
   colors: Partial<Record<ColorToken, Hex>>;
   /** Which expressions to export. */
   expressions: ExpressionId[];
+  /** User-made expressions, shown after the presets. */
+  customExpressions: Expression[];
   version: 1;
 }

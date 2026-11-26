@@ -1,11 +1,15 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { DEFAULT_BASE_COLORS, isDerivedToken } from '../canvas/colors';
-import type { Character, ColorToken, Hex, Slot } from '../types';
+import { expressionNameError, toExpressionName, uniqueExpressionName } from '../expressions/names';
+import { takenExpressionIds } from '../expressions/presets';
+import type { Character, ColorToken, Expression, ExpressionId, Hex, Slot } from '../types';
 import { createDefaultCharacter } from './defaultCharacter';
-import { isCharacter } from './isCharacter';
+import { parseCharacter } from './parseCharacter';
 
 export const STORAGE_KEY = 'spirit-sprite-character';
+
+export type ExpressionPatch = Partial<Pick<Expression, 'eyes' | 'brows' | 'mouth' | 'extras'>>;
 
 interface CharacterState {
   character: Character;
@@ -16,11 +20,17 @@ interface CharacterState {
   /** Derived tokens go back to automatic, base tokens to their default. */
   resetColor: (token: ColorToken) => void;
   resetCharacter: () => void;
+  /** Add a custom expression copied from `from`. Returns the new id. */
+  addExpression: (from: Expression) => ExpressionId;
+  updateExpression: (id: ExpressionId, patch: ExpressionPatch) => void;
+  /** Returns an error message, or the new id on success. */
+  renameExpression: (id: ExpressionId, rawName: string) => { id: string } | { error: string };
+  removeExpression: (id: ExpressionId) => void;
 }
 
 export const useCharacterStore = create<CharacterState>()(
   persist(
-    (set) => {
+    (set, get) => {
       const update = (change: (c: Character) => Partial<Character>) =>
         set((state) => ({ character: { ...state.character, ...change(state.character) } }));
 
@@ -43,6 +53,43 @@ export const useCharacterStore = create<CharacterState>()(
             return { colors };
           }),
         resetCharacter: () => set({ character: createDefaultCharacter() }),
+
+        addExpression: (from) => {
+          const id = uniqueExpressionName(from.id, takenExpressionIds(get().character));
+          const copy: Expression = {
+            id,
+            eyes: from.eyes,
+            brows: from.brows,
+            mouth: from.mouth,
+            extras: [...(from.extras ?? [])],
+          };
+          update((c) => ({
+            customExpressions: [...c.customExpressions, copy],
+            expressions: [...c.expressions, id],
+          }));
+          return id;
+        },
+        updateExpression: (id, patch) =>
+          update((c) => ({
+            customExpressions: c.customExpressions.map((e) => (e.id === id ? { ...e, ...patch } : e)),
+          })),
+        renameExpression: (id, rawName) => {
+          const name = toExpressionName(rawName);
+          if (name === id) return { id };
+          const taken = takenExpressionIds(get().character).filter((t) => t !== id);
+          const error = expressionNameError(name, taken);
+          if (error) return { error };
+          update((c) => ({
+            customExpressions: c.customExpressions.map((e) => (e.id === id ? { ...e, id: name } : e)),
+            expressions: c.expressions.map((e) => (e === id ? name : e)),
+          }));
+          return { id: name };
+        },
+        removeExpression: (id) =>
+          update((c) => ({
+            customExpressions: c.customExpressions.filter((e) => e.id !== id),
+            expressions: c.expressions.filter((e) => e !== id),
+          })),
       };
     },
     {
@@ -52,8 +99,8 @@ export const useCharacterStore = create<CharacterState>()(
       partialize: ({ character }) => ({ character }),
       // Ignore saved data that doesn't look like a character.
       merge: (persisted, current) => {
-        const saved = (persisted as { character?: unknown } | undefined)?.character;
-        return isCharacter(saved) ? { ...current, character: saved } : current;
+        const saved = parseCharacter((persisted as { character?: unknown } | undefined)?.character);
+        return saved ? { ...current, character: saved } : current;
       },
     },
   ),

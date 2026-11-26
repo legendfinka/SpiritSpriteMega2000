@@ -1,4 +1,4 @@
-import type { Character, Expression, PresetExpressionId } from '../types';
+import type { Character, Expression, ExpressionId, PresetExpressionId } from '../types';
 
 export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
   neutral: {
@@ -59,3 +59,22 @@ export const PRESET_IDS: readonly PresetExpressionId[] = [
   'angry',
   'surprised',
 ];
+
+export function isPresetId(id: ExpressionId): id is PresetExpressionId {
+  return (PRESET_IDS as readonly string[]).includes(id);
+}
+
+/** Presets first, then the character's custom expressions. */
+export function listExpressions(character: Character): Expression[] {
+  return [...PRESET_IDS.map((id) => getPresetExpression(id, character)), ...character.customExpressions];
+}
+
+export function getExpression(id: ExpressionId, character: Character): Expression | undefined {
+  if (isPresetId(id)) return getPresetExpression(id, character);
+  return character.customExpressions.find((e) => e.id === id);
+}
+
+/** Every id in use, for name checks. */
+export function takenExpressionIds(character: Character): string[] {
+  return [...PRESET_IDS, ...character.customExpressions.map((e) => e.id)];
+}

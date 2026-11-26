@@ -16,6 +16,7 @@ export function createDefaultCharacter(): Character {
     },
     colors: { ...DEFAULT_BASE_COLORS },
     expressions: ['neutral', 'happy', 'sad', 'angry', 'surprised'],
+    customExpressions: [],
     version: 1,
   };
 }

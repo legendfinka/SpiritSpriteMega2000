@@ -25,7 +25,7 @@ function stubPart(id: string): Part | undefined {
 }
 
 function character(parts: Character['parts']): Character {
-  return { name: 't', parts, colors: {}, expressions: [], version: 1 };
+  return { name: 't', parts, colors: {}, expressions: [], customExpressions: [], version: 1 };
 }
 
 describe('LAYER_ORDER', () => {
