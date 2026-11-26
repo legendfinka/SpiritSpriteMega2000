@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <pattern id="paper" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="#ead9b6"/>
+      <path d="M40 12 L52 40 L40 68 L28 40 Z" fill="#dcc59a"/>
+    </pattern>
+    <pattern id="parquet" width="160" height="60" patternUnits="userSpaceOnUse">
+      <rect width="160" height="60" fill="#9a6440"/>
+      <path d="M0 1 H160 M0 30 H160 M40 0 V30 M120 30 V60" stroke="#7a4b2e" stroke-width="4"/>
+    </pattern>
+  </defs>
+
+  <!-- wallpaper, floor, skirting -->
+  <rect width="1920" height="860" fill="url(#paper)"/>
+  <rect y="860" width="1920" height="220" fill="url(#parquet)"/>
+  <rect x="-10" y="836" width="1940" height="30" fill="#6b3f26" stroke="#2b1d18" stroke-width="6"/>
+
+  <!-- wall carpet -->
+  <g stroke="#2b1d18" stroke-width="6" stroke-linejoin="round">
+    <rect x="180" y="150" width="760" height="480" fill="#9c2f2a"/>
+    <rect x="215" y="185" width="690" height="410" fill="none" stroke="#e3a92b" stroke-width="14"/>
+    <path d="M560 230 L760 390 L560 550 L360 390 Z" fill="#2c3e57"/>
+    <path d="M560 290 L685 390 L560 490 L435 390 Z" fill="#e3a92b"/>
+    <path d="M560 345 L615 390 L560 435 L505 390 Z" fill="#9c2f2a"/>
+    <g fill="#ece4d0" stroke-width="4">
+      <path d="M280 240 l30 30 -30 30 -30 -30 Z"/>
+      <path d="M840 240 l30 30 -30 30 -30 -30 Z"/>
+      <path d="M280 480 l30 30 -30 30 -30 -30 Z"/>
+      <path d="M840 480 l30 30 -30 30 -30 -30 Z"/>
+    </g>
+  </g>
+  <path d="M192 644 H930" stroke="#e3a92b" stroke-width="24" stroke-dasharray="5 15"/>
+
+  <!-- window at night -->
+  <rect x="1240" y="140" width="520" height="540" fill="#f3ead6" stroke="#2b1d18" stroke-width="8"/>
+  <rect x="1272" y="172" width="456" height="476" fill="#2c3e57" stroke="#2b1d18" stroke-width="6"/>
+  <circle cx="1640" cy="250" r="34" fill="#f7eedb"/>
+  <rect x="1300" y="360" width="260" height="288" fill="#4a4f5e"/>
+  <g fill="#ffd36b">
+    <rect x="1325" y="390" width="34" height="30"/>
+    <rect x="1445" y="390" width="34" height="30"/>
+    <rect x="1385" y="450" width="34" height="30"/>
+    <rect x="1505" y="510" width="34" height="30"/>
+    <rect x="1325" y="570" width="34" height="30"/>
+  </g>
+  <path d="M1500 172 V648 M1272 400 H1728" stroke="#2b1d18" stroke-width="26"/>
+  <path d="M1500 172 V648 M1272 400 H1728" stroke="#f3ead6" stroke-width="14"/>
+
+  <!-- curtains -->
+  <path d="M1180 118 H1820" stroke="#2b1d18" stroke-width="12" stroke-linecap="round"/>
+  <g fill="#b8432b" stroke="#2b1d18" stroke-width="6" stroke-linejoin="round">
+    <path d="M1200 120 H1330 C1320 300 1290 420 1310 700 H1215 C1235 450 1190 300 1200 120 Z"/>
+    <path d="M1800 120 H1670 C1680 300 1710 420 1690 700 H1785 C1765 450 1810 300 1800 120 Z"/>
+  </g>
+  <path d="M1250 140 C1245 330 1265 500 1250 690 M1750 140 C1755 330 1735 500 1750 690" fill="none" stroke="#8e2f1e" stroke-width="8"/>
+
+  <!-- radiator -->
+  <rect x="1330" y="700" width="340" height="120" rx="10" fill="#ece4d0" stroke="#2b1d18" stroke-width="6"/>
+  <path d="M1350 760 H1652" stroke="#c9c2b4" stroke-width="100" stroke-dasharray="8 22"/>
+
+  <!-- warm lamp glow -->
+  <circle cx="960" cy="300" r="520" fill="#ffd36b" opacity="0.08"/>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5d5487"/>
+      <stop offset="0.55" stop-color="#d9817a"/>
+      <stop offset="0.8" stop-color="#f6c177"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#ffd36b" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffd36b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="win" width="60" height="70" patternUnits="userSpaceOnUse">
+      <rect width="60" height="70" fill="#bcb6ab"/>
+      <rect x="15" y="18" width="30" height="34" fill="#2c3e57" stroke="#2b1d18" stroke-width="3"/>
+    </pattern>
+  </defs>
+
+  <!-- dusk -->
+  <rect width="1920" height="900" fill="url(#sky)"/>
+  <circle cx="980" cy="640" r="110" fill="#ffd36b" opacity="0.9"/>
+
+  <!-- far blocks -->
+  <g fill="#7a6f8a">
+    <rect x="-10" y="420" width="360" height="460"/>
+    <rect x="860" y="470" width="260" height="410"/>
+    <rect x="1740" y="380" width="200" height="500"/>
+  </g>
+
+  <!-- panel blocks -->
+  <rect x="120" y="260" width="720" height="620" fill="url(#win)" stroke="#2b1d18" stroke-width="8"/>
+  <rect x="1080" y="200" width="640" height="680" fill="url(#win)" stroke="#2b1d18" stroke-width="8"/>
+  <g fill="#ffd36b" stroke="#2b1d18" stroke-width="3">
+    <rect x="195" y="368" width="30" height="34"/>
+    <rect x="435" y="578" width="30" height="34"/>
+    <rect x="615" y="298" width="30" height="34"/>
+    <rect x="315" y="718" width="30" height="34"/>
+    <rect x="735" y="508" width="30" height="34"/>
+    <rect x="1215" y="438" width="30" height="34"/>
+    <rect x="1455" y="228" width="30" height="34"/>
+    <rect x="1575" y="648" width="30" height="34"/>
+    <rect x="1335" y="788" width="30" height="34"/>
+  </g>
+  <!-- roof antennas -->
+  <path d="M300 260 V200 M285 214 H315 M1600 200 V140 M1585 154 H1615" stroke="#2b1d18" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- trees -->
+  <g fill="#3e5b4a" stroke="#2b1d18" stroke-width="6">
+    <circle cx="70" cy="760" r="110"/>
+    <circle cx="1840" cy="740" r="120"/>
+  </g>
+
+  <!-- asphalt and curb -->
+  <rect y="880" width="1920" height="200" fill="#5b5752"/>
+  <rect x="-10" y="872" width="1940" height="22" fill="#9a958d" stroke="#2b1d18" stroke-width="5"/>
+
+  <!-- streetlight -->
+  <circle cx="1000" cy="520" r="160" fill="url(#glow)"/>
+  <path d="M960 1000 V540 Q960 500 1000 500" fill="none" stroke="#2b1d18" stroke-width="14" stroke-linecap="round"/>
+  <path d="M980 500 H1030 L1020 525 H990 Z" fill="#ffd36b" stroke="#2b1d18" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- bench -->
+  <g stroke="#2b1d18" stroke-width="6">
+    <rect x="1340" y="900" width="260" height="22" fill="#9a6440"/>
+    <rect x="1340" y="860" width="260" height="22" fill="#9a6440"/>
+    <path d="M1360 922 V980 M1580 922 V980"/>
+  </g>
+</svg>
