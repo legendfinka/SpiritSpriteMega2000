@@ -1,4 +1,4 @@
-import type { Expression, PresetExpressionId } from '../types';
+import type { Character, Expression, PresetExpressionId } from '../types';
 
 export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
   neutral: {
@@ -37,6 +37,20 @@ export const PRESET_EXPRESSIONS: Record<PresetExpressionId, Expression> = {
     extras: ['extras/sweat-drop'],
   },
 };
+
+/** "neutral" shows the face chosen on the character; other presets override it. */
+export function getPresetExpression(id: PresetExpressionId, character: Character): Expression {
+  const preset = PRESET_EXPRESSIONS[id];
+  if (id !== 'neutral') return preset;
+  const { eyes, brows, mouth, extras } = character.parts;
+  return {
+    id,
+    eyes: eyes ?? preset.eyes,
+    brows: brows ?? preset.brows,
+    mouth: mouth ?? preset.mouth,
+    extras: extras ? [extras] : [],
+  };
+}
 
 export const PRESET_IDS: readonly PresetExpressionId[] = [
   'neutral',
