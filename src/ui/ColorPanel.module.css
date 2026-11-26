@@ -51,6 +51,38 @@
   margin-left: 0.6rem;
 }
 
+/* paint samples under the main colours */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.7rem;
+}
+
+.swatch {
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  box-shadow: 1px 1px 0 var(--line);
+}
+
+.swatch[aria-pressed='true'] {
+  outline: 3px solid var(--teal);
+  outline-offset: 1px;
+}
+
+/* bigger tap targets on touch screens */
+@media (pointer: coarse) {
+  .swatches {
+    gap: 0.5rem;
+  }
+
+  .swatch {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 .label {
   display: flex;
   align-items: center;

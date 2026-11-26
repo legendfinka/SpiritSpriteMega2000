@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
+import { shareHash } from './export/shareLink';
 import { useCharacterStore } from './store/useCharacterStore';
 
 const character = () => useCharacterStore.getState().character;
@@ -92,6 +93,56 @@ describe('shortcuts and history', () => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+});
+
+describe('quick wins', () => {
+  afterEach(() => {
+    window.history.replaceState(null, '', '/');
+  });
+
+  const openLink = () => {
+    window.history.replaceState(
+      null,
+      '',
+      shareHash({ ...character(), name: 'friend', parts: { body: 'body/base-female' } }),
+    );
+    render(<App />);
+    return within(screen.getByRole('alertdialog', { name: 'Shared character' }));
+  };
+
+  it('asks before opening a shared link, then clears the hash', () => {
+    const dialog = openLink();
+    expect(window.location.hash).toBe('');
+    expect(character().name).toBe('guy');
+    fireEvent.click(dialog.getByRole('button', { name: 'Open it' }));
+    expect(character().name).toBe('friend');
+  });
+
+  it('keeps your character if you say so', () => {
+    fireEvent.click(openLink().getByRole('button', { name: 'Keep mine' }));
+    expect(character().name).toBe('guy');
+    expect(screen.queryByRole('alertdialog')).toBeNull();
+  });
+
+  it('randomises in one undoable step', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.999);
+    render(<App />);
+    const before = character();
+    fireEvent.click(screen.getByRole('button', { name: 'Random' }));
+    expect(character().parts).not.toEqual(before.parts);
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    expect(character()).toEqual(before);
+  });
+
+  it('applies a swatch and puts the shade back to auto', () => {
+    useCharacterStore.getState().setColor('hair-shade', '#ff0000');
+    render(<App />);
+    const swatch = screen.getByRole('button', { name: 'Hair: Blonde' });
+    fireEvent.click(swatch);
+    expect(character().colors.hair).toBe('#e8c46a');
+    expect(character().colors['hair-shade']).toBeUndefined();
+    expect(swatch).toHaveAttribute('aria-pressed', 'true');
+  });
 });
 
 describe('editing', () => {

@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { DEFAULT_BASE_COLORS, isDerivedToken } from '../canvas/colors';
+import {
+  type BaseToken,
+  DEFAULT_BASE_COLORS,
+  DERIVED_TOKENS,
+  type DerivedToken,
+  isDerivedToken,
+} from '../canvas/colors';
 import { expressionNameError, toExpressionName, uniqueExpressionName } from '../expressions/names';
 import { takenExpressionIds } from '../expressions/presets';
 import type { Character, ColorToken, Expression, ExpressionId, Hex, Slot } from '../types';
@@ -24,6 +30,8 @@ interface CharacterState {
   /** undefined empties the slot */
   setPart: (slot: Slot, partId: string | undefined) => void;
   setColor: (token: ColorToken, hex: Hex) => void;
+  /** a preset swatch: sets bases and puts their shades back to auto */
+  applyColors: (patch: Partial<Record<BaseToken, Hex>>) => void;
   /** shades back to auto, bases back to default */
   resetColor: (token: ColorToken) => void;
   resetCharacter: () => void;
@@ -97,6 +105,14 @@ export const useCharacterStore = create<CharacterState>()(
           }),
         setColor: (token, hex) =>
           update((c) => ({ colors: { ...c.colors, [token]: hex } }), `color:${token}`),
+        applyColors: (patch) =>
+          update((c) => {
+            const colors: Character['colors'] = { ...c.colors, ...patch };
+            for (const [shade, [base]] of Object.entries(DERIVED_TOKENS)) {
+              if (base in patch) delete colors[shade as DerivedToken];
+            }
+            return { colors };
+          }),
         resetColor: (token) =>
           update((c) => {
             const colors = { ...c.colors };

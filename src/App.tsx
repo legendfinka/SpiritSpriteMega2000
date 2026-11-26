@@ -7,6 +7,7 @@ import {
   isPresetId,
   listExpressions,
 } from './expressions/presets';
+import { randomCharacter } from './store/randomCharacter';
 import { useCharacterStore } from './store/useCharacterStore';
 import type { ExpressionId, Slot } from './types';
 import { CharacterFileButtons } from './ui/CharacterFileButtons';
@@ -16,6 +17,8 @@ import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
+import { ShareButton } from './ui/ShareButton';
+import { SharedLinkPrompt } from './ui/SharedLinkPrompt';
 import { Stage } from './ui/Stage';
 import { StarterPicker } from './ui/StarterPicker';
 import { MOD, useShortcuts } from './ui/useShortcuts';
@@ -27,7 +30,7 @@ export function App() {
   const character = useCharacterStore((s) => s.character);
   const canUndo = useCharacterStore((s) => s.past.length > 0);
   const canRedo = useCharacterStore((s) => s.future.length > 0);
-  const { setName, resetCharacter, undo, redo } = useCharacterStore.getState();
+  const { setName, resetCharacter, loadCharacter, undo, redo } = useCharacterStore.getState();
   const [activeId, setActiveId] = useState<ExpressionId>('neutral');
   const [slot, setSlot] = useState<Slot>('hairFront');
   const [exporting, setExporting] = useState(false);
@@ -105,12 +108,20 @@ export function App() {
         </div>
         <button
           type="button"
-          onClick={() => setResetting(true)}
+          title="Random look and colours"
+          onClick={() => {
+            loadCharacter(randomCharacter(useCharacterStore.getState().character));
+            setActiveId('neutral');
+          }}
         >
+          Random
+        </button>
+        <button type="button" onClick={() => setResetting(true)}>
           Reset
         </button>
         <StarterPicker onPicked={() => setActiveId('neutral')} />
         <CharacterFileButtons onLoaded={() => setActiveId('neutral')} />
+        <ShareButton />
         <button
           type="button"
           className={styles.exportButton}
@@ -120,6 +131,7 @@ export function App() {
           Export ▸
         </button>
       </header>
+      <SharedLinkPrompt onOpened={() => setActiveId('neutral')} />
       {exporting && <ExportDialog active={active} onClose={() => setExporting(false)} />}
       {resetting && (
         <ConfirmDialog
