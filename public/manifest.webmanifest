@@ -1,0 +1,13 @@
+{
+  "name": "SpiritSprite Mega 2000",
+  "short_name": "SpiritSprite",
+  "description": "Make visual novel sprites without drawing.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#3b3834",
+  "theme_color": "#b8432b",
+  "icons": [
+    { "src": "./logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
