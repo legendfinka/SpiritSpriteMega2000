@@ -37,8 +37,12 @@ Vitest + React Testing Library, ESLint + Prettier.
 - **Tokens:** `--skin --skin-shade --hair --hair-shade --hair-hi --iris --outfit-main
   --outfit-shade --outfit-accent --pants --pants-shade --outline`. Shades/highlights
   derive from the base (HSL −15 % / +12 % lightness) unless overridden.
-- **Layer order (back → front):** hairBack → body → outfit → face → eyes → brows →
-  hairFront → mouth → extras → accessory
+- **Layer order (back → front):** hairBack → body → bottom → top → outfit → face → eyes →
+  brows → hairFront → mouth → extras → accessory
+- **Clothes:** `top` + `bottom` mix freely; `outfit` is a one-piece (dress, overalls) and
+  the store keeps it exclusive with top/bottom. Bottoms start at the waist (y 740) and
+  use `--pants`; tops reach at least y 760 so they cover it. Old two-piece outfit ids
+  are converted on load (`parts/outfitSplits.ts`).
 - **Expressions:** override eyes, brows, mouth; their extras are drawn on top of the
   character's own extras (freckles stay on every expression). 5 fixed presets
   (neutral = the character's own face parts) plus `Character.customExpressions`.
@@ -48,10 +52,27 @@ Vitest + React Testing Library, ESLint + Prettier.
   added later. Keep new `Character` fields backward compatible.
 - **History:** every character edit goes through the store's `commit`, so it can be
   undone. Quick repeats with the same merge key (colour drags, typing) are one step.
+  Snapshots hold the whole cast, so adding/removing characters undoes too.
+- **Cast (`store/cast.ts`):** `character` is the selected one and the source of truth;
+  `cast` holds everyone (the selected entry may be stale, use `castWithActive`).
+  Persisted as `{cast, activeId}` (store version 2); `restoreCast` also reads old
+  single-character saves. Loaded files and share links join the cast.
+- **Uploads (`parts/sanitizeSvg.ts`):** untrusted, rendered via innerHTML. Rebuilt from
+  an allowlist (plain shapes, known attributes, checked values, no url/style/href),
+  must be 800×1080, tokens must exist. Stored in `Character.customParts` and
+  re-sanitised in `parseCharacter`. Look parts up with `findPart(character, id)`.
 
 - **Analytics:** countmetrics tag at the end of `index.html`. It sends only the path (no
   query or hash), sets no cookies and respects Do Not Track. As a safeguard it stays after
   the app script, where `ui/sharedLink.ts` removes `#c=` from the URL.
+
+- **Languages (`i18n/`):** every UI string goes through `t()`; `en.ts` is the source and
+  `uk.ts`/`ru.ts` must match its keys. New parts and swatches need names in
+  `partNames.ts` (tests check). Expression ids and exported files stay English; presets
+  are shown translated via `expressionLabel`. Flags are inline SVG (`LanguagePicker`).
+- **Fonts:** bundled with fontsource (Russo One, PT Sans, IBM Plex Mono) for Cyrillic.
+- **Offline:** `pwa/serviceWorkerSource.ts` + the plugin in `vite.config.ts` write
+  `dist/sw.js` (production only). New files in `public/` go into `PUBLIC_FILES`.
 
 ## 6. Export
 - One standalone SVG per expression with hex colours inlined (no CSS variables).
@@ -102,9 +123,9 @@ Vitest + React Testing Library, ESLint + Prettier.
   - Underwear on both base bodies (briefs + bandeau on female), coloured with the outfit.
   - Random names (`store/randomNames.ts`) behind a name lock, locked by default.
   - Base font 15px (all sizes are rem, nothing below 0.72rem); stronger alignment guide.
-- [ ] **M9 Bigger:** cast library (several characters, 2–3 together in scene view),
-  custom part upload (SVG checked against the canvas and tokens), offline PWA,
-  Ukrainian/Russian UI.
+- [x] **M9 Bigger:** cast library (several characters, 2–3 together in scene view),
+  custom part upload, tops/bottoms split (11 tops, 8 bottoms, 6 one-pieces), offline
+  PWA, Ukrainian/Russian UI with Cyrillic fonts and a flag picker.
 
 ## 9. Conventions
 - No `any` without a comment. One function component per file.

@@ -6,6 +6,11 @@ All in the browser, nothing to sign up for. Share a character with a link; it tr
 
 ![Demo](docs/demo.gif)
 
+- Keep a whole cast, and stage up to three of them together.
+- Mix tops and bottoms, or upload your own SVG parts.
+- Works offline and can be installed like an app.
+- English, Ukrainian and Russian.
+
 ```bash
 npm install
 npm run dev
