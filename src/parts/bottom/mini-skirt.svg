@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- short A-line skirt with a belt; still long enough to hide the briefs -->
+<path d="M282 740 L518 740 L538 926 L262 926 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M283 742 L517 742 L519 768 L281 768 Z" fill="var(--outline, #2b1d18)"/>
+<rect x="384" y="740" width="32" height="30" rx="3" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="5"/>
+<path d="M266 906 L534 906" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="5"/>
+</svg>

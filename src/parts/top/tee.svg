@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- short sleeves -->
+<path d="M256 418 C222 432 206 476 206 552 L264 566 L274 470 Z M544 418 C578 432 594 476 594 552 L536 566 L526 470 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M208 534 L264 548 M592 534 L536 548" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5"/>
+<!-- loose tee, hem over the waistband -->
+<path d="M368 384 C330 395 278 400 260 420 C246 436 244 470 248 520 L262 780 L538 780 L552 520 C556 470 554 436 540 420 C522 400 470 395 432 384 Q400 420 368 384 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M366 388 Q400 426 434 388" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5"/>
+<path d="M280 640 C286 690 290 740 290 776 M520 640 C514 690 510 740 510 776" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- thin straps, bare shoulders; wide enough at the chest to cover the bandeau -->
+<path d="M352 388 L344 428 C322 436 294 444 268 470 C262 520 270 600 268 780 L532 780 C530 600 538 520 532 470 C506 444 478 436 456 428 L448 388 Q400 446 352 388 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M356 400 Q400 452 444 400" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5"/>
+<path d="M290 620 C294 690 294 740 292 776 M510 620 C506 690 506 740 508 776" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="5" stroke-linecap="round"/>
+</svg>

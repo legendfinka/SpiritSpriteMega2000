@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- soft legs gathered into cuffs -->
+<path d="M276 740 L524 740 C530 820 532 900 528 960 C524 1010 516 1040 512 1052 L408 1052 L400 885 L392 1052 L288 1052 C284 1040 276 1010 272 960 C268 900 270 820 276 740 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M290 1050 L392 1050 L392 1085 L290 1085 Z M408 1050 L510 1050 L510 1085 L408 1085 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- elastic waist and drawstring -->
+<path d="M277 742 L523 742 L523 770 L277 770 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M392 768 L384 820 M408 768 L416 820" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="4" stroke-linecap="round"/>
+<path d="M300 900 C304 960 300 1010 296 1040 M500 900 C496 960 500 1010 504 1040" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="4" stroke-linecap="round"/>
+</svg>

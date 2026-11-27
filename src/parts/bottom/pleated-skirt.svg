@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- knee-high pleated skirt; hem below the briefs (y 912) -->
+<path d="M284 740 L516 740 L562 935 L238 935 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M330 764 L306 935 M370 764 L360 935 M400 764 L400 935 M430 764 L440 935 M470 764 L494 935" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="5" stroke-linecap="round"/>
+<path d="M285 742 L515 742 L519 764 L281 764 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+</svg>

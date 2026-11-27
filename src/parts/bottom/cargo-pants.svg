@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- baggy legs -->
+<path d="M274 740 L526 740 L536 1085 L406 1085 L400 885 L394 1085 L264 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M275 742 L525 742 L525 762 L275 762 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<!-- side pockets with flaps -->
+<path d="M268 900 L322 900 L324 984 L270 984 Z M532 900 L478 900 L476 984 L530 984 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M266 900 L324 900 L324 922 L268 922 Z M534 900 L476 900 L476 922 L532 922 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M330 1040 C350 1050 370 1048 390 1040 M410 1040 C430 1048 450 1050 470 1040" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="4" stroke-linecap="round"/>
+<path d="M400 780 L400 870" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- pressed trousers with creases -->
+<path d="M276 740 L524 740 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M277 742 L523 742 L523 762 L277 762 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M338 880 L334 1080 M462 880 L466 1080" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="4" stroke-linecap="round"/>
+<path d="M400 780 L400 870" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="4" stroke-linecap="round"/>
+</svg>

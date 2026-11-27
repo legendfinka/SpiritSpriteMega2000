@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- denim shorts with rolled cuffs -->
+<path d="M268 740 L532 740 L540 902 L408 910 L400 888 L392 910 L260 902 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M264 882 L394 890 M536 882 L406 890" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="8"/>
+<path d="M269 742 L531 742 L532 762 L268 762 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M400 800 V870" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+</svg>

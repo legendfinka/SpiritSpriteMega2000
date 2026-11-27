@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- flowing skirt to the ankles -->
+<path d="M284 740 L516 740 C540 860 560 960 572 1060 L228 1060 C240 960 260 860 284 740 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M340 800 C336 900 320 990 310 1056 M460 800 C464 900 480 990 490 1056 M400 820 L400 1056" fill="none" stroke="var(--pants-shade, #283e5d)" stroke-width="5" stroke-linecap="round"/>
+<path d="M285 742 L515 742 L518 762 L282 762 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M232 1036 L568 1036" fill="none" stroke="var(--outfit-accent, #ece4d0)" stroke-width="6"/>
+</svg>

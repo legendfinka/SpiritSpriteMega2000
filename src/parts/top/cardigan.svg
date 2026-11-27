@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- tee underneath -->
+<path d="M368 384 C330 395 300 405 290 425 L300 700 L298 812 L502 812 L500 700 L510 425 C500 405 470 395 432 384 Q400 424 368 384 Z" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- soft sleeves with rib cuffs -->
+<path d="M258 418 C222 436 206 490 204 560 L196 832 L268 832 L274 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M542 418 C578 436 594 490 596 560 L604 832 L532 832 L526 600 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M199 802 L269 802 L268 832 L196 832 Z M601 802 L531 802 L532 832 L604 832 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<!-- open front panels, V to the waist -->
+<path d="M368 382 C330 395 280 400 262 420 C248 436 246 470 250 520 L266 700 C270 750 274 790 276 822 L384 822 L386 600 L374 470 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M432 382 C470 395 520 400 538 420 C552 436 554 470 550 520 L534 700 C530 750 526 790 524 822 L416 822 L414 600 L426 470 Z" fill="var(--outfit-main, #2f6f6a)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M276 796 L384 796 L384 822 L276 822 Z M416 796 L524 796 L524 822 L416 822 Z" fill="var(--outfit-shade, #1a3e3b)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="372" cy="540" r="6" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="2"/>
+<circle cx="376" cy="620" r="6" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="2"/>
+<circle cx="376" cy="700" r="6" fill="var(--outfit-accent, #ece4d0)" stroke="var(--outline, #2b1d18)" stroke-width="2"/>
+<path d="M290 650 L340 650 L340 700 L290 700 Z M510 650 L460 650 L460 700 L510 700 Z" fill="none" stroke="var(--outfit-shade, #1a3e3b)" stroke-width="4" stroke-linejoin="round"/>
+</svg>

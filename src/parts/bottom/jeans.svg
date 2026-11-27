@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">
+<!-- every bottom starts at the waist (y 740) so any top covers the join -->
+<path d="M276 740 L524 740 L526 1085 L406 1085 L400 885 L394 1085 L274 1085 Z" fill="var(--pants, #3e5f8f)" stroke="var(--outline, #2b1d18)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M400 892 L394 1080 L374 1080 L392 900 Z M400 892 L406 1080 L426 1080 L408 900 Z" fill="var(--pants-shade, #283e5d)"/>
+<path d="M277 742 L523 742 L523 764 L277 764 Z" fill="var(--pants-shade, #283e5d)" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M400 790 L400 880" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="4" stroke-linecap="round"/>
+<path d="M300 808 Q336 818 350 790 M500 808 Q464 818 450 790" fill="none" stroke="var(--outline, #2b1d18)" stroke-width="3" stroke-linecap="round"/>
+</svg>
