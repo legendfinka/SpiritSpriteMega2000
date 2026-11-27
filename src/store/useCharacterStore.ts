@@ -9,23 +9,43 @@ import {
 } from '../canvas/colors';
 import { expressionNameError, toExpressionName, uniqueExpressionName } from '../expressions/names';
 import { takenExpressionIds } from '../expressions/presets';
-import type { Character, ColorToken, Expression, ExpressionId, Hex, Slot } from '../types';
+import type { Character, ColorToken, Expression, ExpressionId, Hex, Part, Slot } from '../types';
+import {
+  type CastState,
+  castWithActive,
+  freshCast,
+  MAX_CAST,
+  newMemberId,
+  restoreCast,
+  uniqueCharacterName,
+} from './cast';
 import { createDefaultCharacter } from './defaultCharacter';
-import { parseCharacter } from './parseCharacter';
 
 export const STORAGE_KEY = 'spirit-sprite-character';
 const HISTORY_LIMIT = 100;
 // edits with the same key this close together become one undo step (colour drags, typing)
 const MERGE_MS = 1000;
+// slots that can't be empty; a removed upload falls back to the default part
+const REQUIRED_SLOTS: readonly Slot[] = ['body', 'face', 'eyes', 'brows', 'mouth'];
 
 export type ExpressionPatch = Partial<Pick<Expression, 'eyes' | 'brows' | 'mouth' | 'extras'>>;
 
-interface CharacterState {
-  character: Character;
-  past: Character[];
-  future: Character[];
+interface CharacterState extends CastState {
+  /** whole-cast snapshots, so undo also covers adding and removing characters */
+  past: CastState[];
+  future: CastState[];
   undo: () => void;
   redo: () => void;
+  /** switches characters; not an undo step */
+  selectCharacter: (id: string) => void;
+  /** adds a copy of `character` (or a default one) and selects it */
+  addCharacter: (character?: Character) => void;
+  duplicateCharacter: () => void;
+  /** the last one can't go */
+  removeCharacter: (id: string) => void;
+  addCustomPart: (part: Part) => void;
+  /** also swaps it out wherever it's used */
+  removeCustomPart: (id: string) => void;
   setName: (name: string) => void;
   /** undefined empties the slot */
   setPart: (slot: Slot, partId: string | undefined) => void;
@@ -52,6 +72,12 @@ export const useCharacterStore = create<CharacterState>()(
       let lastKey: string | undefined;
       let lastTime = 0;
 
+      const snapshot = ({ character, cast, activeId }: CastState): CastState => ({
+        character,
+        cast,
+        activeId,
+      });
+
       // every edit goes through here so it lands in the undo history
       const commit = (next: (c: Character) => Character, mergeKey?: string) =>
         set((state) => {
@@ -63,10 +89,33 @@ export const useCharacterStore = create<CharacterState>()(
           lastTime = now;
           return {
             character,
-            past: merge ? state.past : [...state.past, state.character].slice(-HISTORY_LIMIT),
+            past: merge ? state.past : [...state.past, snapshot(state)].slice(-HISTORY_LIMIT),
             future: [],
           };
         });
+
+      // adding/removing characters: also undoable
+      const commitCast = (next: (s: CastState) => CastState | null) =>
+        set((state) => {
+          const result = next(state);
+          if (!result) return state;
+          lastKey = undefined;
+          return {
+            ...result,
+            past: [...state.past, snapshot(state)].slice(-HISTORY_LIMIT),
+            future: [],
+          };
+        });
+
+      const addMember = (s: CastState, character: Character): CastState | null => {
+        if (s.cast.length >= MAX_CAST) return null;
+        const cast = castWithActive(s);
+        const member = {
+          id: newMemberId(),
+          character: { ...character, name: uniqueCharacterName(character.name, cast) },
+        };
+        return { cast: [...cast, member], activeId: member.id, character: member.character };
+      };
 
       const update = (change: (c: Character) => Partial<Character>, mergeKey?: string) =>
         commit((c) => {
@@ -76,7 +125,7 @@ export const useCharacterStore = create<CharacterState>()(
         }, mergeKey);
 
       return {
-        character: createDefaultCharacter(),
+        ...freshCast(),
         past: [],
         future: [],
         undo: () => {
@@ -84,7 +133,7 @@ export const useCharacterStore = create<CharacterState>()(
           set((s) => {
             const prev = s.past.at(-1);
             if (!prev) return s;
-            return { character: prev, past: s.past.slice(0, -1), future: [s.character, ...s.future] };
+            return { ...prev, past: s.past.slice(0, -1), future: [snapshot(s), ...s.future] };
           });
         },
         redo: () => {
@@ -92,15 +141,67 @@ export const useCharacterStore = create<CharacterState>()(
           set((s) => {
             const [next, ...rest] = s.future;
             if (!next) return s;
-            return { character: next, past: [...s.past, s.character], future: rest };
+            return { ...next, past: [...s.past, snapshot(s)], future: rest };
           });
         },
+        selectCharacter: (id) => {
+          lastKey = undefined;
+          set((s) => {
+            const member = s.cast.find((m) => m.id === id);
+            if (!member || id === s.activeId) return s;
+            return { cast: castWithActive(s), activeId: id, character: member.character };
+          });
+        },
+        addCharacter: (character = createDefaultCharacter()) =>
+          commitCast((s) => addMember(s, character)),
+        duplicateCharacter: () => commitCast((s) => addMember(s, s.character)),
+        removeCharacter: (id) =>
+          commitCast((s) => {
+            if (s.cast.length <= 1) return null;
+            const cast = castWithActive(s);
+            const i = cast.findIndex((m) => m.id === id);
+            if (i < 0) return null;
+            const rest = cast.filter((m) => m.id !== id);
+            if (id !== s.activeId) return { character: s.character, cast: rest, activeId: s.activeId };
+            // select the neighbour
+            const next = rest[Math.min(i, rest.length - 1)] ?? rest[0];
+            return next ? { cast: rest, activeId: next.id, character: next.character } : null;
+          }),
+        addCustomPart: (part) => update((c) => ({ customParts: [...(c.customParts ?? []), part] })),
+        removeCustomPart: (id) =>
+          update((c) => {
+            const fallback = createDefaultCharacter().parts;
+            const parts = { ...c.parts };
+            for (const slot of Object.keys(parts) as Slot[]) {
+              if (parts[slot] !== id) continue;
+              if (REQUIRED_SLOTS.includes(slot)) parts[slot] = fallback[slot];
+              else delete parts[slot];
+            }
+            const rest = (c.customParts ?? []).filter((p) => p.id !== id);
+            return {
+              parts,
+              customParts: rest.length > 0 ? rest : undefined,
+              customExpressions: c.customExpressions.map((e) => ({
+                ...e,
+                eyes: e.eyes === id ? (fallback.eyes ?? e.eyes) : e.eyes,
+                brows: e.brows === id ? (fallback.brows ?? e.brows) : e.brows,
+                mouth: e.mouth === id ? (fallback.mouth ?? e.mouth) : e.mouth,
+                extras: e.extras?.filter((x) => x !== id),
+              })),
+            };
+          }),
         setName: (name) => update(() => ({ name }), 'name'),
         setPart: (slot, partId) =>
           update((c) => {
             const parts = { ...c.parts };
             if (partId === undefined) delete parts[slot];
             else parts[slot] = partId;
+            // a one-piece replaces top and bottom, and the other way round
+            if (partId && slot === 'outfit') {
+              delete parts.top;
+              delete parts.bottom;
+            }
+            if (partId && (slot === 'top' || slot === 'bottom')) delete parts.outfit;
             return { parts };
           }),
         setColor: (token, hex) =>
@@ -171,13 +272,15 @@ export const useCharacterStore = create<CharacterState>()(
     },
     {
       name: STORAGE_KEY,
-      version: 1,
+      // 1: one character, 2: the cast. restoreCast reads both
+      version: 2,
+      migrate: (persisted) => persisted,
       storage: createJSONStorage(() => localStorage),
-      partialize: ({ character }) => ({ character }),
+      partialize: (s) => ({ cast: castWithActive(s), activeId: s.activeId }),
       // skip saved data that isn't a character
       merge: (persisted, current) => {
-        const saved = parseCharacter((persisted as { character?: unknown } | undefined)?.character);
-        return saved ? { ...current, character: saved } : current;
+        const saved = restoreCast(persisted);
+        return saved ? { ...current, ...saved } : current;
       },
     },
   ),

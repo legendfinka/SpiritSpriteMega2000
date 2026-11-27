@@ -6,7 +6,8 @@ export function createDefaultCharacter(): Character {
     name: 'guy',
     parts: {
       body: 'body/base-male',
-      outfit: 'outfit/jacket-jeans',
+      bottom: 'bottom/jeans',
+      top: 'top/jacket',
       hairBack: 'hair-back/short',
       face: 'face/oval',
       eyes: 'eyes/normal',

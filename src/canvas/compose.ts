@@ -1,4 +1,4 @@
-import { getPart as registryGetPart } from '../parts/registry';
+import { findPart } from '../parts/customParts';
 import type { Character, Expression, Part, Slot } from '../types';
 import { LAYER_ORDER } from './layerOrder';
 
@@ -31,7 +31,8 @@ export function resolvePartIds(
 export function composeLayers(
   character: Character,
   expression?: Expression,
-  getPart: (id: string) => Part | undefined = registryGetPart,
+  // bundled parts and the character's own uploads
+  getPart: (id: string) => Part | undefined = (id) => findPart(character, id),
 ): Layer[] {
   const ids = resolvePartIds(character, expression);
   const layers: Layer[] = [];

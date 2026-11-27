@@ -4,13 +4,16 @@ import { createDefaultCharacter } from '../store/defaultCharacter';
 import { parseCharacter } from '../store/parseCharacter';
 import { STARTERS } from '../store/starters';
 import { COLOR_TOKENS } from '../types';
+import { OUTFIT_SPLITS } from './outfitSplits';
 import { getPart, PARTS, partsForSlot, toFragment } from './registry';
 
 describe('library size', () => {
   it.each([
     ['hairFront', 10],
     ['hairBack', 9],
-    ['outfit', 12],
+    ['top', 11],
+    ['bottom', 8],
+    ['outfit', 6],
     ['body', 2],
     ['face', 4],
     ['eyes', 11],
@@ -33,6 +36,21 @@ describe.each(STARTERS.map((s) => [s.label, s] as const))('starter %s', (_label,
   it('is a valid character', () => {
     const character = starter.create();
     expect(parseCharacter(JSON.parse(JSON.stringify(character)))).toEqual(character);
+  });
+
+  it('wears either a one-piece or a top and bottom, not both', () => {
+    const { outfit, top, bottom } = starter.create().parts;
+    expect(outfit && (top || bottom)).toBeFalsy();
+  });
+});
+
+describe('old two-piece outfits', () => {
+  it.each(Object.entries(OUTFIT_SPLITS))('%s becomes a top and a bottom', (old, split) => {
+    expect(getPart(old), 'the old file should be deleted').toBeUndefined();
+    expect(getPart(split.top)?.slot).toBe('top');
+    expect(getPart(split.bottom)?.slot).toBe('bottom');
+    const saved = { ...createDefaultCharacter(), parts: { body: 'body/base-male', outfit: old } };
+    expect(parseCharacter(saved)?.parts).toEqual({ body: 'body/base-male', ...split });
   });
 });
 

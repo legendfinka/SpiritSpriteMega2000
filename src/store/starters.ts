@@ -45,7 +45,8 @@ export const STARTERS: readonly { id: string; label: string; create: () => Chara
         'vika',
         {
           body: 'body/base-female',
-          outfit: 'outfit/school-uniform',
+          top: 'top/blazer',
+          bottom: 'bottom/pleated-skirt',
           hairBack: 'hair-back/ponytail',
           face: 'face/soft',
           hairFront: 'hair-front/side-swept',
@@ -97,7 +98,8 @@ export const STARTERS: readonly { id: string; label: string; create: () => Chara
         'kostya',
         {
           body: 'body/base-male',
-          outfit: 'outfit/sweater-jeans',
+          top: 'top/knit-sweater',
+          bottom: 'bottom/jeans',
           hairBack: 'hair-back/short',
           face: 'face/oval',
           hairFront: 'hair-front/curtains',
@@ -150,7 +152,8 @@ export const STARTERS: readonly { id: string; label: string; create: () => Chara
         'dima',
         {
           body: 'body/base-male',
-          outfit: 'outfit/leather-jacket',
+          top: 'top/leather-jacket',
+          bottom: 'bottom/jeans',
           hairBack: 'hair-back/short',
           face: 'face/sharp',
           hairFront: 'hair-front/pompadour',

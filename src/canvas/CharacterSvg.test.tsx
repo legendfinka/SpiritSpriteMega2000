@@ -11,7 +11,8 @@ describe('CharacterSvg', () => {
       <CharacterSvg character={createDefaultCharacter()} expression={PRESET_EXPRESSIONS.happy} />,
     );
     const slots = [...container.querySelectorAll('svg > g')].map((g) => g.getAttribute('data-slot'));
-    expect(slots).toEqual(LAYER_ORDER.filter((s) => s !== 'accessory'));
+    // the default wears a top and bottom, so no one-piece; and no accessory
+    expect(slots).toEqual(LAYER_ORDER.filter((s) => s !== 'accessory' && s !== 'outfit'));
     expect(container.querySelector('[data-part="eyes/closed-happy"]')).not.toBeNull();
     expect(container.querySelector('[data-part="extras/blush"]')).not.toBeNull();
   });

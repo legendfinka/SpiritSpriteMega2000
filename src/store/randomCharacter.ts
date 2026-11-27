@@ -34,13 +34,19 @@ export function randomCharacter(
 
   const parts: Character['parts'] = {
     body: part('body'),
-    outfit: part('outfit'),
     face: part('face'),
     eyes: pick(CALM_FACE.eyes),
     brows: pick(CALM_FACE.brows),
     mouth: pick(CALM_FACE.mouth),
     hairFront: part('hairFront'),
   };
+  // mostly mix-and-match, sometimes a one-piece
+  if (random() < 0.25) {
+    parts.outfit = part('outfit');
+  } else {
+    parts.top = part('top');
+    parts.bottom = part('bottom');
+  }
   if (random() < 0.8) parts.hairBack = part('hairBack');
   if (random() < 0.35) parts.accessory = part('accessory');
   if (random() < 0.2) parts.extras = pick(LASTING_EXTRAS);

@@ -1,4 +1,4 @@
-import { getPart } from '../parts/registry';
+import { findPart } from '../parts/customParts';
 import type { Character, ColorToken, Expression, Hex } from '../types';
 import { inlineTokens, resolveColors } from './colors';
 import { composeLayers, type Layer, offsetTransform } from './compose';
@@ -75,7 +75,7 @@ export function renderPartsSvgString(
   scale = 1,
 ): string {
   const layers = partIds.flatMap((id) => {
-    const part = getPart(id);
+    const part = findPart(character, id);
     return part ? [{ slot: part.slot, part }] : [];
   });
   return svgDocument(

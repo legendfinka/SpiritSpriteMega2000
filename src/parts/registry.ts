@@ -3,6 +3,8 @@ import type { Part, Slot } from '../types';
 /** folder -> slot */
 export const FOLDER_SLOTS: Record<string, Slot> = {
   body: 'body',
+  bottom: 'bottom',
+  top: 'top',
   outfit: 'outfit',
   'hair-back': 'hairBack',
   face: 'face',

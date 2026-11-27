@@ -1,5 +1,8 @@
 export type Slot =
   | 'body'
+  | 'bottom'
+  | 'top'
+  /** one-piece: dresses, overalls; replaces top and bottom */
   | 'outfit'
   | 'hairBack'
   | 'face'
@@ -66,5 +69,7 @@ export interface Character {
   /** which ones get exported */
   expressions: ExpressionId[];
   customExpressions: Expression[];
+  /** uploaded parts, ids "custom/<slug>"; svg is already sanitised. Older saves have none */
+  customParts?: Part[];
   version: 1;
 }

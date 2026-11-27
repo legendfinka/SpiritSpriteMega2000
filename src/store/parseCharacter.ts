@@ -1,6 +1,10 @@
 import { isHex } from '../canvas/colors';
+import { LAYER_ORDER } from '../canvas/layerOrder';
 import { expressionNameError } from '../expressions/names';
-import type { Character, Expression } from '../types';
+import { CUSTOM_ID_RE, MAX_CUSTOM_PARTS } from '../parts/customParts';
+import { OUTFIT_SPLITS } from '../parts/outfitSplits';
+import { MAX_PART_SVG_LENGTH, sanitizeFragment } from '../parts/sanitizeSvg';
+import type { Character, Expression, Part, Slot } from '../types';
 
 const MAX_CHARACTER_NAME = 100;
 // control characters, plus unicode line (Zl) and paragraph (Zp) separators
@@ -28,11 +32,56 @@ function isExpression(value: unknown): value is Expression {
   );
 }
 
+/** saves from before tops and bottoms: two-piece outfits become a top + bottom */
+function splitOldOutfit(parts: Character['parts']): Character['parts'] {
+  const split = parts.outfit ? OUTFIT_SPLITS[parts.outfit] : undefined;
+  if (!split) return parts;
+  const next = { ...parts, ...split };
+  delete next.outfit;
+  return next;
+}
+
+/** uploaded parts from a save or a stranger's link: svg is sanitised again, never trusted */
+function parseCustomParts(value: unknown): Part[] | null {
+  if (value === undefined) return [];
+  if (!Array.isArray(value) || value.length > MAX_CUSTOM_PARTS) return null;
+  const parts: Part[] = [];
+  for (const item of value) {
+    if (!isRecord(item)) return null;
+    const { id, slot, label, svg } = item;
+    if (
+      typeof id !== 'string' ||
+      !CUSTOM_ID_RE.test(id) ||
+      parts.some((p) => p.id === id) ||
+      typeof slot !== 'string' ||
+      !(LAYER_ORDER as readonly string[]).includes(slot) ||
+      typeof label !== 'string' ||
+      typeof svg !== 'string' ||
+      svg.length > MAX_PART_SVG_LENGTH
+    ) {
+      return null;
+    }
+    try {
+      parts.push({
+        id,
+        slot: slot as Slot,
+        label: label.replace(LINE_BREAKS, ' ').slice(0, 40),
+        svg: sanitizeFragment(svg),
+      });
+    } catch {
+      return null;
+    }
+  }
+  return parts;
+}
+
 /** checks saved/imported data and fills newer fields; null if it's junk */
 export function parseCharacter(value: unknown): Character | null {
   if (!isRecord(value)) return null;
   const { name, parts, colors, expressions, customExpressions = [], version } = value;
+  const customParts = parseCustomParts(value.customParts);
   if (
+    customParts === null ||
     version !== 1 ||
     typeof name !== 'string' ||
     !isRecord(parts) ||
@@ -48,10 +97,12 @@ export function parseCharacter(value: unknown): Character | null {
   return {
     // the name gets pasted into a Ren'Py script, so keep it on one line
     name: name.replace(LINE_BREAKS, ' ').slice(0, MAX_CHARACTER_NAME),
-    parts: parts as Character['parts'],
+    parts: splitOldOutfit(parts as Character['parts']),
     colors: colors as Character['colors'],
     expressions,
     customExpressions,
+    // left out when empty, so older saves round-trip unchanged
+    ...(customParts.length > 0 ? { customParts } : {}),
     version,
   };
 }

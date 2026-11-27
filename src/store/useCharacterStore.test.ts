@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+import { castWithActive, freshCast } from './cast';
 import { createDefaultCharacter } from './defaultCharacter';
 import { STORAGE_KEY, useCharacterStore } from './useCharacterStore';
 
 const state = () => useCharacterStore.getState();
+const names = () => castWithActive(state()).map((m) => m.character.name);
 
 beforeEach(() => {
-  state().resetCharacter();
-  useCharacterStore.setState({ past: [], future: [] });
+  useCharacterStore.setState({ ...freshCast(), past: [], future: [] });
 });
 
 describe('undo / redo', () => {
@@ -62,6 +63,15 @@ describe('undo / redo', () => {
 });
 
 describe('useCharacterStore', () => {
+  it('swaps a one-piece for a top and bottom and back', () => {
+    state().setPart('outfit', 'outfit/dress');
+    expect(state().character.parts).not.toHaveProperty('top');
+    expect(state().character.parts).not.toHaveProperty('bottom');
+    state().setPart('bottom', 'bottom/shorts');
+    expect(state().character.parts).not.toHaveProperty('outfit');
+    expect(state().character.parts.bottom).toBe('bottom/shorts');
+  });
+
   it('sets and empties a slot', () => {
     state().setPart('hairFront', undefined);
     expect(state().character.parts).not.toHaveProperty('hairFront');
@@ -77,10 +87,24 @@ describe('useCharacterStore', () => {
     expect(state().character.colors).toEqual(createDefaultCharacter().colors);
   });
 
-  it('persists the character to localStorage', () => {
+  it('persists the cast to localStorage', () => {
     state().setName('mira');
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
-    expect(saved.state.character.name).toBe('mira');
+    const active = saved.state.cast.find((m: { id: string }) => m.id === saved.state.activeId);
+    expect(active.character.name).toBe('mira');
+  });
+
+  it('restores a saved cast with the same character selected', async () => {
+    const a = { ...createDefaultCharacter(), name: 'a' };
+    const b = { ...createDefaultCharacter(), name: 'b' };
+    const cast = [
+      { id: 'x', character: a },
+      { id: 'y', character: b },
+    ];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ state: { cast, activeId: 'y' }, version: 2 }));
+    await useCharacterStore.persist.rehydrate();
+    expect(state().character.name).toBe('b');
+    expect(names()).toEqual(['a', 'b']);
   });
 
   it('restores a saved character', async () => {
@@ -106,6 +130,79 @@ describe('useCharacterStore', () => {
     await useCharacterStore.persist.rehydrate();
     expect(state().character.name).toBe('old');
     expect(state().character.customExpressions).toEqual([]);
+  });
+});
+
+describe('cast', () => {
+  it('adds, switches and keeps each character’s edits', () => {
+    state().setName('mira');
+    state().addCharacter();
+    expect(names()).toEqual(['mira', 'guy']);
+    state().setName('kostya');
+    const [first] = state().cast;
+    state().selectCharacter(first!.id);
+    expect(state().character.name).toBe('mira');
+    expect(names()).toEqual(['mira', 'kostya']);
+  });
+
+  it('gives copies a name that won’t clash in exports', () => {
+    state().duplicateCharacter();
+    state().duplicateCharacter();
+    expect(names()).toEqual(['guy', 'guy 2', 'guy 3']);
+  });
+
+  it('removes a character, selects a neighbour, and undo brings it back', () => {
+    state().addCharacter({ ...createDefaultCharacter(), name: 'b' });
+    const b = state().activeId;
+    state().removeCharacter(b);
+    expect(names()).toEqual(['guy']);
+    expect(state().character.name).toBe('guy');
+    state().undo();
+    expect(names()).toEqual(['guy', 'b']);
+    expect(state().character.name).toBe('b');
+  });
+
+  it('never removes the last character', () => {
+    state().removeCharacter(state().activeId);
+    expect(names()).toEqual(['guy']);
+    expect(state().past).toEqual([]);
+  });
+
+  it('undo goes back across a switch to the character that changed', () => {
+    state().setName('a');
+    state().addCharacter({ ...createDefaultCharacter(), name: 'b' });
+    state().setName('b2');
+    state().undo();
+    state().undo();
+    expect(state().character.name).toBe('a');
+    expect(names()).toEqual(['a']);
+  });
+
+  it('loads a pre-cast save as a cast of one', async () => {
+    const character = { ...createDefaultCharacter(), name: 'old' };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ state: { character }, version: 1 }));
+    await useCharacterStore.persist.rehydrate();
+    expect(names()).toEqual(['old']);
+  });
+});
+
+describe('custom parts', () => {
+  const hat = { id: 'custom/hat', slot: 'accessory' as const, label: 'Hat', svg: '<path d="M0 0"/>' };
+  const eyes = { id: 'custom/eyes', slot: 'eyes' as const, label: 'Eyes', svg: '<path d="M0 0"/>' };
+
+  it('adds an upload and removes it from everywhere it was used', () => {
+    state().addCustomPart(hat);
+    state().addCustomPart(eyes);
+    state().setPart('accessory', hat.id);
+    state().setPart('eyes', eyes.id);
+    const id = state().addExpression({ id: 'x', eyes: eyes.id, brows: 'brows/neutral', mouth: 'mouth/neutral' });
+
+    state().removeCustomPart(eyes.id);
+    expect(state().character.parts.eyes).toBe('eyes/normal');
+    expect(state().character.customExpressions.find((e) => e.id === id)?.eyes).toBe('eyes/normal');
+    state().removeCustomPart(hat.id);
+    expect(state().character.parts).not.toHaveProperty('accessory');
+    expect(state().character.customParts).toBeUndefined();
   });
 });
 

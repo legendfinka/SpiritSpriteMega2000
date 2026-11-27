@@ -7,6 +7,8 @@ import { LAYER_ORDER, layerIndex } from './layerOrder';
 // tsc fails here if a new Slot isn't listed
 const ALL_SLOTS: Record<Slot, true> = {
   body: true,
+  bottom: true,
+  top: true,
   outfit: true,
   hairBack: true,
   face: true,
@@ -92,6 +94,14 @@ describe('composeLayers', () => {
       .filter((l) => l.slot === 'extras')
       .map((l) => l.part.id);
     expect(extras).toEqual(['extras/freckles', 'extras/blush']);
+  });
+
+  it("draws the character's uploaded parts in their slot", () => {
+    const hat = { id: 'custom/hat', slot: 'accessory' as const, label: 'Hat', svg: '<path d="M0 0"/>' };
+    const c = { ...character({ body: 'body/base-male', accessory: hat.id }), customParts: [hat] };
+    expect(composeLayers(c).map((l) => l.part.id)).toEqual(['body/base-male', 'custom/hat']);
+    // another character doesn't have it
+    expect(composeLayers({ ...c, customParts: [] }).map((l) => l.part.id)).toEqual(['body/base-male']);
   });
 
   it('skips unknown part ids instead of throwing', () => {

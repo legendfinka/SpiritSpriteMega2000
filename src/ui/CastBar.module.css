@@ -1,0 +1,79 @@
+/* mailboxes in the stairwell: one per tenant */
+.bar {
+  composes: rough-slab from global;
+  --slab-bg: var(--noise), var(--slab-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  align-items: center;
+  padding: 0.2rem 0.8rem;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.members {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.2rem 0.1rem 0.3rem;
+  overflow-x: auto;
+}
+
+.member {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.15rem 0.55rem 0.15rem 0.2rem;
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.member[aria-pressed='true'] {
+  color: var(--line);
+  background: var(--lit);
+  box-shadow: 2px 2px 0 var(--teal);
+}
+
+.head {
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: var(--tile-a);
+  border: 2px solid var(--line);
+  border-radius: 50%;
+}
+
+.name {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.actions button {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.warning {
+  flex-basis: 100%;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--brick);
+}
