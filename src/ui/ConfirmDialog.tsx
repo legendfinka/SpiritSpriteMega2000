@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { t } from '../i18n';
 import styles from './ConfirmDialog.module.css';
 
 interface ConfirmDialogProps {
@@ -16,8 +17,8 @@ export function ConfirmDialog({
   title,
   children,
   onConfirm,
-  confirmLabel = 'OK',
-  cancelLabel = onConfirm ? 'Cancel' : 'OK',
+  confirmLabel = t('common.ok'),
+  cancelLabel = t(onConfirm ? 'common.cancel' : 'common.ok'),
   onCancel,
 }: ConfirmDialogProps) {
   const cancel = useRef<HTMLButtonElement>(null);

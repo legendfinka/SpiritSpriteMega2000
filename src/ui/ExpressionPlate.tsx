@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import { MAX_NAME_LENGTH } from '../expressions/names';
+import { expressionLabel, t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
 import type { Expression, ExpressionId } from '../types';
 import { ConfirmDialog } from './ConfirmDialog';
@@ -41,11 +42,11 @@ export function ExpressionPlate({ expression, custom, onActiveChange }: Expressi
 
   return (
     <div className={styles.plate}>
-      <span className={styles.plateLabel}>Expression</span>
+      <span className={styles.plateLabel}>{t('expr.heading')}</span>
       {custom ? (
         <input
           className={styles.plateInput}
-          aria-label="Expression name"
+          aria-label={t('expr.name')}
           value={draft}
           maxLength={MAX_NAME_LENGTH}
           aria-invalid={error !== null}
@@ -65,7 +66,7 @@ export function ExpressionPlate({ expression, custom, onActiveChange }: Expressi
         />
       ) : (
         <strong className={styles.plateName}>
-          {expression.id} <small>preset</small>
+          {expressionLabel(expression.id)} <small>{t('expr.preset')}</small>
         </strong>
       )}
       {error && (
@@ -75,24 +76,24 @@ export function ExpressionPlate({ expression, custom, onActiveChange }: Expressi
       )}
       <div className={styles.plateButtons}>
         <button type="button" onClick={() => onActiveChange(addExpression(expression))}>
-          Duplicate
+          {t('common.duplicate')}
         </button>
         {custom && (
           <button type="button" onClick={() => setDeleting(true)}>
-            Delete
+            {t('common.delete')}
           </button>
         )}
       </div>
       {deleting && (
         <ConfirmDialog
-          title="Delete expression?"
-          confirmLabel="Delete"
-          cancelLabel="Keep"
+          title={t('expr.deleteTitle')}
+          confirmLabel={t('common.delete')}
+          cancelLabel={t('common.keep')}
           onConfirm={remove}
           onCancel={() => setDeleting(false)}
         >
-          <p>“{expression.id}” will be gone.</p>
-          <small>Undo brings it back.</small>
+          <p>{t('expr.deleteText', { id: expression.id })}</p>
+          <small>{t('expr.deleteHint')}</small>
         </ConfirmDialog>
       )}
     </div>

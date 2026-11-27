@@ -67,6 +67,8 @@
   flex: 1;
   place-items: center;
   min-height: 0;
+  /* room for the tape, so it never sticks over the toolbar */
+  padding-top: 14px;
   container-type: size;
 }
 

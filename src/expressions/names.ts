@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 // ids end up in Ren'Py and file names, so: one lowercase word
 const NAME_RE = /^[a-z][a-z0-9_]*$/;
 export const MAX_NAME_LENGTH = 32;
@@ -14,9 +16,9 @@ export function toExpressionName(raw: string): string {
 
 /** error message, or null if it's fine */
 export function expressionNameError(name: string, taken: readonly string[]): string | null {
-  if (name === '') return 'Enter a name';
-  if (!NAME_RE.test(name)) return 'Must start with a letter';
-  if (taken.includes(name)) return 'Name already used';
+  if (name === '') return t('error.nameEmpty');
+  if (!NAME_RE.test(name)) return t('error.nameLetter');
+  if (taken.includes(name)) return t('error.nameTaken');
   return null;
 }
 

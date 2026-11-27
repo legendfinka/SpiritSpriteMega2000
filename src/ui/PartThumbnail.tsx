@@ -16,8 +16,17 @@ export const PartThumbnail = memo(function PartThumbnail({ part, colors }: PartT
     const base = createDefaultCharacter();
     const parts = { ...base.parts, [part.slot]: part.id };
     // bodies all look alike under a jacket
-    if (part.slot === 'body') delete parts.outfit;
-    return { ...base, parts, colors };
+    if (part.slot === 'body') {
+      delete parts.top;
+      delete parts.bottom;
+    }
+    // a one-piece is worn alone
+    if (part.slot === 'outfit') {
+      delete parts.top;
+      delete parts.bottom;
+    }
+    // an upload only exists on the character that owns it, so bring it along
+    return { ...base, parts, colors, customParts: [part] };
   }, [part, colors]);
 
   return (

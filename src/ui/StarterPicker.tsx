@@ -1,3 +1,4 @@
+import { type MessageKey, t } from '../i18n';
 import { STARTERS } from '../store/starters';
 import { useCharacterStore } from '../store/useCharacterStore';
 
@@ -11,21 +12,24 @@ export function StarterPicker({ onPicked }: StarterPickerProps) {
 
   return (
     <select
-      aria-label="Start from"
+      aria-label={t('starter.label')}
       value=""
       onChange={(e) => {
         const starter = STARTERS.find((s) => s.id === e.target.value);
         if (!starter) return;
-        loadCharacter(starter.create());
+        // keep this character's uploads, they'd be lost otherwise
+        const { customParts } = useCharacterStore.getState().character;
+        loadCharacter({ ...starter.create(), customParts });
         onPicked?.();
       }}
     >
       <option value="" disabled>
-        Start from…
+        {t('starter.placeholder')}
       </option>
       {STARTERS.map((s) => (
         <option key={s.id} value={s.id}>
-          {s.label}
+          {/* a test keeps a message for every starter */}
+          {t(`starter.${s.id}` as MessageKey)}
         </option>
       ))}
     </select>

@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { type ImageFormat, MIME_TYPES } from './fileNames';
 
 /** SVG -> Image -> canvas -> Blob, browser only */
@@ -12,14 +13,16 @@ export async function svgToImage(svg: string, format: ImageFormat = 'png'): Prom
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas is not available in this browser');
+    if (!ctx) throw new Error(t('error.noCanvas'));
     ctx.drawImage(img, 0, 0);
 
     const type = MIME_TYPES[format];
     const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, type, 0.95));
-    if (!blob) throw new Error('Could not create the image');
+    if (!blob) throw new Error(t('error.noImage'));
     // no WebP encoder? the browser quietly hands back PNG
-    if (blob.type !== type) throw new Error(`This browser can't save ${format.toUpperCase()}. Try PNG.`);
+    if (blob.type !== type) {
+      throw new Error(t('error.noFormat', { format: format.toUpperCase() }));
+    }
     return blob;
   } finally {
     URL.revokeObjectURL(url);

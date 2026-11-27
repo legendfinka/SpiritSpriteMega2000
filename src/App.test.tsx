@@ -2,6 +2,8 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from './App';
 import { shareHash } from './export/shareLink';
+import { LANG_KEY } from './i18n';
+import { freshCast } from './store/cast';
 import { THEME_KEY } from './ui/theme';
 import { useCharacterStore } from './store/useCharacterStore';
 
@@ -9,9 +11,10 @@ const character = () => useCharacterStore.getState().character;
 const strip = () => within(screen.getByRole('contentinfo'));
 const preview = () => screen.getByRole('img', { name: 'Preview' });
 
+const cast = () => within(screen.getByRole('navigation', { name: 'Cast' }));
+
 beforeEach(() => {
-  useCharacterStore.getState().resetCharacter();
-  useCharacterStore.setState({ past: [], future: [] });
+  useCharacterStore.setState({ ...freshCast(), past: [], future: [] });
 });
 
 describe('shortcuts and history', () => {
@@ -111,18 +114,67 @@ describe('quick wins', () => {
     return within(screen.getByRole('alertdialog', { name: 'Shared character' }));
   };
 
-  it('asks before opening a shared link, then clears the hash', () => {
+  it('asks before adding a shared character to the cast, then clears the hash', () => {
     const dialog = openLink();
     expect(window.location.hash).toBe('');
     expect(character().name).toBe('guy');
-    fireEvent.click(dialog.getByRole('button', { name: 'Open it' }));
+    fireEvent.click(dialog.getByRole('button', { name: 'Add to cast' }));
     expect(character().name).toBe('friend');
+    // yours is still there
+    expect(cast().getByRole('button', { name: /guy/ })).toBeInTheDocument();
   });
 
-  it('keeps your character if you say so', () => {
-    fireEvent.click(openLink().getByRole('button', { name: 'Keep mine' }));
+  it('leaves the cast alone if you say so', () => {
+    fireEvent.click(openLink().getByRole('button', { name: 'Not now' }));
     expect(character().name).toBe('guy');
+    expect(useCharacterStore.getState().cast).toHaveLength(1);
     expect(screen.queryByRole('alertdialog')).toBeNull();
+  });
+
+  it('adds, switches and removes cast members', () => {
+    render(<App />);
+    fireEvent.click(cast().getByRole('button', { name: 'New character' }));
+    expect(character().name).toBe('guy 2');
+    fireEvent.click(cast().getByRole('button', { name: /^guy$/ }));
+    expect(character().name).toBe('guy');
+
+    fireEvent.click(cast().getByRole('button', { name: 'Remove character' }));
+    fireEvent.click(
+      within(screen.getByRole('alertdialog')).getByRole('button', { name: 'Remove' }),
+    );
+    expect(useCharacterStore.getState().cast).toHaveLength(1);
+    expect(character().name).toBe('guy 2');
+    expect(cast().getByRole('button', { name: 'Remove character' })).toBeDisabled();
+  });
+
+  it('puts another cast member on stage in the scene view', () => {
+    useCharacterStore.getState().addCharacter({ ...character(), name: 'mira' });
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: 'scene' }));
+    expect(screen.queryAllByTestId('scene-companion')).toHaveLength(0);
+    fireEvent.click(screen.getByRole('button', { name: '+ guy' }));
+    expect(screen.getAllByTestId('scene-companion')).toHaveLength(1);
+  });
+
+  it('switches the whole interface to Ukrainian and Russian and back', () => {
+    render(<App />);
+    const pickLanguage = (name: string) =>
+      fireEvent.click(screen.getByRole('button', { name }));
+
+    pickLanguage('Українська');
+    expect(screen.getByRole('button', { name: 'Випадково' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Очі' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Скуйовджена чубка' })).toBeInTheDocument();
+    // preset names are translated on screen
+    expect(strip().getByText('радість')).toBeInTheDocument();
+
+    pickLanguage('Русский');
+    expect(screen.getByRole('tab', { name: 'Глаза' })).toBeInTheDocument();
+
+    pickLanguage('English');
+    expect(screen.getByRole('tab', { name: 'Eyes' })).toBeInTheDocument();
+    expect(strip().getByText('happy')).toBeInTheDocument();
+    localStorage.removeItem(LANG_KEY);
   });
 
   it('switches day and night and remembers the choice', () => {

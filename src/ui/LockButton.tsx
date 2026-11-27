@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface LockButtonProps {
   locked: boolean;
   onToggle: () => void;
@@ -8,9 +10,9 @@ export function LockButton({ locked, onToggle }: LockButtonProps) {
   return (
     <button
       type="button"
-      aria-label="Keep name on Random"
+      aria-label={t('lock.label')}
       aria-pressed={locked}
-      title={locked ? 'Name stays when you press Random' : 'Random picks a new name too'}
+      title={t(locked ? 'lock.on' : 'lock.off')}
       onClick={onToggle}
     >
       <svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true">

@@ -1,6 +1,7 @@
 import { resolvePartIds } from '../canvas/compose';
 import { SIDE_CROP, SIDE_ZOOM } from '../canvas/svgString';
-import { getPart } from '../parts/registry';
+import { t } from '../i18n';
+import { findPart } from '../parts/customParts';
 import type { Character, Expression, Slot } from '../types';
 import { toImageTag } from './fileNames';
 
@@ -58,8 +59,6 @@ export interface LayeredPlan {
   script: string;
 }
 
-const known = (ids: readonly string[] | undefined) => (ids ?? []).filter((id) => getPart(id));
-
 export function layeredPlan(
   character: Character,
   expressions: readonly Expression[],
@@ -67,11 +66,13 @@ export function layeredPlan(
 ): LayeredPlan {
   for (const { id } of expressions) {
     if (RESERVED_IDS.has(id)) {
-      throw new Error(`Rename the “${id}” expression: Ren'Py uses that word in layered images.`);
+      throw new Error(t('error.layeredName', { id }));
     }
   }
 
   const tag = toImageTag(character.name);
+  const known = (ids: readonly string[] | undefined) =>
+    (ids ?? []).filter((id) => findPart(character, id));
   const own = resolvePartIds(character);
   const images = new Map<string, LayerImage>();
   const image = (name: string, partIds: string[]): LayerImage => {
@@ -98,7 +99,7 @@ export function layeredPlan(
   };
 
   // LAYER_ORDER, with neighbouring fixed slots merged into one image
-  always('base', ['hairBack', 'body', 'outfit', 'face']);
+  always('base', ['hairBack', 'body', 'bottom', 'top', 'outfit', 'face']);
   group('eyes');
   group('brows');
   always('hair', ['hairFront']);

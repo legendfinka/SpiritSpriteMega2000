@@ -6,28 +6,11 @@ import {
   resolveColors,
 } from '../canvas/colors';
 import { SWATCHES } from '../canvas/palettes';
+import { t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
-import type { ColorToken } from '../types';
+import { COLOR_TOKENS } from '../types';
 import styles from './ColorPanel.module.css';
 import { Swatches } from './Swatches';
-
-const TOKEN_LABELS: Record<ColorToken, string> = {
-  skin: 'Skin',
-  'skin-shade': 'Skin shade',
-  hair: 'Hair',
-  'hair-shade': 'Hair shade',
-  'hair-hi': 'Hair highlight',
-  iris: 'Eyes',
-  'outfit-main': 'Outfit',
-  'outfit-shade': 'Outfit shade',
-  'outfit-accent': 'Outfit accent',
-  pants: 'Pants',
-  'pants-shade': 'Pants shade',
-  outline: 'Outline',
-};
-
-// shown in the order above
-const TOKENS = Object.keys(TOKEN_LABELS) as ColorToken[];
 
 export function ColorPanel() {
   const colors = useCharacterStore((s) => s.character.colors);
@@ -37,10 +20,11 @@ export function ColorPanel() {
   const resolved = useMemo(() => resolveColors(colors), [colors]);
 
   return (
-    <section className={styles.panel} aria-label="Colours">
-      <h2 className={styles.heading}>Colours</h2>
+    <section className={styles.panel} aria-label={t('colors.title')}>
+      <h2 className={styles.heading}>{t('colors.title')}</h2>
       <div className={styles.list}>
-        {TOKENS.map((token) => {
+        {COLOR_TOKENS.map((token) => {
+          const name = t(`color.${token}`);
           const derived = isDerivedToken(token);
           const changed = derived
             ? colors[token] !== undefined
@@ -55,24 +39,24 @@ export function ColorPanel() {
                     value={resolved[token]}
                     onChange={(e) => setColor(token, e.target.value)}
                   />
-                  {TOKEN_LABELS[token]}
+                  {name}
                 </label>
                 {changed ? (
                   <button
                     type="button"
                     className={styles.reset}
-                    aria-label={`Reset ${TOKEN_LABELS[token]}`}
+                    aria-label={t('colors.reset', { name })}
                     onClick={() => resetColor(token)}
                   >
-                    Reset
+                    {t('common.reset')}
                   </button>
                 ) : (
-                  derived && <span className={styles.auto}>auto</span>
+                  derived && <span className={styles.auto}>{t('colors.auto')}</span>
                 )}
               </div>
               {swatches && (
                 <Swatches
-                  name={TOKEN_LABELS[token]}
+                  name={name}
                   swatches={swatches}
                   current={resolved}
                   onPick={applyColors}

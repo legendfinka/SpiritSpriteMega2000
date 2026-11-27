@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useSyncExternalStore } from 'react';
 import { characterFromHash } from '../export/shareLink';
+import { t } from '../i18n';
+import { MAX_CAST } from '../store/cast';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { ConfirmDialog } from './ConfirmDialog';
 import {
@@ -13,9 +15,11 @@ interface SharedLinkPromptProps {
   onOpened: () => void;
 }
 
-/** asks first: opening a link replaces the saved character */
+/** asks first, then adds the shared character to the cast */
 export function SharedLinkPrompt({ onOpened }: SharedLinkPromptProps) {
   const loadCharacter = useCharacterStore((s) => s.loadCharacter);
+  const addCharacter = useCharacterStore((s) => s.addCharacter);
+  const full = useCharacterStore((s) => s.cast.length >= MAX_CAST);
   const hash = useSyncExternalStore(subscribeShareLink, pendingShareHash);
   // null = broken link
   const incoming = useMemo(() => (hash === null ? null : characterFromHash(hash)), [hash]);
@@ -26,27 +30,30 @@ export function SharedLinkPrompt({ onOpened }: SharedLinkPromptProps) {
 
   if (incoming === null) {
     return (
-      <ConfirmDialog title="Broken link" onCancel={dismissShareLink}>
-        <p>That share link doesn&rsquo;t hold a character.</p>
-        <small>It may have been cut off while copying.</small>
+      <ConfirmDialog title={t('shared.brokenTitle')} onCancel={dismissShareLink}>
+        <p>{t('shared.brokenText')}</p>
+        <small>{t('shared.brokenHint')}</small>
       </ConfirmDialog>
     );
   }
 
+  const name = incoming.name || t('common.unnamed');
   return (
     <ConfirmDialog
-      title="Shared character"
-      confirmLabel="Open it"
-      cancelLabel="Keep mine"
+      title={t('shared.title')}
+      confirmLabel={t('shared.add')}
+      cancelLabel={t('shared.later')}
       onCancel={dismissShareLink}
       onConfirm={() => {
-        loadCharacter(incoming);
+        // a full cast can't take more; replace the selected character instead
+        if (full) loadCharacter(incoming);
+        else addCharacter(incoming);
         onOpened();
         dismissShareLink();
       }}
     >
-      <p>Open &ldquo;{incoming.name || 'unnamed'}&rdquo;? It replaces your current character.</p>
-      <small>Undo brings yours back, until you reload the page.</small>
+      <p>{t(full ? 'shared.replace' : 'shared.question', { name })}</p>
+      <small>{t('shared.hint')}</small>
     </ConfirmDialog>
   );
 }

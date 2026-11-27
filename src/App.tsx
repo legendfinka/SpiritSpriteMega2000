@@ -7,14 +7,17 @@ import {
   isPresetId,
   listExpressions,
 } from './expressions/presets';
+import { t, useLang } from './i18n';
 import { randomCharacter } from './store/randomCharacter';
 import { useCharacterStore } from './store/useCharacterStore';
 import type { ExpressionId, Slot } from './types';
+import { CastBar } from './ui/CastBar';
 import { CharacterFileButtons } from './ui/CharacterFileButtons';
 import { ColorPanel } from './ui/ColorPanel';
 import { ConfirmDialog } from './ui/ConfirmDialog';
 import { ExportDialog } from './ui/ExportDialog';
 import { ExpressionStrip } from './ui/ExpressionStrip';
+import { LanguagePicker } from './ui/LanguagePicker';
 import { LockButton } from './ui/LockButton';
 import { type FaceTarget, PartPicker } from './ui/PartPicker';
 import { FACE_SLOTS } from './ui/slots';
@@ -38,6 +41,8 @@ export function App() {
   const [exporting, setExporting] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [theme, toggleTheme] = useTheme();
+  // subscribed here so everything below redraws in the new language
+  useLang();
   // locked by default: Random keeps the name you typed
   const [nameLocked, setNameLocked] = useState(true);
 
@@ -87,11 +92,12 @@ export function App() {
             </span>
           </h1>
         </div>
+        <LanguagePicker />
         <button
           type="button"
           className={styles.themeButton}
-          aria-label={theme === 'night' ? 'Switch to day' : 'Switch to night'}
-          title={theme === 'night' ? 'Day mode' : 'Night mode'}
+          aria-label={t(theme === 'night' ? 'header.toDay' : 'header.toNight')}
+          title={t(theme === 'night' ? 'header.dayMode' : 'header.nightMode')}
           onClick={toggleTheme}
         >
           {/* ︎: draw as text, not a colour emoji */}
@@ -99,7 +105,7 @@ export function App() {
         </button>
         <div className={styles.nameField}>
           <label className={styles.control}>
-            Name
+            {t('header.name')}
             <input value={character.name} onChange={(e) => setName(e.target.value)} />
           </label>
           <LockButton locked={nameLocked} onToggle={() => setNameLocked(!nameLocked)} />
@@ -107,8 +113,8 @@ export function App() {
         <div className={styles.history}>
           <button
             type="button"
-            aria-label="Undo"
-            title={`Undo (${MOD}+Z)`}
+            aria-label={t('header.undo')}
+            title={`${t('header.undo')} (${MOD}+Z)`}
             disabled={!canUndo}
             onClick={undo}
           >
@@ -116,8 +122,8 @@ export function App() {
           </button>
           <button
             type="button"
-            aria-label="Redo"
-            title={`Redo (${MOD}+Shift+Z)`}
+            aria-label={t('header.redo')}
+            title={`${t('header.redo')} (${MOD}+Shift+Z)`}
             disabled={!canRedo}
             onClick={redo}
           >
@@ -126,17 +132,17 @@ export function App() {
         </div>
         <button
           type="button"
-          title="Random look and colours"
+          title={t('header.randomHint')}
           onClick={() => {
             const current = useCharacterStore.getState().character;
             loadCharacter(randomCharacter(current, Math.random, { name: !nameLocked }));
             setActiveId('neutral');
           }}
         >
-          Random
+          {t('header.random')}
         </button>
         <button type="button" onClick={() => setResetting(true)}>
-          Reset
+          {t('common.reset')}
         </button>
         <StarterPicker onPicked={() => setActiveId('neutral')} />
         <CharacterFileButtons onLoaded={() => setActiveId('neutral')} />
@@ -144,19 +150,19 @@ export function App() {
         <button
           type="button"
           className={styles.exportButton}
-          title={`Export (${MOD}+E)`}
+          title={`${t('header.export')} (${MOD}+E)`}
           onClick={() => setExporting(true)}
         >
-          Export ▸
+          {t('header.export')} ▸
         </button>
       </header>
       <SharedLinkPrompt onOpened={() => setActiveId('neutral')} />
       {exporting && <ExportDialog active={active} onClose={() => setExporting(false)} />}
       {resetting && (
         <ConfirmDialog
-          title="Start over?"
-          confirmLabel="Reset"
-          cancelLabel="Keep"
+          title={t('reset.title')}
+          confirmLabel={t('common.reset')}
+          cancelLabel={t('common.keep')}
           onCancel={() => setResetting(false)}
           onConfirm={() => {
             resetCharacter();
@@ -164,10 +170,14 @@ export function App() {
             setResetting(false);
           }}
         >
-          <p>{character.name || 'This character'} goes back to the default.</p>
-          <small>Changed your mind later? Undo brings it back.</small>
+          <p>{t('reset.text', { name: character.name || t('reset.thisCharacter') })}</p>
+          <small>{t('reset.hint')}</small>
         </ConfirmDialog>
       )}
+
+      <div className={styles.cast}>
+        <CastBar onSwitched={() => setActiveId('neutral')} />
+      </div>
 
       <main className={styles.main}>
         <PartPicker slot={slot} onSlotChange={changeSlot} faceTarget={faceTarget} />

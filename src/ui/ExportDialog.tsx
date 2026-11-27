@@ -10,6 +10,7 @@ import {
 import { type ImageFormat, spriteFileName, zipFileName } from '../export/fileNames';
 import { svgToImage, svgToImageBytes } from '../export/svgToPng';
 import { listExpressions } from '../expressions/presets';
+import { expressionLabel, t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
 import type { Expression } from '../types';
 import styles from './ExportDialog.module.css';
@@ -96,14 +97,14 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
       );
       const name = zipFileName(character.name);
       downloadBlob(new Blob([bytes], { type: 'application/zip' }), name);
-      return `Saved ${name}`;
+      return t('export.saved', { name });
     });
 
   const exportOne = () =>
     run(async () => {
       const svg = renderSvgString(character, active, options.scale);
       downloadBlob(await svgToImage(svg, options.format), singleName);
-      return `Saved ${singleName}`;
+      return t('export.saved', { name: singleName });
     });
 
   return (
@@ -122,12 +123,12 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
         tabIndex={-1}
       >
         <h2 id={titleId} className={styles.title}>
-          Export
+          {t('export.title')}
         </h2>
 
         <div className={styles.body}>
           <fieldset className={styles.group}>
-            <legend>Expressions</legend>
+            <legend>{t('export.expressions')}</legend>
             {all.map((e) => (
               <label key={e.id} className={styles.check}>
                 <input
@@ -135,14 +136,14 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   checked={character.expressions.includes(e.id)}
                   onChange={(ev) => setExpressionExported(e.id, ev.target.checked)}
                 />
-                {e.id}
+                {expressionLabel(e.id)}
               </label>
             ))}
           </fieldset>
 
           <div className={styles.column}>
             <fieldset className={styles.group}>
-              <legend>Size</legend>
+              <legend>{t('export.size')}</legend>
               {SCALES.map((scale) => (
                 <label key={scale} className={styles.check}>
                   <input
@@ -160,7 +161,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
             </fieldset>
 
             <fieldset className={styles.group}>
-              <legend>Format</legend>
+              <legend>{t('export.format')}</legend>
               {FORMATS.map((format) => (
                 <label key={format} className={styles.check}>
                   <input
@@ -178,7 +179,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   checked={options.includeJson}
                   onChange={(e) => setOptions({ ...options, includeJson: e.target.checked })}
                 />
-                Include character.json
+                {t('export.json')}
               </label>
             </fieldset>
 
@@ -191,7 +192,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   checked={!layered}
                   onChange={() => setOptions({ ...options, mode: 'sprites' })}
                 />
-                Sprites <small>one PNG per expression</small>
+                {t('export.sprites')} <small>{t('export.spritesHint')}</small>
               </label>
               <label className={styles.check}>
                 <input
@@ -200,7 +201,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   checked={layered}
                   onChange={() => setOptions({ ...options, mode: 'layered' })}
                 />
-                Layered <small>parts + layeredimage</small>
+                {t('export.layered')} <small>{t('export.layeredHint')}</small>
               </label>
               <label className={styles.check}>
                 <input
@@ -208,7 +209,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   checked={options.sideImages}
                   onChange={(e) => setOptions({ ...options, sideImages: e.target.checked })}
                 />
-                Side images
+                {t('export.side')}
               </label>
               <label className={styles.check}>
                 <input
@@ -217,14 +218,14 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
                   disabled={!layered}
                   onChange={(e) => setOptions({ ...options, blinkTalk: e.target.checked })}
                 />
-                Blink &amp; talk {!layered && <small>layered only</small>}
+                {t('export.blink')} {!layered && <small>{t('export.layeredOnly')}</small>}
               </label>
             </fieldset>
           </div>
 
           <fieldset className={styles.group}>
             <legend>{zipFileName(character.name)}</legend>
-            <ul className={styles.files} aria-label="Files in the zip">
+            <ul className={styles.files} aria-label={t('export.files')}>
               {fileNames.map((name) => (
                 <li key={name}>{name}</li>
               ))}
@@ -234,7 +235,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
 
         <p className={styles.status} role="status">
           {status.kind === 'busy' &&
-            `Exporting…${status.total > 0 ? ` ${status.done}/${status.total}` : ''}`}
+            `${t('export.busy')}${status.total > 0 ? ` ${status.done}/${status.total}` : ''}`}
           {status.kind === 'done' && status.message}
         </p>
         {errorMessage && (
@@ -245,10 +246,10 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
 
         <div className={styles.actions}>
           <button type="button" onClick={onClose} disabled={busy}>
-            Close
+            {t('export.close')}
           </button>
           <button type="button" onClick={exportOne} disabled={busy}>
-            Only {singleName}
+            {t('export.only', { name: singleName })}
           </button>
           <button
             type="button"
@@ -256,7 +257,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
             onClick={exportZip}
             disabled={busy || selected.length === 0 || planError !== null}
           >
-            Download zip
+            {t('export.zip')}
           </button>
         </div>
       </div>

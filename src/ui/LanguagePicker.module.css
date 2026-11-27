@@ -1,0 +1,26 @@
+.flags {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.flags .flag {
+  display: block;
+  padding: 2px;
+  line-height: 0;
+  opacity: 0.65;
+}
+
+.flags .flag:hover {
+  opacity: 1;
+}
+
+.flags .flag[aria-pressed='true'] {
+  background: var(--lit);
+  box-shadow: 2px 2px 0 var(--line);
+  opacity: 1;
+}
+
+.flag svg {
+  width: 27px;
+  height: 18px;
+}

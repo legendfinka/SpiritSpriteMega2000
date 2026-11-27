@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { characterFromJson, downloadCharacterJson } from '../export/characterJson';
+import { t } from '../i18n';
+import { MAX_CAST } from '../store/cast';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { ConfirmDialog } from './ConfirmDialog';
 import { MOD } from './useShortcuts';
@@ -10,32 +12,38 @@ interface CharacterFileButtonsProps {
 
 export function CharacterFileButtons({ onLoaded }: CharacterFileButtonsProps) {
   const character = useCharacterStore((s) => s.character);
-  const loadCharacter = useCharacterStore((s) => s.loadCharacter);
+  const addCharacter = useCharacterStore((s) => s.addCharacter);
   const input = useRef<HTMLInputElement>(null);
   /** name of a file that failed to load */
   const [badFile, setBadFile] = useState<string | null>(null);
+  const [castFull, setCastFull] = useState(false);
 
+  // a loaded character joins the cast instead of replacing the current one
   const load = async (file: File) => {
     const loaded = characterFromJson(await file.text());
     if (!loaded) {
       setBadFile(file.name);
       return;
     }
-    loadCharacter(loaded);
+    if (useCharacterStore.getState().cast.length >= MAX_CAST) {
+      setCastFull(true);
+      return;
+    }
+    addCharacter(loaded);
     onLoaded?.();
   };
 
   return (
     <>
       <button type="button" onClick={() => input.current?.click()}>
-        Load JSON
+        {t('file.load')}
       </button>
       <button
         type="button"
-        title={`Save JSON (${MOD}+S)`}
+        title={`${t('file.save')} (${MOD}+S)`}
         onClick={() => downloadCharacterJson(character)}
       >
-        Save JSON
+        {t('file.save')}
       </button>
       <input
         ref={input}
@@ -50,9 +58,14 @@ export function CharacterFileButtons({ onLoaded }: CharacterFileButtonsProps) {
         }}
       />
       {badFile !== null && (
-        <ConfirmDialog title="Can't load that" onCancel={() => setBadFile(null)}>
-          <p>“{badFile}” is not a SpiritSprite character file.</p>
-          <small>Use a .json saved with Save JSON.</small>
+        <ConfirmDialog title={t('file.badTitle')} onCancel={() => setBadFile(null)}>
+          <p>{t('file.badText', { file: badFile })}</p>
+          <small>{t('file.badHint')}</small>
+        </ConfirmDialog>
+      )}
+      {castFull && (
+        <ConfirmDialog title={t('file.fullTitle')} onCancel={() => setCastFull(false)}>
+          <p>{t('file.fullText', { max: MAX_CAST })}</p>
         </ConfirmDialog>
       )}
     </>

@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { characterToJson } from '../export/characterJson';
 import { downloadBlob } from '../export/download';
+import { freshCast } from '../store/cast';
 import { createDefaultCharacter } from '../store/defaultCharacter';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { CharacterFileButtons } from './CharacterFileButtons';
@@ -14,7 +15,7 @@ const pickFile = (contents: string, name = 'mira.json') =>
   });
 
 beforeEach(() => {
-  useCharacterStore.getState().resetCharacter();
+  useCharacterStore.setState({ ...freshCast(), past: [], future: [] });
   vi.clearAllMocks();
 });
 
@@ -36,6 +37,8 @@ describe('CharacterFileButtons', () => {
 
     await waitFor(() => expect(useCharacterStore.getState().character.name).toBe('Mira'));
     expect(onLoaded).toHaveBeenCalled();
+    // added next to the old one, not over it
+    expect(useCharacterStore.getState().cast).toHaveLength(2);
   });
 
   it('refuses a file that is not a character', async () => {

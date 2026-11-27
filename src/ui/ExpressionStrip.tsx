@@ -1,5 +1,6 @@
 import { CharacterSvg, HEAD_VIEWBOX } from '../canvas/CharacterSvg';
 import { getPresetExpression, isPresetId, listExpressions } from '../expressions/presets';
+import { expressionLabel, t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
 import type { Expression, ExpressionId } from '../types';
 import { ExpressionPlate } from './ExpressionPlate';
@@ -28,7 +29,7 @@ export function ExpressionStrip({ active, onSelect }: ExpressionStripProps) {
             key={expr.id}
             type="button"
             className={styles.window}
-            title={i < 9 ? `${expr.id} (${i + 1}, or ←/→)` : expr.id}
+            title={i < 9 ? t('expr.keys', { id: expr.id, number: i + 1 }) : expr.id}
             aria-pressed={expr.id === active.id}
             onClick={() => onSelect(expr.id)}
           >
@@ -38,19 +39,19 @@ export function ExpressionStrip({ active, onSelect }: ExpressionStripProps) {
               viewBox={HEAD_VIEWBOX}
               className={styles.windowSvg}
             />
-            <span className={styles.sill}>{expr.id}</span>
+            <span className={styles.sill}>{expressionLabel(expr.id)}</span>
           </button>
         ))}
         <button
           type="button"
           className={styles.window}
-          aria-label="New expression"
+          aria-label={t('expr.new')}
           onClick={addNew}
         >
           <span className={styles.addPane} aria-hidden="true">
             +
           </span>
-          <span className={styles.sill}>new</span>
+          <span className={styles.sill}>{t('expr.newShort')}</span>
         </button>
       </div>
       <ExpressionPlate

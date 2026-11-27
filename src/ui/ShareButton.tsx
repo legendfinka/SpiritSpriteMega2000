@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { shareUrl } from '../export/shareLink';
+import { t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
 import { ConfirmDialog } from './ConfirmDialog';
 
@@ -26,19 +27,19 @@ export function ShareButton() {
   return (
     <>
       <button type="button" onClick={() => void share()}>
-        Share
+        {t('share.button')}
       </button>
       {shared && (
-        <ConfirmDialog title="Share link" onCancel={() => setShared(null)}>
-          <p>{shared.copied ? 'Copied to clipboard.' : 'Copy it from the box.'}</p>
+        <ConfirmDialog title={t('share.title')} onCancel={() => setShared(null)}>
+          <p>{t(shared.copied ? 'share.copied' : 'share.manual')}</p>
           <input
-            aria-label="Share link"
+            aria-label={t('share.title')}
             readOnly
             value={shared.url}
             style={{ width: '100%' }}
             onFocus={(e) => e.target.select()}
           />
-          <small>Anyone with the link gets a copy of this character.</small>
+          <small>{t('share.hint')}</small>
         </ConfirmDialog>
       )}
     </>

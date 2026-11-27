@@ -2,8 +2,8 @@ import type { Character } from '../types';
 import { characterFromJson } from './characterJson';
 
 const PREFIX = '#c=';
-// far above any real character
-const MAX_LENGTH = 50_000;
+// room for a few uploaded parts; browsers handle URLs far longer
+const MAX_LENGTH = 1_000_000;
 
 /** the whole character, packed into the hash so it never reaches a server */
 export function shareHash(character: Character): string {
