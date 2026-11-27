@@ -1,6 +1,7 @@
-import { type ReactNode, useEffect, useId, useRef } from 'react';
+import { type ReactNode, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { t } from '../i18n';
+import { useModal } from './useModal';
 import styles from './ConfirmDialog.module.css';
 
 interface ConfirmDialogProps {
@@ -25,25 +26,8 @@ export function ConfirmDialog({
   const titleId = useId();
   const textId = useId();
 
-  // latest onCancel, without re-running the focus effect
-  const cancelRef = useRef(onCancel);
-  useEffect(() => {
-    cancelRef.current = onCancel;
-  });
-
-  // focus the safe button, close on Escape, hand focus back after
-  useEffect(() => {
-    const opener = document.activeElement as HTMLElement | null;
-    cancel.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') cancelRef.current();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      opener?.focus();
-    };
-  }, []);
+  // focus starts on the safe button
+  useModal(onCancel, cancel);
 
   // portal: a rotated parent (the name plate) would trap position: fixed
   return createPortal(

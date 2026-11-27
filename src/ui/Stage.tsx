@@ -43,9 +43,13 @@ export function Stage({ character, expression }: StageProps) {
   const cast = useCharacterStore((s) => s.cast);
   const activeId = useCharacterStore((s) => s.activeId);
   const others = cast.filter((m) => m.id !== activeId);
-  const companions = withIds.flatMap((id) => others.filter((m) => m.id === id)).slice(0, 2);
+  // ids of people since selected or removed don't count
+  const companions = withIds.flatMap((id) => others.filter((m) => m.id === id));
   const toggleCompanion = (id: string) =>
-    setWithIds((ids) => (ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id]));
+    setWithIds(() => {
+      const current = companions.map((m) => m.id);
+      return current.includes(id) ? current.filter((i) => i !== id) : [...current, id].slice(-2);
+    });
 
   const sprite = (
     <CharacterSvg

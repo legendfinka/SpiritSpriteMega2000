@@ -1,0 +1,27 @@
+/* shared by every popup */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(27 20 16 / 0.55);
+}
+
+/* brick sign across the top */
+.title {
+  margin: 0;
+  padding: 0.5rem 1rem 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f7eedb;
+  text-shadow: 2px 2px 0 var(--line);
+  background:
+    radial-gradient(rgb(0 0 0 / 0.14) 1.3px, transparent 1.7px) 0 0 / 7px 7px,
+    var(--brick);
+  border-bottom: 3px dashed var(--line);
+}

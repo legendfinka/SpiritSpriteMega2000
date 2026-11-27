@@ -44,8 +44,3 @@ export function composeLayers(
   }
   return layers;
 }
-
-export function offsetTransform(part: Part): string | undefined {
-  const { offset } = part;
-  return offset && (offset.x || offset.y) ? `translate(${offset.x} ${offset.y})` : undefined;
-}

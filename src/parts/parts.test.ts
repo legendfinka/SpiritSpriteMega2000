@@ -26,7 +26,7 @@ describe('library size', () => {
   });
 });
 
-describe.each(STARTERS.map((s) => [s.label, s] as const))('starter %s', (_label, starter) => {
+describe.each(STARTERS.map((s) => [s.id, s] as const))('starter %s', (_id, starter) => {
   it('uses existing parts in the right slots', () => {
     for (const [slot, id] of Object.entries(starter.create().parts)) {
       expect(getPart(id)?.slot, id).toBe(slot);

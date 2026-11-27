@@ -20,17 +20,20 @@ Vitest + React Testing Library, ESLint + Prettier.
 
 ## 4. Structure (`src/`)
 - `canvas/`: rendering, colours; `layerOrder.ts` is the only definition of draw order
-- `parts/`: `registry.ts` + folders `body outfit hair-back face hair-front eyes brows mouth extras accessories`
-- `expressions/presets.ts`, `store/`, `types.ts` (source of truth for data types)
-- `ui/`: PartPicker, ColorPanel, Stage (sprite/scene preview), ExpressionStrip,
-  ExportDialog, `useShortcuts`
+- `parts/`: `registry.ts`, `customParts.ts`, `sanitizeSvg.ts`, `outfitSplits.ts` + folders
+  `body bottom top outfit hair-back face hair-front eyes brows mouth extras accessories`
+- `expressions/presets.ts`, `store/` (store, cast, starters), `types.ts` (data types)
+- `ui/`: Header, CastBar, PartPicker, ColorPanel, Stage (sprite/scene), ExpressionStrip,
+  ExportDialog, ConfirmDialog (+ `useModal`), LanguagePicker, `useShortcuts`
+- `i18n/`: `t()`, en/uk/ru messages, part and swatch names
+- `pwa/`: service worker source and registration
 - `export/`: svgToPng, exportZip, renpySnippet, characterJson
 - Outside `src/`: `public/backgrounds/*.svg` (1920×1080), `public/templates/alignment-guide.svg`,
   `.github/workflows/ci.yml` (lint, test, build). Hosted on Vercel; Vite `base: './'`
 
 ## 5. Core concepts
 - **Canvas:** all parts share an 800×1080 viewBox, head centre ≈ (400, 200).
-  Sprites are bottom-aligned. `Part.offset` is for fine-tuning only.
+  Sprites are bottom-aligned; parts are drawn exactly where they sit in the file.
 - **Part files:** standalone SVGs with fallback colours for editor previews:
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1080">`,
   `fill="var(--hair, #6b4428)"`. The registry strips the wrapper and fallbacks.

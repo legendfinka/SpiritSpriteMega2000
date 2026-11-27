@@ -42,8 +42,6 @@ export interface Part {
   label: string;
   /** inner SVG, colours as var(--token) */
   svg: string;
-  tags?: string[];
-  offset?: { x: number; y: number };
 }
 
 export type PresetExpressionId = 'neutral' | 'happy' | 'sad' | 'angry' | 'surprised';

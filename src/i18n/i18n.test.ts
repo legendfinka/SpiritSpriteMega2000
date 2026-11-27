@@ -34,8 +34,8 @@ describe('names', () => {
   });
 
   it('covers every starter', () => {
-    for (const { id, label } of STARTERS) {
-      expect(MESSAGES.en[`starter.${id}` as keyof typeof MESSAGES.en]).toBe(label);
+    for (const { id } of STARTERS) {
+      expect(MESSAGES.en[`starter.${id}` as keyof typeof MESSAGES.en], id).toBeDefined();
     }
   });
 });

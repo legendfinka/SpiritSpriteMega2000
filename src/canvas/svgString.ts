@@ -1,7 +1,7 @@
 import { findPart } from '../parts/customParts';
 import type { Character, ColorToken, Expression, Hex } from '../types';
 import { inlineTokens, resolveColors } from './colors';
-import { composeLayers, type Layer, offsetTransform } from './compose';
+import { composeLayers, type Layer } from './compose';
 
 export const CANVAS_WIDTH = 800;
 export const CANVAS_HEIGHT = 1080;
@@ -29,11 +29,10 @@ function svgDocument(
   height: number,
 ): string {
   const body = layers
-    .map(({ slot, part }) => {
-      const t = offsetTransform(part);
-      const attrs = `data-slot="${slot}" data-part="${part.id}"${t ? ` transform="${t}"` : ''}`;
-      return `<g ${attrs}>${inlineTokens(part.svg, colors)}</g>`;
-    })
+    .map(
+      ({ slot, part }) =>
+        `<g data-slot="${slot}" data-part="${part.id}">${inlineTokens(part.svg, colors)}</g>`,
+    )
     .join('');
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ` +

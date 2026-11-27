@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, renderSvgString } from '../canvas/svgString';
 import { downloadBlob } from '../export/download';
 import {
@@ -14,6 +14,7 @@ import { expressionLabel, t } from '../i18n';
 import { useCharacterStore } from '../store/useCharacterStore';
 import type { Expression } from '../types';
 import styles from './ExportDialog.module.css';
+import { useModal } from './useModal';
 
 const SCALES: readonly Scale[] = [0.5, 1, 2];
 const FORMATS: readonly ImageFormat[] = ['png', 'webp'];
@@ -61,25 +62,7 @@ export function ExportDialog({ active, onClose }: ExportDialogProps) {
   }
   const errorMessage = planError ?? (status.kind === 'error' ? status.message : null);
 
-  // latest onClose, without re-running the focus effect
-  const closeRef = useRef(onClose);
-  useEffect(() => {
-    closeRef.current = onClose;
-  });
-
-  // grab focus, close on Escape, hand focus back after
-  useEffect(() => {
-    const opener = document.activeElement as HTMLElement | null;
-    dialog.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeRef.current();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      opener?.focus();
-    };
-  }, []);
+  useModal(onClose, dialog);
 
   const run = async (task: () => Promise<string>) => {
     setStatus({ kind: 'busy', done: 0, total: 0 });

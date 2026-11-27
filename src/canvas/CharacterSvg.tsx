@@ -1,7 +1,7 @@
 import { type CSSProperties, useMemo } from 'react';
 import type { Character, Expression } from '../types';
 import { resolveColors, toCssVars } from './colors';
-import { composeLayers, offsetTransform } from './compose';
+import { composeLayers } from './compose';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './svgString';
 
 interface CharacterSvgProps {
@@ -44,7 +44,6 @@ export function CharacterSvg({
           key={`${i}-${part.id}`}
           data-slot={slot}
           data-part={part.id}
-          transform={offsetTransform(part)}
           // our own bundled SVGs, safe to inject
           dangerouslySetInnerHTML={{ __html: part.svg }}
         />
